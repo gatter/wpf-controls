@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -839,6 +840,7 @@ namespace BrokenHouse.Windows.Parts.Task
         /// Overridden to ensure that animations are only used after we have rendered the control.
         /// </summary>
         /// <param name="drawingContext">An instance of <see cref="System.Windows.Media.DrawingContext"/> used to render the control.</param>
+        [SecuritySafeCritical]
         protected override void  OnRender(DrawingContext drawingContext)
         {
  	        base.OnRender(drawingContext);
@@ -853,6 +855,7 @@ namespace BrokenHouse.Windows.Parts.Task
         /// This is our chance to initialise the control by either expanding or contracting the message
         /// section of the control.
         /// </remarks>
+        [SecuritySafeCritical]
         public override void OnApplyTemplate()
         {
             // Call the default

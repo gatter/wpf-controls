@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
@@ -21,6 +22,7 @@ namespace BrokenHouse.Windows.Media.Imaging
         /// Simple function to crate an instance of the collectiuon.
         /// </summary>
         /// <returns></returns>
+        [SecuritySafeCritical]
         protected override Freezable CreateInstanceCore()
         {
             return new ColorTransformCollection();

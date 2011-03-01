@@ -34,10 +34,10 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             content.Properties["Name"].ClearValue();
 
             // Update the page
-            page.Properties[FrameworkElement.WidthProperty].ClearValue();
-            page.Properties[FrameworkElement.HeightProperty].ClearValue();
-            page.Properties[ClassicWizardContentPage.TitleProperty].SetValue(page.Name);
-            page.Properties[ClassicWizardContentPage.DescriptionProperty].SetValue("Description");
+            page.Properties[Metadata.ClassicWizardContentPageTitlePropertyId].SetValue(page.Name);
+            page.Properties[Metadata.ClassicWizardContentPageDescriptionPropertyId].SetValue("Description");
+            page.Properties[Metadata.FrameworkElementHeightPropertyId].ClearValue();
+            page.Properties[Metadata.FrameworkElementWidthPropertyId].ClearValue();
 
             // Setthe content
             page.Content.SetValue(content);

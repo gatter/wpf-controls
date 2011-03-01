@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Windows.Media.Imaging;
 using BrokenHouse.Internal;
@@ -26,6 +27,8 @@ namespace BrokenHouse.Windows.Controls
             Question    = LoadIcon("Question");
             Information = LoadIcon("Information");
             Tick        = LoadIcon("Tick");
+            Running     = LoadIcon("Running");
+            AltRunning  = LoadIcon("AltRunning");
             AltTick     = LoadIcon("AltTick");
         }
 
@@ -45,7 +48,13 @@ namespace BrokenHouse.Windows.Controls
         /// <summary>
         /// A yellow triangle with a black exclamation mark used for indicating a warning.
         /// </summary>
-        public static BitmapSource Warning     { get; private set; }
+        
+        public static BitmapSource Warning     
+        { 
+            [SecuritySafeCritical]
+            get; 
+            private set; 
+        }
  
         /// <summary>
         /// A red circle containing an white cross used to indicate an erro has ocurred.
@@ -81,5 +90,15 @@ namespace BrokenHouse.Windows.Controls
         /// A white tick in a yellow circle used as an alternative for a tick.
         /// </summary>
         public static BitmapSource AltTick     { get; private set; }
+
+        /// <summary>
+        /// White circular arrows in a green circle used to indicate running.
+        /// </summary>
+        public static BitmapSource Running     { get; private set; }
+
+        /// <summary>
+        /// White circular arrows in a yellow circle used as an alternative for a Running.
+        /// </summary>
+        public static BitmapSource AltRunning  { get; private set; }
     }
 }

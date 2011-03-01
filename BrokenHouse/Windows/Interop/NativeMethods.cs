@@ -606,7 +606,7 @@ namespace BrokenHouse.Windows.Interop
         /// <summary>
         /// By putting all the imports in their own class we can suppress the native call type checks
         /// </summary>
-        [SecurityCritical(SecurityCriticalScope.Everything)]
+        [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
         private static class NativeMethodImports
         {
@@ -626,6 +626,7 @@ namespace BrokenHouse.Windows.Interop
             /// A C# reference to the <c>DwmIsCompositionEnabled</c> found in <c>dwmapi.dll</c>
             ///</summary>
             [DllImport("dwmapi.dll", PreserveSig = false)]
+            [SecurityCritical]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool DwmIsCompositionEnabled();
 
@@ -727,7 +728,6 @@ namespace BrokenHouse.Windows.Interop
         /// <param name="window">The target window</param>
         /// <param name="flag">The flags to change</param>
         /// <param name="state">The state to which we are changing the flags.</param>
-        [SecurityTreatAsSafe]
         [SecurityCritical]
         public static void SetNonClientThemeFlags( this Window window, uint flag, bool state )
         {
@@ -753,7 +753,6 @@ namespace BrokenHouse.Windows.Interop
         /// </summary>
         public static Point CurrentPos
         {
-            [SecurityTreatAsSafe]
             [SecurityCritical]
             get
             {
@@ -774,10 +773,9 @@ namespace BrokenHouse.Windows.Interop
         /// </summary>
         public static bool IsCompositionEnabled
         {
-            [SecurityTreatAsSafe]
-            [SecurityCritical]
             get { return (Environment.OSVersion.Version.Major >= 6) && NativeMethodImports.DwmIsCompositionEnabled(); }
         }
+
 
         /// <summary>
         /// Modify the glass frame
@@ -785,7 +783,6 @@ namespace BrokenHouse.Windows.Interop
         /// <param name="window">The target window</param>
         /// <param name="margin">The amount that the class frame extends into the window's client area</param>
         /// <returns></returns>
-        [SecurityTreatAsSafe]
         [SecurityCritical]
         internal static void ExtendGlassFrame( Window window, Thickness margin )
         {
@@ -818,7 +815,6 @@ namespace BrokenHouse.Windows.Interop
         /// Bring the window to the front of all the current windows by using the <c>SetWindowPos</c>.
         /// </summary>
         /// <param name="window">The target window</param>
-        [SecurityTreatAsSafe]
         [SecurityCritical]
         public static void BringToFront( this Window window )
         {
@@ -838,7 +834,6 @@ namespace BrokenHouse.Windows.Interop
         /// <param name="flag"></param>
         /// <param name="state"></param>
         [SecurityCritical]
-        [SecurityTreatAsSafe]
         private static void SetWindowFlags( this Window window, int index, uint flag, bool state )
         {
             IntPtr hwnd       = new WindowInteropHelper(window).Handle;
@@ -899,7 +894,6 @@ namespace BrokenHouse.Windows.Interop
         /// </summary>
         /// <param name="window">The target window</param>
         /// <param name="state"><c>true</c> if you want to show the context help control box.</param>
-        [SecurityTreatAsSafe]
         public static void ShowContextHelp( this Window window, bool state )
         {
             SetWindowFlags(window, NativeMethods.GWL_EXSTYLE, NativeMethods.WS_EX_CONTEXTHELP, state);
@@ -910,7 +904,6 @@ namespace BrokenHouse.Windows.Interop
         /// </summary>
         /// <param name="window">The target window</param>
         /// <param name="state"><c>true</c> if you want to show the minimisecontrol box.</param>
-        [SecurityTreatAsSafe]
         public static void ShowMinimiseBox( this Window window, bool state )
         {
             SetWindowFlags(window, NativeMethods.GWL_STYLE, NativeMethods.WS_MINIMIZEBOX, state);
@@ -921,7 +914,6 @@ namespace BrokenHouse.Windows.Interop
         /// </summary>
         /// <param name="window">The target window</param>
         /// <param name="state"><c>true</c> if you want to show the maximise control box.</param>
-        [SecurityTreatAsSafe]
         public static void ShowMaximiseBox( this Window window, bool state )
         {
             SetWindowFlags(window, NativeMethods.GWL_STYLE, NativeMethods.WS_MAXIMIZEBOX, state);
@@ -932,7 +924,6 @@ namespace BrokenHouse.Windows.Interop
         /// </summary>
         /// <param name="window">The target window</param>
         /// <param name="state"><c>false</c> if you want to hide the window caption</param>
-        [SecurityTreatAsSafe]
         public static void ShowWindowCaption( this Window window, bool state )
         {
             SetNonClientThemeFlags(window, NativeMethods.WTNCA_NODRAWCAPTION, !state);
@@ -943,7 +934,6 @@ namespace BrokenHouse.Windows.Interop
         /// </summary>
         /// <param name="window">The target window</param>
         /// <param name="state"><c>false</c> if you want to hide the window icon</param>
-        [SecurityTreatAsSafe]
         public static void ShowWindowIcon( this Window window, bool state )
         {
             SetNonClientThemeFlags(window, NativeMethods.WTNCA_NODRAWICON, !state);
@@ -954,7 +944,6 @@ namespace BrokenHouse.Windows.Interop
         /// </summary>
         /// <param name="window">The target window</param>
         /// <param name="state"><c>true</c> if you want to make the window a lyered window</param>
-        [SecurityTreatAsSafe]
         public static void SetLayered( this Window window, bool state )
         {
             SetWindowFlags(window, NativeMethods.GWL_EXSTYLE, NativeMethods.WS_EX_LAYERED, state);
@@ -966,7 +955,6 @@ namespace BrokenHouse.Windows.Interop
         /// </summary>
         /// <param name="window">The target window</param>
         /// <param name="state"><c>true</c> if you want to make the window transparent</param>
-        [SecurityTreatAsSafe]
         public static void SetTransparent( this Window window, bool state )
         {
             SetWindowFlags(window, NativeMethods.GWL_EXSTYLE, NativeMethods.WS_EX_TRANSPARENT, state);
@@ -977,7 +965,6 @@ namespace BrokenHouse.Windows.Interop
         /// </summary>
         /// <param name="window">The target window</param>
         /// <param name="state"><c>true</c> if you want to stop the window becoming active when it is shown.</param>
-        [SecurityTreatAsSafe]
         public static void SetNoActivate( this Window window, bool state )
         {
             SetWindowFlags(window, NativeMethods.GWL_EXSTYLE, NativeMethods.WS_EX_NOACTIVATE, state);
@@ -988,7 +975,6 @@ namespace BrokenHouse.Windows.Interop
         /// </summary>
         /// <param name="window">The target window</param>
         /// <param name="state"><c>true</c> if you want the window to have a sys menu</param>
-        [SecurityTreatAsSafe]
         public static void ShowSystemMenu( this Window window, bool state )
         {
             SetWindowFlags(window, NativeMethods.GWL_STYLE, NativeMethods.WS_SYSMENU, state);
@@ -999,7 +985,6 @@ namespace BrokenHouse.Windows.Interop
         /// </summary>
         /// <param name="window">The target window</param>
         /// <param name="state"><c>true</c> if you want the window to become a popup window</param>
-        [SecurityTreatAsSafe]
         public static void SetPopup( this Window window, bool state )
         {
             SetWindowFlags(window, NativeMethods.GWL_STYLE, NativeMethods.WS_POPUP, state);
@@ -1010,7 +995,6 @@ namespace BrokenHouse.Windows.Interop
         /// </summary>
         /// <param name="screenPosition"></param>
         /// <returns></returns>
-        [SecurityTreatAsSafe]
         [SecurityCritical]
         public static IntPtr WindowFromPoint( Point screenPosition )
         {
@@ -1022,7 +1006,6 @@ namespace BrokenHouse.Windows.Interop
         /// </summary>
         /// <param name="window">The target window</param>
         /// <returns>The bounds of the client area of the window.</returns>
-        [SecurityTreatAsSafe]
         [SecurityCritical]
         public static Thickness GetNonClientMargin( this Window window )
         {

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System;
 using System.Text;
+using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -42,6 +43,7 @@ namespace BrokenHouse.Windows.Controls
         /// The attached window will only be updated if the ancestor that we have attached to has changed.
         /// </remarks>
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> that contains the event data</param>
+        [SecuritySafeCritical]
         protected override void OnInitialized( EventArgs e )
         {
             // Call the default
@@ -73,6 +75,7 @@ namespace BrokenHouse.Windows.Controls
         /// </summary>
         /// <param name="arrangeSize">The <see cref="System.Windows.Size"/> in which the children should be arranged.</param>
         /// <returns>The <see cref="System.Windows.Size"/> that represents the rendered size of this element</returns>
+        [SecuritySafeCritical]
         protected override Size ArrangeOverride( Size arrangeSize )
         {
             Size  finalSize   = base.ArrangeOverride(arrangeSize);
@@ -134,6 +137,7 @@ namespace BrokenHouse.Windows.Controls
         /// Called when the visual parent has changed.
         /// </summary>
         /// <param name="oldParent"></param>
+        [SecuritySafeCritical]
         protected override void OnVisualParentChanged(DependencyObject oldParent)
         {
             // Update the attached window because our parent has definately changed

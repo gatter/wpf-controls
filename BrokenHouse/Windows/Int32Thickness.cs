@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Globalization;
@@ -52,6 +53,7 @@ namespace BrokenHouse.Windows
         /// </summary>
         /// <param name="obj">The object to compare.</param>
         /// <returns><b>true</b> if the two objects are equal; otherwise, false.</returns>
+        [SecuritySafeCritical]
         public override bool Equals(object obj)
         {
             if (obj is Int32Thickness)
@@ -68,6 +70,7 @@ namespace BrokenHouse.Windows
         /// </summary>
         /// <param name="thickness">The <c>Int32Thickness</c> to compare.</param>
         /// <returns><b>true</b> if the two <c>Int32Thickness</c> are equal; otherwise, <b>false</b>.</returns>
+        [SecuritySafeCritical]
         public bool Equals(Int32Thickness thickness)
         {
             return (this == thickness);
@@ -77,6 +80,7 @@ namespace BrokenHouse.Windows
         /// Returns the hash code of the structure.
         /// </summary>
         /// <returns>A hash code for this instance of <see cref="Int32Thickness"/>.</returns>
+        [SecuritySafeCritical]
         public override int GetHashCode()
         {
             return (((this.m_Left.GetHashCode() ^ this.m_Top.GetHashCode()) ^ this.m_Right.GetHashCode()) ^ this.m_Bottom.GetHashCode());
@@ -86,6 +90,7 @@ namespace BrokenHouse.Windows
         /// Returns the string representation of the <see cref="Int32Thickness"/> structure.
         /// </summary>
         /// <returns>The string representation of this instance of <see cref="Int32Thickness"/></returns>
+        [SecuritySafeCritical]
         public override string ToString()
         {
             return Int32ThicknessConverter.ToString(this, CultureInfo.InvariantCulture);

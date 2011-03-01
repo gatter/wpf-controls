@@ -64,40 +64,43 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// </summary>
         private void UpdateBounds()
         {
-            // Work out the page rect based on the coordinates of the control
-            WizardControl    control    = (EditingItem.View as WizardControl);
-            WizardPage       activePage = (ActivePageItem == null)? null : (ActivePageItem.View as WizardPage);
-            FrameworkElement presenter  = control.FindVisualDescendant("PART_PageHost") as FrameworkElement;
-            Size             pageSize   = presenter.RenderSize;
-
-            // Define the page bounds
-            Rect pageBounds = new Rect(0, 0, pageSize.Width, pageSize.Height);
-
-            // Loop over all pages setting their dimensions
-            foreach (var page in PageItemCollection.Select(i => i.View).OfType<WizardPage>().Where(p => p != activePage))
+            if (ActivePageItem != null)
             {
-                page.Measure(pageBounds.Size);
-                page.Arrange(pageBounds);
+                // Work out the page rect based on the coordinates of the control
+                WizardControl    control    = (EditingItem.View.PlatformObject as WizardControl);
+                WizardPage       activePage = (ActivePageItem.View == null)? null : (ActivePageItem.View.PlatformObject as WizardPage);
+                FrameworkElement presenter  = control.FindVisualDescendant("PART_PageHost") as FrameworkElement;
+                Size             pageSize   = presenter.RenderSize;
+
+                // Define the page bounds
+                Rect pageBounds = new Rect(0, 0, pageSize.Width, pageSize.Height);
+
+                // Loop over all pages setting their dimensions
+                foreach (var page in PageItemCollection.Select(i => i.View.PlatformObject).OfType<WizardPage>().Where(p => p != activePage))
+                {
+                    page.Measure(pageBounds.Size);
+                    page.Arrange(pageBounds);
+                }
+
+                // Update the thumbnails
+                ThumbnailHeight = 100.0;
+                ThumbnailWidth  = (ThumbnailHeight / pageSize.Height) * pageSize.Width;
+
+                // We do not want the width > 150.0
+                if (ThumbnailWidth > 150.0)
+                {
+                    ThumbnailHeight *= 150.0 / ThumbnailWidth;
+                    ThumbnailWidth = 150.0;
+                }
+
+                //MessageBox.Show(string.Format("{0}x{1}", ThumbnailWidth, ThumbnailHeight));
+
+                // Trigger the property changes
+                OnPropertyChanged("ThumbnailHeight");
+                OnPropertyChanged("ThumbnailWidth");
+
+                InvalidateMeasure();
             }
-
-            // Update the thumbnails
-            ThumbnailHeight = 100.0;
-            ThumbnailWidth  = (ThumbnailHeight / pageSize.Height) * pageSize.Width;
-
-            // We do not want the width > 150.0
-            if (ThumbnailWidth > 150.0)
-            {
-                ThumbnailHeight *= 150.0 / ThumbnailWidth;
-                ThumbnailWidth = 150.0;
-            }
-
-            //MessageBox.Show(string.Format("{0}x{1}", ThumbnailWidth, ThumbnailHeight));
-
-            // Trigger the property changes
-            OnPropertyChanged("ThumbnailHeight");
-            OnPropertyChanged("ThumbnailWidth");
-
-            InvalidateMeasure();
         }
 
         #endregion
@@ -111,16 +114,23 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// <param name="editingItem">the wizard control item that we are editing.</param>
         public void Activate( EditingContext context, ModelItem editingItem, Point offset )
         {
-            WizardControl wizardControl = editingItem.View as WizardControl;
+            WizardControl wizardControl = editingItem.View.PlatformObject as WizardControl;
 
             // Initialise some properties
             EditingContext     = context;
             EditingItem        = editingItem;
             IsAeroWizard       = wizardControl is AeroWizardControl;
 
+            // Ensure that the active page is set
+            if ((int)EditingItem.Properties["ActiveIndex"].ComputedValue == -1)
+            {
+                EditingItem.Properties["ActiveIndex"].SetValue(0);
+            }
+
             // Initialise the position of this options control
             Margin = new Thickness(offset.X, offset.Y, 0, 0);
             MaxHeight = MinHeight = wizardControl.ActualHeight;
+            MinWidth = 100.0;
 
             // Work out the page rect based on the coordinates of the control
             UpdateBounds();
@@ -145,6 +155,12 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             Visibility = Visibility.Visible;
             IsActive   = true;
 
+            (Parent as AdornerPanel).MinHeight = MinHeight;
+            (Parent as AdornerPanel).MinWidth = ActualWidth;
+   
+            (Parent as AdornerPanel).InvalidateVisual();
+            (Parent as AdornerPanel).UpdateLayout();
+
             // Enable the commands
             CommandManager.InvalidateRequerySuggested();
         }
@@ -160,7 +176,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             // Detatch from the control
             if (EditingItem != null)
             {
-                WizardControl wizardControl = EditingItem.View as WizardControl;
+                WizardControl wizardControl = EditingItem.View.PlatformObject as WizardControl;
 
                 // Disconnect from the page collection
                 PageItemCollection.CollectionChanged -= OnPageItemCollectionChanged;
@@ -392,7 +408,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             // Set the content of the page
             if ((PageItemCollection.Count > 0) && (ActivePageIndex > 0))
             {
-                wizardPageItem.Properties[WizardPage.IsFinalPageProperty].SetValue(true);
+                wizardPageItem.Properties[Metadata.WizardPageIsFinalPagePropertyId].SetValue(true);
             }
 
             // Insert the page

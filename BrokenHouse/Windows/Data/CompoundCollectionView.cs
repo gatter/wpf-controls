@@ -32,6 +32,14 @@ namespace BrokenHouse.Windows.Data
         #region --- Constructors ---
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="CompoundCollectionView"/> class that is managed internally.
+        /// </summary>
+        public CompoundCollectionView()
+        {
+            CurrentView = m_BasicView = new SimpleListCollectionView(null);
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CompoundCollectionView"/> class that represents a view of the specified collection. 
         /// </summary>
         /// <param name="source">The underlying collection.</param>
@@ -48,7 +56,7 @@ namespace BrokenHouse.Windows.Data
         /// added as a logical child of the owner.
         /// </remarks>
         /// <param name="owner">The element whose items that are being managed.</param>
-        public CompoundCollectionView( ICollectionViewModelParent owner )
+        internal CompoundCollectionView( ICollectionViewModelParent owner )
         {
             CurrentView = m_ListView = new SimpleListCollectionView(owner);
         }
@@ -195,14 +203,17 @@ namespace BrokenHouse.Windows.Data
         {
             OnCurrentChanging(new CurrentChangingEventArgs(false));
 
-            m_BasicView = new CollectionView(source);
+            m_BasicView = new CollectionView((source == null)? new object[0] : source);
             m_ListView  = null;
 
             CurrentView = m_BasicView;
 
             OnCurrentChanged();
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, source.Cast<object>().ToList()));
+            if (source != null)
+            {
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, source.Cast<object>().ToList()));
+            }
             OnPropertyChanged("Count");
         }
           

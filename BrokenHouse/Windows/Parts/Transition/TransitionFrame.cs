@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace BrokenHouse.Windows.Parts.Transition
 {
@@ -37,7 +39,7 @@ namespace BrokenHouse.Windows.Parts.Transition
             TransitionEffectPropertyKey = DependencyProperty.RegisterReadOnly("TransitionEffect", typeof(TransitionEffect), typeof(TransitionFrame), new FrameworkPropertyMetadata(null, null));
             TransitionEffectProperty = TransitionEffectPropertyKey.DependencyProperty;
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TransitionFrame), new FrameworkPropertyMetadata(TransitionElements.TransitionFrameEmptyStyleKey));
-        }
+            KeyboardNavigation.IsTabStopProperty.OverrideMetadata(typeof(TransitionFrame), new FrameworkPropertyMetadata(false));        }
 
         /// <summary>
         /// Gets or sets the transition effect that controls this <see cref="TransitionFrame"/>. This is a dependency property.
@@ -57,6 +59,7 @@ namespace BrokenHouse.Windows.Parts.Transition
         /// </remarks>
         /// <param name="oldContent">The old value of the <see cref="System.Windows.Controls.ContentControl.Content"/> property.</param>
         /// <param name="newContent">The new value of the <see cref="System.Windows.Controls.ContentControl.Content"/> property.</param>
+        [SecuritySafeCritical]
         protected override void OnContentChanged(object oldContent, object newContent)
         {
             // Do not call the base classes version.

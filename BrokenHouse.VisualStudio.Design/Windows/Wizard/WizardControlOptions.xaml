@@ -142,7 +142,7 @@
                                            Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.ThumbnailWidth}"
                                            Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=DataContext.ThumbnailHeight}">
                                             <Rectangle.Fill>
-                                                <VisualBrush Visual="{Binding View}" Stretch="Fill" AutoLayoutContent="False" />
+                                                <VisualBrush Visual="{Binding Path=View.PlatformObject}" Stretch="Fill" AutoLayoutContent="False" />
                                             </Rectangle.Fill>
                                         </Rectangle>
                                     </DataTemplate>

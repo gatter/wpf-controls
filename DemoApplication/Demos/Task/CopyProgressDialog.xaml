@@ -3,7 +3,7 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:bh="http://www.brokenhouse.co.uk/wpf"
                      Title="{Binding TimeRemainingText, StringFormat='{}{0} remaining'}" 
-                     Height="222" MinWidth="450"
+                     Height="222" Width="450"
                      ResizeMode="NoResize">
     
     <bh:TaskDialogControl Padding="0" CollapsedText="More information" ExpandedText="Less information" IsExpanded="false">

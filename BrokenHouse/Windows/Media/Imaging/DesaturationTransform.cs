@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Security;
 using System.Windows;
 using System.Windows.Media;
 
@@ -28,6 +29,7 @@ namespace BrokenHouse.Windows.Media.Imaging
         /// Create the transformable bitmap
         /// </summary>
         /// <returns></returns>
+        [SecuritySafeCritical]
         protected override Freezable CreateInstanceCore()
         {
             return new DesaturationTransform();
@@ -67,7 +69,8 @@ namespace BrokenHouse.Windows.Media.Imaging
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        public override Color  TransformColor(Color color)
+        [SecurityCritical]
+        internal override Color  TransformColor(Color color)
         {
             double amount = Amount;
 
@@ -94,8 +97,9 @@ namespace BrokenHouse.Windows.Media.Imaging
         /// <summary>
         /// Return <b>true</b> if the desaturation amount means that we would be no color change.
         /// </summary>
-        public override bool IsIdentity
+        internal override bool IsIdentity
         {
+            [SecurityCritical]
             get { return Amount == 0.0; }
         }
 

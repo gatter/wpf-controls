@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -19,6 +20,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BrokenHouse.Windows.Parts.Transition.Primitives;
 using BrokenHouse.Windows.Data;
+using BrokenHouse.Extensions;
 
 namespace BrokenHouse.Windows.Parts.Transition
 {
@@ -37,6 +39,10 @@ namespace BrokenHouse.Windows.Parts.Transition
         /// Identifies the <see cref="ActiveIndex"/> dependency property key. 
         /// </summary>
         public static DependencyProperty     ActiveIndexProperty;
+        /// <summary>
+        /// Identifies the <see cref="ActiveName"/> dependency property key. 
+        /// </summary>
+        public static DependencyProperty     ActiveNameProperty;
         /// <summary>
         /// Identifies the <see cref="TransitionEffect"/> dependency property key. 
         /// </summary>
@@ -88,20 +94,26 @@ namespace BrokenHouse.Windows.Parts.Transition
         private CompoundCollectionView       m_Items;
 
         /// <summary>
+        /// A flag indicating that the active item is being updated
+        /// </summary>
+        private bool                         m_UpdatingActiveItem;
+
+        /// <summary>
         /// Static construct to perform the WPF registration
         /// </summary>
         static TransitionItemsControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TransitionItemsControl), new FrameworkPropertyMetadata(typeof(TransitionItemsControl)));
 
-            ActiveIndexProperty = DependencyProperty.Register("ActiveIndex", typeof(int), typeof(TransitionItemsControl), new FrameworkPropertyMetadata(-1, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnActiveIndexChangedThunk));
-            ItemsSourceProperty = ItemsControl.ItemsSourceProperty.AddOwner(typeof(TransitionItemsControl), new FrameworkPropertyMetadata(null, OnItemsSourceChangedThunk));
-            ItemTemplateProperty            = ItemsControl.ItemTemplateProperty.AddOwner(typeof(TransitionItemsControl), new FrameworkPropertyMetadata(null));
-            ItemTemplateSelectorProperty    = ItemsControl.ItemTemplateSelectorProperty.AddOwner(typeof(TransitionItemsControl), new FrameworkPropertyMetadata(null));
-            ItemStringFormatProperty        = ItemsControl.ItemStringFormatProperty.AddOwner(typeof(TransitionItemsControl), new FrameworkPropertyMetadata(null));
+            ItemsSourceProperty          = ItemsControl.ItemsSourceProperty.AddOwner(typeof(TransitionItemsControl), new FrameworkPropertyMetadata(null, OnItemsSourceChangedThunk));
+            ItemTemplateProperty         = ItemsControl.ItemTemplateProperty.AddOwner(typeof(TransitionItemsControl), new FrameworkPropertyMetadata(null));
+            ItemTemplateSelectorProperty = ItemsControl.ItemTemplateSelectorProperty.AddOwner(typeof(TransitionItemsControl), new FrameworkPropertyMetadata(null));
+            ItemStringFormatProperty     = ItemsControl.ItemStringFormatProperty.AddOwner(typeof(TransitionItemsControl), new FrameworkPropertyMetadata(null));
 
-            ActiveItemProperty       = DependencyProperty.Register("ActiveItem", typeof(object), typeof(TransitionItemsControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnActiveItemChangedThunk));
-            TransitionEffectProperty = DependencyProperty.Register("TransitionEffect", typeof(TransitionEffect), typeof(TransitionItemsControl), new FrameworkPropertyMetadata(null));
+            ActiveIndexProperty          = DependencyProperty.Register("ActiveIndex", typeof(int), typeof(TransitionItemsControl), new FrameworkPropertyMetadata(-1, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnActiveIndexChangedThunk));
+            ActiveItemProperty           = DependencyProperty.Register("ActiveItem", typeof(object), typeof(TransitionItemsControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnActiveItemChangedThunk));
+            ActiveNameProperty           = DependencyProperty.Register("ActiveName", typeof(string), typeof(TransitionItemsControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Journal, OnActiveNameChangedThunk));
+            TransitionEffectProperty     = DependencyProperty.Register("TransitionEffect", typeof(TransitionEffect), typeof(TransitionItemsControl), new FrameworkPropertyMetadata(null));
             TransitionInSequenceProperty = DependencyProperty.Register("TransitionInSequence", typeof(bool), typeof(TransitionItemsControl), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
         }
 
@@ -113,6 +125,8 @@ namespace BrokenHouse.Windows.Parts.Transition
             m_Items = new CompoundCollectionView(this);
 
             m_Items.CollectionChanged += OnItemsChanged;
+
+            DataContextChanged += OnDataContextChanged;
         }
 
         #region --- Properties ---
@@ -184,6 +198,19 @@ namespace BrokenHouse.Windows.Parts.Transition
             get { return GetValue(ActiveItemProperty); }
             set { SetValue(ActiveItemProperty, value); }
         }
+       
+        /// <summary>
+        /// Gets or sets the name of the item that we are displaying or transitioning to.  This is a dependency property. 
+        /// </summary>
+        /// <remarks>
+        /// If the active item does not have a name then this property will be null. If the transition items control
+        /// does not contain the name supplied to it then the active item will be set to null.
+        /// </remarks>
+        public string ActiveName
+        {
+            get { return (string)GetValue(ActiveNameProperty); }
+            set { SetValue(ActiveNameProperty, value); }
+        }
 
         /// <summary>
         /// Gets or sets the index of the item we are displaying or transitioning to.  This is a dependency property. 
@@ -210,6 +237,7 @@ namespace BrokenHouse.Windows.Parts.Transition
         /// Called when the control is initialised.
         /// </summary>
         /// <param name="e"></param>
+        [SecuritySafeCritical]
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
@@ -231,6 +259,7 @@ namespace BrokenHouse.Windows.Parts.Transition
         /// <summary>
         /// The template has been applied. It is our chance to obtain the presenter that will do the actual transitions.
         /// </summary>
+        [SecuritySafeCritical]
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -239,12 +268,24 @@ namespace BrokenHouse.Windows.Parts.Transition
 
             ProcessPendingTransitions();
         }
+        
+        /// <summary>
+        /// Called when the data context changes - force an update of the data context on all internal items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        [SecuritySafeCritical]
+        protected virtual void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+ 	        m_Items.OfType<FrameworkElement>().ForEach(i => i.DataContext = e.NewValue);
+        }
 
         /// <summary>
         /// Called when the items have changed.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        [SecuritySafeCritical]
         protected virtual void OnItemsChanged( object sender, NotifyCollectionChangedEventArgs e )
         {
             if (e.Action == NotifyCollectionChangedAction.Reset)
@@ -256,16 +297,31 @@ namespace BrokenHouse.Windows.Parts.Transition
             }
             else
             {
+                // Has the active item been defined
                 if ((e.NewItems != null) && (e.NewItems.Count > 0) && (ActiveItem == null))
                 {
-                    if (ActiveIndex == -1)
+                    object newActiveItem = null;
+
+                    if (ActiveName != null)
                     {
-                        ActiveItem = e.NewItems[0];
+                        newActiveItem = e.NewItems.OfType<FrameworkElement>().FirstOrDefault(fe => fe.FindName(ActiveName) != null);
+                    }
+                    else if (ActiveIndex == -1)
+                    {
+                        newActiveItem = (ActiveIndex < Items.Count)? Items[ActiveIndex] : null;
                     }
                     else
                     {
-                        ActiveItem = Items[Math.Min(Items.Count - 1, ActiveIndex)];
+                        newActiveItem = e.NewItems[0];
                     }
+
+                    // Do we update the active item?
+                    if (newActiveItem != null)
+                    {
+                        ActiveItem = newActiveItem;
+                    }
+
+                    e.NewItems.OfType<FrameworkElement>().ForEach(fe => AddLogicalChild(fe));
                 }
                 if (e.OldItems != null)
                 {
@@ -273,6 +329,8 @@ namespace BrokenHouse.Windows.Parts.Transition
                     {
                         ActiveItem = (Items.Count > 0)? Items[ActiveIndex - 1] : null;
                     }
+
+                    e.OldItems.OfType<FrameworkElement>().ForEach(fe => RemoveLogicalChild(fe));
                 }
             }
         }
@@ -353,47 +411,78 @@ namespace BrokenHouse.Windows.Parts.Transition
         }
 
         /// <summary>
+        /// The active name has changed. Ensure that the active item is set.
+        /// </summary>
+        /// <param name="oldActiveName">Tbe old value of the active name.</param>
+        /// <param name="newActiveName">The new value of the active name.</param>
+        private void OnActiveNameChanged( string oldActiveName, string newActiveName )
+        {
+            if (!m_UpdatingActiveItem)
+            {
+                object newActiveItem = Items.OfType<FrameworkElement>().FirstOrDefault(e => string.Equals(e.Name, newActiveName));
+
+                // Check the update
+                if ((newActiveItem != null) && (newActiveItem != ActiveItem))
+                {
+                    // Index changed before content
+                    ActiveItem = newActiveItem;
+                }
+            }
+        }
+
+        /// <summary>
         /// The active item has changed. Make sure we start transitioning to it.
         /// </summary>
         /// <param name="oldActiveItem">The old active item</param>
         /// <param name="newActiveItem">The new active item</param>
         private void OnActiveItemChanged( object oldActiveItem, object newActiveItem )
         {
-            int newIndex = Items.IndexOf(newActiveItem);
-
-            if (newIndex != -1)
+            if (!m_UpdatingActiveItem)
             {
-                List<object> items    = new List<object>();
-                int          oldIndex = Items.IndexOf(oldActiveItem);
+                // We are now updating
+                m_UpdatingActiveItem = true;
+
+                // Get the index of the new active item
+                int newIndex = Items.IndexOf(newActiveItem);
+
+                // Did we find it
+                if (newIndex != -1)
+                {
+                    List<object> items    = new List<object>();
+                    int          oldIndex = Items.IndexOf(oldActiveItem);
           
-                if ((oldIndex == -1) || !TransitionInSequence)
-                {
-                    items.Add(newActiveItem);
-                }
-                else if (oldIndex < newIndex)
-                {
-                    for (int i = oldIndex + 1; i <= newIndex; i++)
+                    if ((oldIndex == -1) || !TransitionInSequence)
                     {
-                        items.Add(Items[i]);
+                        items.Add(newActiveItem);
                     }
+                    else if (oldIndex < newIndex)
+                    {
+                        for (int i = oldIndex + 1; i <= newIndex; i++)
+                        {
+                            items.Add(Items[i]);
+                        }
+                    }
+                    else
+                    {
+                        for (int i = oldIndex - 1; i >= newIndex; i--)
+                        {
+                            items.Add(Items[i]);
+                        }
+                    }
+
+                    AddTransitions(items);
                 }
                 else
                 {
-                    for (int i = oldIndex - 1; i >= newIndex; i--)
-                    {
-                        items.Add(Items[i]);
-                    }
+                    // Old and new items are not part of the list
                 }
 
-                AddTransitions(items);
-            }
-            else
-            {
-                // Old and new items are not part of the list
-            }
+                // Save the new index
+                ActiveIndex = newIndex;
 
-            // Save the new index
-            ActiveIndex = newIndex;
+                // Finished updating
+                m_UpdatingActiveItem = false;
+            }
         }
  
         /// <summary>
@@ -428,6 +517,16 @@ namespace BrokenHouse.Windows.Parts.Transition
         }
     
         /// <summary>
+        /// Static method to trigger the instance <see cref="OnActiveNameChanged"/> property change event handler.
+        /// </summary>
+        /// <param name="target">The target of the property.</param>
+        /// <param name="args">The additional information that describes the property change.</param>
+        private static void OnActiveNameChangedThunk( DependencyObject target, DependencyPropertyChangedEventArgs args )
+        {
+            (target as TransitionItemsControl).OnActiveNameChanged((string)args.OldValue, (string)args.NewValue);
+        }
+    
+        /// <summary>
         /// Static method to trigger the instance <see cref="OnItemsSourceChanged"/> property change event handler.
         /// </summary>
         /// <param name="target">The target of the property.</param>
@@ -446,7 +545,8 @@ namespace BrokenHouse.Windows.Parts.Transition
         /// Allow a item to be removed as a logical child.
         /// </summary>
         /// <param name="item"></param>
-        public void RemoveModelItem(object item)
+        [SecurityCritical]
+        void ICollectionViewModelParent.RemoveModelItem(object item)
         {
             RemoveLogicalChild(item);
         }
@@ -455,7 +555,8 @@ namespace BrokenHouse.Windows.Parts.Transition
         /// Allow an item to be added as a logical child.
         /// </summary>
         /// <param name="item"></param>
-        public void AddModelItem(object item)
+        [SecurityCritical]
+        void ICollectionViewModelParent.AddModelItem(object item)
         {
             AddLogicalChild(item);
         }

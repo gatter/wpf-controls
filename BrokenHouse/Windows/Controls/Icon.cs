@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -173,6 +174,7 @@ namespace BrokenHouse.Windows.Controls
         /// <param name="constraintSize">The <see cref="System.Windows.Size"/> of the available area to render the icon.</param>
         /// <returns>The desired <see cref="System.Windows.Size"/> based on the <paramref name="constraintSize"/>
         /// and the frame to be rendered.</returns>
+        [SecuritySafeCritical]
         protected override Size MeasureOverride( Size constraintSize )
         {
             Int32Size        bestSize     = new Int32Size(16, 16);
@@ -288,6 +290,7 @@ namespace BrokenHouse.Windows.Controls
         /// Renders the best frame of the icon.
         /// </summary>
         /// <param name="drawingContext">An instance of <see cref="System.Windows.Media.DrawingContext"/> used to render the frame.</param>
+        [SecuritySafeCritical]
         protected override void OnRender( DrawingContext drawingContext )
         {
             // Draw the background
@@ -367,13 +370,18 @@ namespace BrokenHouse.Windows.Controls
              // Do we have a new value
             if (newValue != null)
             {
-                BitmapSource bitmapSource = (newValue as BitmapSource);
-                BitmapFrame  bitmapFrame  = (newValue as BitmapFrame);
+                BitmapSource      bitmapSource = (newValue as BitmapSource);
+                BitmapFrame       bitmapFrame  = (newValue as BitmapFrame);
+                CustomBitmapFrame customFrame  = (newValue as CustomBitmapFrame);
 
                 // Was we supplied a bitmap
                 if (bitmapFrame != null)
                 {
                     Frames = bitmapFrame.Decoder.Frames.OfType<BitmapSource>().ToList();
+                }
+                else if (customFrame != null)
+                {
+                    Frames = customFrame.Frames.ToList();
                 }
                 else if (bitmapSource != null)
                 {

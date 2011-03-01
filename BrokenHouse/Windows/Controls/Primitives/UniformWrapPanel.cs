@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -22,6 +23,7 @@ namespace BrokenHouse.Windows.Controls.Primitives
         /// <param name="finalSize">The <see cref="System.Windows.Size"/> of the area for the panel to use. </param>
         /// <returns>The actual <see cref="System.Windows.Size"/> of the panel that is rendered to display 
         /// the child elements that are visible.</returns>
+        [SecuritySafeCritical]
         protected override Size ArrangeOverride( Size finalSize )
         {
             var    visibleChildren   = this.EnumerateVisualChildren().OfType<UIElement>().Where(e => e.Visibility != Visibility.Collapsed);
@@ -82,6 +84,7 @@ namespace BrokenHouse.Windows.Controls.Primitives
         /// <param name="constraintSize">The <see cref="System.Windows.Size"/> of the available area for the panel. </param>
         /// <returns>The desired <see cref="System.Windows.Size"/> based on the child content of the
         /// panel and the <paramref name="constraintSize"/>.</returns>
+        [SecuritySafeCritical]
         protected override Size MeasureOverride( Size constraintSize )
         {
             var  visibleChildren   = this.EnumerateVisualChildren().OfType<UIElement>().Where(e => e.Visibility != Visibility.Collapsed);

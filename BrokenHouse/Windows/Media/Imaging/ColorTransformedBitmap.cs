@@ -17,7 +17,7 @@ namespace BrokenHouse.Windows.Media.Imaging
     /// CopyPixels method is called (i.e. the one that requries an IntPtr) then an exception will be
     /// thrown. In all cases where this class is intended to be used this is not a problem.
     /// </remarks>
-    internal class ColorTransformedBitmap : CustomBitmap
+    internal class ColorTransformedBitmap : FixedFormatBitmap
     {
         /// <summary>
         /// Identifies the <see cref="Transform"/> dependency property. 

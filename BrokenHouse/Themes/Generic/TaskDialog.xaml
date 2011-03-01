@@ -284,21 +284,14 @@
 
                         <!-- Content Section -->
                         <Grid Background="{DynamicResource {x:Static local:TaskElements.AeroDialogContentBackgroundKey}}">
-                            <Grid Margin="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Padding}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
+                            
+                            <DockPanel Margin="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Padding}">
 
                                 <!-- The main icon with active icon helper -->
-                                <ContentPresenter x:Name="PART_MainIconPresenter" Grid.Row="0" Grid.Column="0" Visibility="Collapsed"
-                                          HorizontalAlignment="Left" VerticalAlignment="Center" ContentSource="MainIcon"
-                                          Margin="6,6,6,0">
+                                <ContentPresenter x:Name="PART_MainIconPresenter" DockPanel.Dock="Left"  Visibility="Collapsed"
+                                                  HorizontalAlignment="Left" VerticalAlignment="Top" ContentSource="MainIcon"
+                                                  Grid.RowSpan="1"
+                                                  Margin="6,6,6,0">
                                     <ContentPresenter.Resources>
                                         <DataTemplate DataType="{x:Type BitmapSource}">
                                             <controls:ActiveIcon Source="{Binding .}" Width="16" Height="16" SnapsToDevicePixels="True"/>
@@ -307,21 +300,22 @@
                                 </ContentPresenter>
 
                                 <!-- The main instruction with data template to render text in the correct way -->
-                                <ContentPresenter Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"
-                                          Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Instruction}">
+                                <ContentPresenter x:Name="PART_ContentInstructionPanel"  Margin="2,10,0,6"
+                                                    DockPanel.Dock="Top"  VerticalAlignment="Center"
+                                                    Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Instruction}">
                                     <ContentPresenter.Resources>
                                         <DataTemplate DataType="{x:Type system:String}">
                                             <TextBlock Text="{Binding .}" 
-                                               FontSize="16" Foreground="#FF00339A"
-                                               VerticalAlignment="Center"/>
+                                                FontSize="16" Foreground="#FF00339A"
+                                                VerticalAlignment="Center"/>
                                         </DataTemplate>
                                     </ContentPresenter.Resources>
                                 </ContentPresenter>
-
+                                
                                 <!-- This is where the message goes if it is not in the footer -->
-                                <controls:SnapDecorator x:Name="PART_ContentMessagePanel" Grid.Row="1" Grid.Column="1">
+                                <controls:SnapDecorator x:Name="PART_ContentMessagePanel" DockPanel.Dock="Top" VerticalAlignment="Center">
                                     <ContentPresenter x:Name="PART_ContentMessagePresenter" Margin="0,3,0,3"
-                                              Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Message}">
+                                            Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Message}">
                                         <ContentPresenter.Resources>
                                             <DataTemplate DataType="{x:Type system:String}">
                                                 <TextBlock Text="{Binding .}" TextWrapping="Wrap"/>
@@ -329,12 +323,12 @@
                                         </ContentPresenter.Resources>
                                     </ContentPresenter>
                                 </controls:SnapDecorator>
-
+                                
                                 <!-- This is the content of the control -->
                                 <controls:SnapDecorator x:Name="PART_ContentPanel" Grid.Row="2" Grid.Column="1">
                                     <ContentPresenter x:Name="PART_ContentPresenter" ContentSource="Content" Margin="0"/>
                                 </controls:SnapDecorator>
-                            </Grid>
+                            </DockPanel>
                         </Grid>
                     </DockPanel>
                     <ControlTemplate.Triggers>

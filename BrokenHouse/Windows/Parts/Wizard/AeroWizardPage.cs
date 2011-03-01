@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -89,17 +90,5 @@ namespace BrokenHouse.Windows.Parts.Wizard
   
         #endregion
          
-        #region -- Standard overrides ---
-
-        /// <summary>
-        /// Return a way to identify this page
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return Header;
-        }
-
-        #endregion
     }
 }

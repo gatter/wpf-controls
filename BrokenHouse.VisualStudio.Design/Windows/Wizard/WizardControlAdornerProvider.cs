@@ -57,17 +57,17 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// </summary>
         /// <param name="item"></param>
         /// <param name="view"></param>
-        protected override void Activate(ModelItem item, DependencyObject view)
+        protected override void Activate( ModelItem item )
         {
             // What type is it
             if (item.ItemType.IsSubclassOf(typeof(WizardControl)))
             {
                 // Its the wizard control
-                s_WizardOptions.Activate(Context, item, new Point());
+                s_WizardOptions.Activate(Context, item, new Point(0, 0));
             }
             else if ((item.Parent != null) && item.ItemType.IsSubclassOf(typeof(WizardPage)) && item.Parent.ItemType.IsSubclassOf(typeof(WizardControl)))
             {
-                WizardPage    wizardPage    = item.View as WizardPage;
+                WizardPage    wizardPage    = item.View.PlatformObject as WizardPage;
                 WizardControl wizardControl = wizardPage.ParentWizard;
                 WizardPage    originalPage  = wizardControl.ActivePage;
                 DesignerView  designerView  = DesignerView.GetDesignerView(wizardControl);
@@ -90,16 +90,20 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
                 wizardControl.InvalidateVisual();
                 wizardControl.UpdateLayout();
 
-                // Determine the change in offset
-                Rect controlBounds = new Rect(0.0, 0.0, wizardControl.ActualWidth, wizardControl.ActualHeight);
-                Rect transformBounds = wizardControl.TransformToDescendant(wizardPage).TransformBounds(controlBounds);
+                // Only active if we can
+                if (wizardPage.IsDescendantOf(wizardControl))
+                {
+                    // Determine the change in offset
+                    Rect controlBounds = new Rect(0.0, 0.0, wizardControl.ActualWidth, wizardControl.ActualHeight);
+                    Rect transformBounds = wizardControl.TransformToDescendant(wizardPage).TransformBounds(controlBounds);
 
-                // Activate the parent
-                s_WizardOptions.Activate(Context, item.Parent, new Point(transformBounds.Right - wizardPage.ActualWidth, transformBounds.Top));
+                    // Activate the parent
+                    s_WizardOptions.Activate(Context, item.Parent, new Point(transformBounds.Right - wizardPage.ActualWidth, transformBounds.Top));
+                }
             }
 
             // Call the base
-            base.Activate(item, view);
+            base.Activate(item);
         }
 
         /// <summary>

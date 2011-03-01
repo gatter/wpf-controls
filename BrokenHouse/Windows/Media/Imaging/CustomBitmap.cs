@@ -12,30 +12,13 @@ namespace BrokenHouse.Windows.Media.Imaging
     /// <summary>
     /// This is a helper class that is used to perform bitmap transformations
     /// </summary>
-    internal class CustomBitmap : BitmapSource
+    public class CustomBitmap : BitmapSource
     {
         /// <summary>
         /// Identifies the <see cref="Source"/> dependency property. 
         /// </summary>
         public static readonly DependencyProperty SourceProperty = DependencyProperty.Register("Source", typeof(BitmapSource), typeof(CustomBitmap), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure, new PropertyChangedCallback(OnSourceChangedThunk), null), null);
-         
-        /// <summary>
-        /// A list of pixel formats that support an alpha channel
-        /// </summary>
-        private static PixelFormat[]       s_FormatsWithAlpha = new PixelFormat[] { PixelFormats.Bgra32,       PixelFormats.Prgba64,      
-                                                                                    PixelFormats.Pbgra32,      PixelFormats.Prgba128Float, 
-                                                                                    PixelFormats.Rgba128Float, PixelFormats.Rgba64};
-
-        /// <summary>
-        /// The actual source of pixels, can either be a FormatConvertedBitmap or the source
-        /// </summary>
-        private BitmapSource               FormattedBitmapSource { get; set; }
-
-        /// <summary>
-        /// An optional converter used to convert the source to the correct pixel format
-        /// </summary>
-        private FormatConvertedBitmap      BitmapSourceConverter { get; set; }
-
+    
         #region --- Freezable ---
 
         /// <summary>
@@ -54,94 +37,7 @@ namespace BrokenHouse.Windows.Media.Imaging
         /// <returns><b>true</b> if we cn actually be frozen</returns>
         protected override bool FreezeCore( bool isChecking )
         {
-            bool canFreeze = true;
-
-            if (BitmapSourceConverter != null)
-            {
-                if (isChecking)
-                {
-                    canFreeze = BitmapSourceConverter.CanFreeze;
-                }
-                else
-                {
-                    BitmapSourceConverter.Freeze();
-                }
-            }
-
-            return canFreeze;
-        }
-           
-        /// <summary>
-        /// Copies data into a cloned instance.
-        /// </summary>
-        /// <param name="source">The source of the information to clone</param>
-        protected sealed override void CloneCore( Freezable source )
-        {
-            CustomBitmap original = source as CustomBitmap;
-
-            // Call the default
-            base.CloneCore(source);
-
-            // Clone the converter
-            if (original.BitmapSourceConverter != null)
-            {
-                BitmapSourceConverter = (FormatConvertedBitmap)original.BitmapSourceConverter.Clone();
-            }
-        }
-
-        /// <summary>
-        /// Copies current value data into a cloned instance.
-        /// </summary>
-        /// <param name="source">The source of the information to clone</param>
-        protected sealed override void CloneCurrentValueCore( Freezable source )
-        {
-            CustomBitmap original = source as CustomBitmap;
-
-            // Call the default
-            base.CloneCurrentValueCore(source);
-
-            // Clone the converter
-            if (original.BitmapSourceConverter != null)
-            {
-                BitmapSourceConverter = (FormatConvertedBitmap)original.BitmapSourceConverter.CloneCurrentValue();
-            }
-        }
-
-        /// <summary>
-        /// Makes this instance a clone of the specified TransformingBitmap object. 
-        /// </summary>
-        /// <param name="source">The source of the information to clone</param>
-        protected sealed override void GetAsFrozenCore( Freezable source )
-        {
-            CustomBitmap original = source as CustomBitmap;
-
-            // Call the default
-            base.GetAsFrozenCore(source);
-
-            // Clone the converter
-            if (original.BitmapSourceConverter != null)
-            {
-                BitmapSourceConverter = (FormatConvertedBitmap)original.BitmapSourceConverter.GetAsFrozen();
-            }
-        }
-
-        /// <summary>
-        /// Makes this instance a frozen clone of the specified BitmapSource.
-        /// Resource references, data bindings, and animations are not copied, but their current values are.
-        /// </summary>
-        /// <param name="source">The source of the information to clone</param>
-        protected sealed override void GetCurrentValueAsFrozenCore( Freezable source )
-        {
-            CustomBitmap original = source as CustomBitmap;
-
-            // Call the default
-            base.GetCurrentValueAsFrozenCore(source);
-
-            // Clone the converter
-            if (original.BitmapSourceConverter != null)
-            {
-                BitmapSourceConverter = (FormatConvertedBitmap)original.BitmapSourceConverter.GetCurrentValueAsFrozen();
-            }
+            return true;
         }
 
         #endregion
@@ -273,10 +169,6 @@ namespace BrokenHouse.Windows.Media.Imaging
                     oldValue.DownloadFailed -= OnSourceDownloadFailed;
                     oldValue.DecodeFailed -= OnSourceDecodeFailed;
                 }
-
-                // Clear the old format converter
-                FormattedBitmapSource = null;
-                BitmapSourceConverter = null;
             }
 
             // Attach the new ones
@@ -289,19 +181,6 @@ namespace BrokenHouse.Windows.Media.Imaging
                     newValue.DownloadProgress += OnSourceDownloadProgress;
                     newValue.DownloadFailed += OnSourceDownloadFailed;
                     newValue.DecodeFailed += OnSourceDecodeFailed;
-                }
-                
-                // Determine the required format
-                PixelFormat requiredFormat = s_FormatsWithAlpha.Contains(newValue.Format)? PixelFormats.Bgra32 : PixelFormats.Bgr32;
-
-                // Create the format converter bitmap
-                if (newValue.Format == requiredFormat)
-                {
-                    FormattedBitmapSource = newValue;
-                }
-                else
-                {
-                    FormattedBitmapSource = BitmapSourceConverter = new FormatConvertedBitmap(newValue, requiredFormat, null, 0.0);
                 }
             }
         }
@@ -436,9 +315,9 @@ namespace BrokenHouse.Windows.Media.Imaging
             }
 
             // Copy from the formatted butmap
-            if (FormattedBitmapSource != null)
+            if (Source != null)
             {
-                FormattedBitmapSource.CopyPixels(sourceRect, pixels, stride, offset);
+                Source.CopyPixels(sourceRect, pixels, stride, offset);
             }
         }
 

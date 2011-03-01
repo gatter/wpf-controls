@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApplication", "DemoApplication\DemoApplication.csproj", "{591F5B21-7187-4086-AE84-E1C88DBFBD2A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6754A836-0EED-4B77-A722-C809D69EE3BB} = {6754A836-0EED-4B77-A722-C809D69EE3BB}

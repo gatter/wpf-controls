@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -52,8 +53,7 @@ namespace BrokenHouse.Windows.Parts.Transition
             // Override the style
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TransitionControl), new FrameworkPropertyMetadata(TransitionElements.TransitionControlStyleKey));
         }
-
-        
+       
 
         #region --- Properties ---
 
@@ -77,6 +77,7 @@ namespace BrokenHouse.Windows.Parts.Transition
         /// </summary>
         /// <param name="oldContent">The new content</param>
         /// <param name="newContent">The old content</param>
+        [SecuritySafeCritical]
         protected override void OnContentChanged(object oldContent, object newContent)
         {
  	         base.OnContentChanged(oldContent, newContent);
@@ -94,6 +95,7 @@ namespace BrokenHouse.Windows.Parts.Transition
         /// <summary>
         /// The template has been applied - search for our transition presenter
         /// </summary>
+        [SecuritySafeCritical]
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();

@@ -300,18 +300,5 @@ namespace BrokenHouse.Windows.Parts.Wizard
         }
 
         #endregion
-            
-        #region --- Standard overrides ---
-
-        /// <summary>
-        /// Return a way to identify this page
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return Title;
-        }
-
-        #endregion
     }
 }

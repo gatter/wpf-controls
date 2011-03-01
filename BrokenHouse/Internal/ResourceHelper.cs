@@ -42,7 +42,7 @@ namespace BrokenHouse.Internal
         /// dictionary in the assembly.
         /// </summary>
         /// <param name="location">The path to the resource dictionary in this assembly.</param>
-        /// <returns>The <see cref="System.Windows.ResourceDictionary"/> found at the supplied <typeparamref name="location"/>.</returns>
+        /// <returns>The <see cref="System.Windows.ResourceDictionary"/> found at the supplied <paramref name="location"/>.</returns>
         public static ResourceDictionary FindDictionary( string location )
         {
             return new ResourceDictionary { Source = MakePackUri(location) };

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Security;
 using System.Windows.Data;
 using System.Globalization;
 
@@ -20,6 +21,7 @@ namespace BrokenHouse.Windows.Converters
         /// <param name="param">Not applicable.</param>
         /// <param name="culture">Not applicable.</param>
         /// <returns><b>true</b> if the value is a null or empty string.</returns>
+        [SecuritySafeCritical]
         public object Convert( object value, Type targetType, object param, CultureInfo culture )
         {
             return (value == null)? false : string.IsNullOrEmpty(value.ToString());
@@ -33,6 +35,7 @@ namespace BrokenHouse.Windows.Converters
         /// <param name="param">Not applicable.</param>
         /// <param name="culture">Not applicable.</param>
         /// <returns>Not applicable.</returns>
+        [SecuritySafeCritical]
         public object ConvertBack( object value, Type targetType, object param, CultureInfo culture )
         {
             return null;

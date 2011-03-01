@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -46,6 +47,7 @@ namespace BrokenHouse.Windows.Parts.Wizard
            
             // Override the style
             DefaultStyleKeyProperty.OverrideMetadata(typeof(AeroWizardControl), new FrameworkPropertyMetadata(WizardElements.AeroWizardStyleKey));
+            IsTabStopProperty.OverrideMetadata(typeof(AeroWizardControl), new FrameworkPropertyMetadata(false));
         }
                
         /// <summary>
@@ -116,6 +118,7 @@ namespace BrokenHouse.Windows.Parts.Wizard
         /// </summary>
         /// <param name="constraint">The maximum size limit for the control.</param>
         /// <returns>The size of the control.</returns>
+        [SecuritySafeCritical]
         protected override Size MeasureOverride( Size constraint )
         {
             UpdatePageStyles<AeroWizardPage>(PageStyle);
@@ -132,6 +135,7 @@ namespace BrokenHouse.Windows.Parts.Wizard
         /// </remarks>
         /// <param name="sender">The collection that triggered the event.</param>
         /// <param name="args">The inforamation about the change.</param>
+        [SecurityCritical]
         protected override void OnPagesChanged( object sender, NotifyCollectionChangedEventArgs args )
         {
             // Ensure the base class does its stuff

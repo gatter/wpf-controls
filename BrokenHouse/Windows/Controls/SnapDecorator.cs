@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -81,6 +82,7 @@ namespace BrokenHouse.Windows.Controls
         /// </summary>
         /// <param name="arrangeSize">The <see cref="System.Windows.Size"/> in which the child should be arranged.</param>
         /// <returns>The actual <see cref="System.Windows.Size"/> used by this element.</returns>
+        [SecuritySafeCritical]
         protected override Size ArrangeOverride( Size arrangeSize )
         {
             // Do we have a childw

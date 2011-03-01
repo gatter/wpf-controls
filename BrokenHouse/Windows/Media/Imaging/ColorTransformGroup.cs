@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
@@ -40,6 +41,7 @@ namespace BrokenHouse.Windows.Media.Imaging
         /// Create a new instance of the group
         /// </summary>
         /// <returns></returns>
+        [SecuritySafeCritical]
         protected override Freezable CreateInstanceCore()
         {
             return new ColorTransformGroup();
@@ -85,7 +87,8 @@ namespace BrokenHouse.Windows.Media.Imaging
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        public override Color TransformColor(Color color)
+        [SecurityCritical]
+        internal override Color TransformColor(Color color)
         {
             if (Children != null)
             {
@@ -110,8 +113,9 @@ namespace BrokenHouse.Windows.Media.Imaging
         /// Gets whether this transform is an identity transform. This will be <c>true</c> if all the child
         /// transforms are identity transforms.
         /// </summary>
-        public override bool  IsIdentity
+        internal override bool  IsIdentity
         {
+            [SecurityCritical]
             get { return Children.Aggregate(true, (f, i) => f & i.IsIdentity); }
         }
 

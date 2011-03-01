@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -68,6 +69,7 @@ namespace BrokenHouse.Windows.Parts.Task
         /// messages so that we can respond to sizing events.
         /// </remarks>
         /// <param name="e"></param>
+        [SecuritySafeCritical]
         protected override void OnSourceInitialized(EventArgs e)
         {
             // Use the helper to hook our WPF window up to receive window messages.
@@ -139,6 +141,7 @@ namespace BrokenHouse.Windows.Parts.Task
         /// </remarks>
         /// <param name="constraintSize"></param>
         /// <returns></returns>
+        [SecuritySafeCritical]
         protected override Size  MeasureOverride( Size constraintSize )
         {
             Size measuredSize = constraintSize;

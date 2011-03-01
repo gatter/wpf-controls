@@ -8,7 +8,7 @@ namespace BrokenHouse.Extensions
     /// <summary>
     /// Provides a set of <b>static</b> methods that extend the <see cref="double"/> value type.
     /// </summary>
-    public static class DoubleExtensions
+    internal static class DoubleExtensions
     {
         /// <summary>
         /// Determines if a number os close to zero.

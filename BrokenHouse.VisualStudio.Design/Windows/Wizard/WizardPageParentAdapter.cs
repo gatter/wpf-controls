@@ -29,8 +29,8 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// <returns></returns>
         private ModelItem CheckRedirectParent( ModelItem parent, Type childType )
         {
-            WizardPage    wizardPage    = parent.View as WizardPage;
-            WizardControl wizardControl = parent.Parent.View as WizardControl;
+            WizardPage    wizardPage    = parent.View.PlatformObject as WizardPage;
+            WizardControl wizardControl = parent.Parent.View.PlatformObject as WizardControl;
             ModelItem     checkedParent = parent;
 
             if ((wizardPage != null) && ((wizardControl == null) || !wizardPage.IsActive))
@@ -47,7 +47,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             {
                 // The new parent has content
                 ModelItem contentItem    = parent.Content.Value;
-                UIElement contentElement = (contentItem == null)? null : contentItem.View as UIElement;
+                UIElement contentElement = (contentItem == null)? null : contentItem.View.PlatformObject as UIElement;
 
                 // Is the conent element valid
                 if (contentElement != null)
@@ -91,9 +91,9 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             }
 
             // Ensure that the child has the appropriate propreties set
-            child.Properties[FrameworkElement.MarginProperty].ClearValue();
-            child.Properties[FrameworkElement.HeightProperty].ClearValue();
-            child.Properties[FrameworkElement.WidthProperty].ClearValue();
+            child.Properties[Metadata.FrameworkElementMarginPropertyId].ClearValue();
+            child.Properties[Metadata.FrameworkElementHeightPropertyId].ClearValue();
+            child.Properties[Metadata.FrameworkElementWidthPropertyId].ClearValue();
 
             // Add the item
             newParent.Content.SetValue(child);

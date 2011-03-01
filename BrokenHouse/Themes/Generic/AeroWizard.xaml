@@ -11,9 +11,21 @@
 
     <!-- Helper converter -->
     <converters:IsNullOrEmptyConverter x:Key="NullOrEmpty"/>
+
+    <!-- Focus Template -->
+    <Style x:Key="AeroWizardBackButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Ellipse Stroke="Black" StrokeDashArray="1 2" StrokeThickness="1" Margin="0" SnapsToDevicePixels="true"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     
     <!-- Fancy aero style button -->
-    <Style x:Key="{x:Static local:WizardElements.AeroWizardBackButtonStyleKey}">
+    <Style x:Key="{x:Static local:WizardElements.AeroWizardBackButtonStyleKey}" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource AeroWizardBackButtonFocusVisual}"/>
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -179,7 +191,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:AeroWizardControl}">
-                    <controls:GlassPanel x:Name="PART_RootLayout">
+                    <controls:GlassPanel x:Name="PART_RootLayout" KeyboardNavigation.TabNavigation="Local">
                         
                         <StackPanel x:Name="PART_GlassPanel" controls:GlassPanel.Dock="Top" HorizontalAlignment="Stretch" Margin="0"
                                     Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"
@@ -189,14 +201,21 @@
                                     <Button Command="input:WizardCommands.Back"
                                             Margin="0,0,3,0"
                                             ToolTip="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BackButtonState.Label}"
-                                            Style="{DynamicResource {x:Static local:WizardElements.AeroWizardBackButtonStyleKey}}"/>
+                                            Style="{DynamicResource {x:Static local:WizardElements.AeroWizardBackButtonStyleKey}}"
+                                            KeyboardNavigation.TabIndex="1000"/>
                                 </Grid>
                                 <controls:Icon x:Name="PART_GlassIcon" Margin="3,0,3,0" Width="16" Height="16" VerticalAlignment="Center"
                                                DockPanel.Dock="Left"
                                                Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Icon}"/>
-                                <TextBlock x:Name="PART_GlassText" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title}"
-                                           Margin="3,0,3,0"
-                                           VerticalAlignment="Center"/>
+
+                                <Grid Margin="3,0,3,0" VerticalAlignment="Center">
+                                    <Grid  x:Name="PART_GlassTextContainer">
+                                        <TextBlock x:Name="PART_GlassTextBlur" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title}"
+                                                    Foreground="#ffffffff"/>
+                                    </Grid>
+                                    <TextBlock x:Name="PART_GlassText" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title}"
+                                                Foreground="Black" />
+                                </Grid>
                             </DockPanel>
 
                         </StackPanel>
@@ -211,19 +230,21 @@
                                       SnapsToDevicePixels="True" Opacity=".3"/>
                                 <StackPanel Orientation="Horizontal" MinHeight="24" 
                                             HorizontalAlignment="Right" 
-                                            Margin="6,6,6,6"
-                                            KeyboardNavigation.TabNavigation="Local">
+                                            Margin="6,6,6,6">
                                     <Button Command="input:WizardCommands.Next"
+                                            KeyboardNavigation.TabIndex="997"
                                             Width="70" Margin="4" MinHeight="24"  
                                             Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=NextButtonState.Label}"
                                             IsDefault="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=NextButtonState.IsDefault}"
                                             Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=NextButtonState.Visibility}"/>
                                     <Button Command="input:WizardCommands.Finish"
+                                            KeyboardNavigation.TabIndex="998"
                                             Width="70" Margin="4" MinHeight="24"
                                             Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FinishButtonState.Label}"
                                             IsDefault="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FinishButtonState.IsDefault}"
                                             Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FinishButtonState.Visibility}"/>
                                     <Button Command="input:WizardCommands.Cancel"
+                                            KeyboardNavigation.TabIndex="999"
                                             Width="70" Margin="4" MinHeight="24"
                                             Content="{x:Static resources:Strings.WizardControl_Cancel}"
                                             IsCancel="True"/>
@@ -234,7 +255,7 @@
                             <Grid>
 
                                 <!-- The actual content on the wizard control - the currently selected page -->
-                                <Border ClipToBounds="True">
+                                <Border ClipToBounds="True" KeyboardNavigation.IsTabStop="false">
                                     <primitives:TransitionPresenter x:Name="PART_PageHost" Margin="0" FlowDirection="LeftToRight"
                                                                       TransitionEffect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TransitionEffect}"
                                                                       VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
@@ -249,6 +270,7 @@
                                                     BorderThickness="1" BorderBrush="{DynamicResource {x:Static local:WizardElements.AeroWizardErrorBorderKey}}"
                                                     Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LastError}"
                                                     Opacity="0"
+                                                    KeyboardNavigation.IsTabStop="false"
                                                     CloseCommand="input:WizardCommands.CloseLastError"/>
 
                             </Grid>
@@ -261,9 +283,15 @@
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type windows:AeroWindow}}, Path=IsCompositionEnabled}" Value="True">
                             <Setter TargetName="PART_GlassPanel" Property="Background" Value="#01000000"/>
                             <Setter TargetName="PART_GlassPanel" Property="Margin" Value="0,0,0,0"/>
-                            <Setter TargetName="PART_GlassText" Property="BitmapEffect">
+                            <Setter TargetName="PART_GlassTextBlur" Property="Effect">
                                 <Setter.Value>
-                                    <OuterGlowBitmapEffect GlowColor="#e0FFFFFF" GlowSize="6" />
+                                    <BlurEffect Radius="3"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="PART_GlassTextBlur" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_GlassTextContainer" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="#FFFFFFFF" BlurRadius="10" ShadowDepth="-2" />
                                 </Setter.Value>
                             </Setter>
                         </DataTrigger>
@@ -286,6 +314,7 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>
+                            <Setter TargetName="PART_ErrorInfo" Property="KeyboardNavigation.IsTabStop" Value="True"/>
                         </DataTrigger>
                         
                         <!-- Use to set the icon from the window if an icon is not present in the wizard -->
@@ -303,6 +332,7 @@
                         <!-- Use to set the title from the window if an title is not present in the wizard -->
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Title}" Value="{x:Null}">
                             <Setter TargetName="PART_GlassText" Property="Text" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Title}"/>
+                            <Setter TargetName="PART_GlassTextBlur" Property="Text" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Title}"/>
                         </DataTrigger>
 
                         <!-- Used to set the correct active background colours -->

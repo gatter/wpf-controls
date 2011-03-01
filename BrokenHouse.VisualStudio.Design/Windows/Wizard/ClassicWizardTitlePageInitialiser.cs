@@ -34,9 +34,9 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             content.Properties["Name"].ClearValue();
 
             // Update the page
-            page.Properties[FrameworkElement.WidthProperty].ClearValue();
-            page.Properties[FrameworkElement.HeightProperty].ClearValue();
-            page.Properties[ClassicWizardTitlePage.TitleProperty].SetValue(page.Name);
+            page.Properties[Metadata.FrameworkElementHeightPropertyId].ClearValue();
+            page.Properties[Metadata.FrameworkElementWidthPropertyId].ClearValue();
+            page.Properties[Metadata.ClassicWizardTitlePageTitlePropertyId].SetValue(page.Name);
 
             // Setthe content
             page.Content.SetValue(content);

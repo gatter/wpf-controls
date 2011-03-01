@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -122,7 +123,7 @@ namespace BrokenHouse.Windows.Parts.Transition.Primitives
         /// If content is supplied to early we cannot transition to it. So we save
         /// it and transition to it when we can.
         /// </summary>
-        private object                       m_PendingContent;
+        private PendingTransition            m_PendingTransition;
 
         /// <summary>
         /// THe current item that we are transitioning to.
@@ -304,7 +305,7 @@ namespace BrokenHouse.Windows.Parts.Transition.Primitives
             }
             else
             {
-                m_PendingContent = newContent;
+                m_PendingTransition = new PendingTransition(newContent, direction);
             }
         }
         
@@ -333,6 +334,7 @@ namespace BrokenHouse.Windows.Parts.Transition.Primitives
         /// </remarks>
         /// <param name="availableSize">The <see cref="System.Windows.Size"/> of the available area for the transition presenter. </param>
         /// <returns>The same size supplied to the method.</returns>
+        [SecuritySafeCritical]
         protected override Size MeasureOverride( Size availableSize )
         {
             Size maxSize = Size.Empty;
@@ -360,6 +362,7 @@ namespace BrokenHouse.Windows.Parts.Transition.Primitives
         /// </summary>
         /// <param name="finalSize">The <see cref="System.Windows.Size"/> in which the frames should be arranged.</param>
         /// <returns>The actual <see cref="System.Windows.Size"/> of the transition control.</returns>
+        [SecuritySafeCritical]
         protected override Size ArrangeOverride( Size finalSize )
         {
             Rect bounds = new Rect(0, 0, finalSize.Width, finalSize.Height);
@@ -381,6 +384,7 @@ namespace BrokenHouse.Windows.Parts.Transition.Primitives
         /// The control has been initialised and it is our chance to finish off our initialisation
         /// </summary>
         /// <param name="e"></param>
+        [SecuritySafeCritical]
         protected override void OnInitialized( EventArgs e )
         {
             TransitionFrames = new UIElementCollection(this, this);
@@ -393,21 +397,22 @@ namespace BrokenHouse.Windows.Parts.Transition.Primitives
         /// The control is being rendered. Ensure that any pending content is rendered.
         /// </summary>
         /// <param name="drawingContext">An instance of <see cref="System.Windows.Media.DrawingContext"/> used to render the control.</param>
+        [SecuritySafeCritical]
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
 
             // If we have pending content that transition to it.
-            if (m_PendingContent != null)
+            if (m_PendingTransition != null)
             {
                 // Do thetransition
-                TransitionEffect.DoTransition(m_PendingContent, TransitionDirection.Forwards);
+                TransitionEffect.DoTransition(m_PendingTransition.Content, m_PendingTransition.Direction);
 
                 // We now have the target
-                m_TargetContent = m_PendingContent;
+                m_TargetContent = m_PendingTransition.Content;
 
                 // And no pending content
-                m_PendingContent = null;
+                m_PendingTransition = null;
             }
         }
         
@@ -420,6 +425,7 @@ namespace BrokenHouse.Windows.Parts.Transition.Primitives
         /// </summary>
         protected override int VisualChildrenCount
         {
+            [SecuritySafeCritical]
             get
             {
                 UIElementCollection frames = TransitionFrames;
@@ -433,6 +439,7 @@ namespace BrokenHouse.Windows.Parts.Transition.Primitives
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
+        [SecuritySafeCritical]
         protected override Visual GetVisualChild(int index)
         {
             UIElementCollection frames = TransitionFrames;
@@ -518,7 +525,7 @@ namespace BrokenHouse.Windows.Parts.Transition.Primitives
         /// <param name="baseValue">Ensures that the transition effect is valid.</param>
         private static object OnTransitionEffectCoerceThunk( DependencyObject target, object baseValue )
         {
-            if (DesignerProperties.GetIsInDesignMode(target) || (baseValue == null))
+            if (SystemParameters.IsRemoteSession || DesignerProperties.GetIsInDesignMode(target) || (baseValue == null))
             {
                 baseValue = new EmptyTransitionEffect();
             }
@@ -601,8 +608,20 @@ namespace BrokenHouse.Windows.Parts.Transition.Primitives
 
 
         #endregion
+    }
 
+    /// <summary>
+    /// Helper class to hold information about a pending transition
+    /// </summary>
+    internal class PendingTransition
+    {
+        public object              Content   { get; private set; }
+        public TransitionDirection Direction { get; private set; }
 
-
+        public PendingTransition( object content, TransitionDirection direction )
+        {
+            Content   = content;
+            Direction = direction;
+        }
     }
 }

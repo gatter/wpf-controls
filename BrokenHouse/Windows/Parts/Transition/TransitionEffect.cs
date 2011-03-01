@@ -332,7 +332,7 @@ namespace BrokenHouse.Windows.Parts.Transition
             }
             else
             {
-                position   = TransitionPosition.Center;
+                position = TransitionPosition.Center;
             }
 
             // Create the frame and animation

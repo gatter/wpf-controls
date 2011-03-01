@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Windows.Documents;
 using System.Windows;
@@ -107,6 +108,7 @@ namespace BrokenHouse.Windows.Controls.Themes.Aero
         /// <param name="constraintSize">The <see cref="System.Windows.Size"/> of the available area for the chrome and its child. </param>
         /// <returns>The desired <see cref="System.Windows.Size"/> based on the child element, the thickness of the
         /// chrome and the <paramref name="constraintSize"/>.</returns>
+        [SecuritySafeCritical]
         protected override Size MeasureOverride( Size constraintSize )
         {
             UIElement child = this.Child;
@@ -145,6 +147,7 @@ namespace BrokenHouse.Windows.Controls.Themes.Aero
         /// </summary>
         /// <param name="finalSize">The <see cref="System.Windows.Size"/> in which the child should be arranged.</param>
         /// <returns>The actual <see cref="System.Windows.Size"/> of the decorator and its child element.</returns>
+        [SecuritySafeCritical]
         protected override Size ArrangeOverride( Size finalSize )
         {
             UIElement child = this.Child;
@@ -250,6 +253,7 @@ namespace BrokenHouse.Windows.Controls.Themes.Aero
         /// Renders the chrome for the <see cref="CommandLink"/>.
         /// </summary>
         /// <param name="drawingContext">An instance of <see cref="System.Windows.Media.DrawingContext"/> used to render the control.</param>
+        [SecuritySafeCritical]
         protected override void OnRender( DrawingContext drawingContext )
         {
             Rect  bounds            = new Rect(0.0, 0.0, ActualWidth, ActualHeight);

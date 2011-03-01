@@ -8,7 +8,7 @@ namespace BrokenHouse.Extensions
     /// <summary>
     /// Provides a set of <b>static</b> methods that extend objects that implement <see cref="System.Collections.Generic.IEnumerable{T}"/>.
     /// </summary>
-    public static class EnumerationExtensions
+    internal static class EnumerationExtensions
     {
         /// <summary>
         /// Applies an action to all the elements in the sequence.

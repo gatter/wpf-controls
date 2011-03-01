@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -115,6 +116,7 @@ namespace BrokenHouse.Windows.Parts.Wizard
         /// </remarks>
         /// <param name="constraint"></param>
         /// <returns></returns>
+        [SecuritySafeCritical]
         protected override Size MeasureOverride(Size constraint)
         {
             UpdatePageStyles<ClassicWizardContentPage>(ContentPageStyle);
@@ -132,6 +134,7 @@ namespace BrokenHouse.Windows.Parts.Wizard
         /// </remarks>
         /// <param name="sender">The pages collection that has changed.</param>
         /// <param name="args">The information about which pages that have changed.</param>
+        [SecurityCritical]
         protected override void OnPagesChanged( object sender, NotifyCollectionChangedEventArgs args )
         {
             // Ensure the base class does its stuff

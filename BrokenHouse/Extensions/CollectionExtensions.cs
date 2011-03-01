@@ -9,7 +9,7 @@ namespace BrokenHouse.Extensions
     /// <summary>
     /// Provides a set of <b>static</b> methods that extend the <see cref="System.Collections.ObjectModel.Collection{T}"/> objects.
     /// </summary>
-    public static class CollectionExtensions
+    internal static class CollectionExtensions
     {
         /// <summary>
         /// Inserts a range of item into a collection.

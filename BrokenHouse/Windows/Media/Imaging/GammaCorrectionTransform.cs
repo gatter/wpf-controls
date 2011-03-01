@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
@@ -33,6 +34,7 @@ namespace BrokenHouse.Windows.Media.Imaging
         /// Create the transformable bitmap
         /// </summary>
         /// <returns></returns>
+        [SecuritySafeCritical]
         protected override Freezable CreateInstanceCore()
         {
             return new GammaCorrectionTransform();
@@ -72,7 +74,8 @@ namespace BrokenHouse.Windows.Media.Imaging
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        public override Color TransformColor(Color color)
+        [SecurityCritical]
+        internal override Color TransformColor(Color color)
         {
             if (InverseGamma != 1.0)
             {
@@ -91,8 +94,9 @@ namespace BrokenHouse.Windows.Media.Imaging
         /// <summary>
         /// Return <b>true</b> if the <see cref="Gamma"/> means that there will be no change to the underlying image.
         /// </summary>
-        public override bool IsIdentity
+        internal override bool IsIdentity
         {
+            [SecurityCritical]
             get { return Gamma == 1.0; }
         }
 

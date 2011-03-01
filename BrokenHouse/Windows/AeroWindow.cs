@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -64,6 +65,7 @@ namespace BrokenHouse.Windows
         /// The source has been initialised - we can do the glass
         /// </summary>
         /// <param name="e"></param>
+        [SecuritySafeCritical]
         protected override void OnSourceInitialized(EventArgs e)
         {
             // Use the helper to hook our WPF window up to receive window messages.
@@ -78,13 +80,14 @@ namespace BrokenHouse.Windows
 
             // Call the default
             base.OnSourceInitialized(e);
-       }
+        }
 
         /// <summary>
         /// A new arrange has been triggered - ensure that the glass extends into the correct area
         /// </summary>
         /// <param name="arrangeBounds"></param>
         /// <returns></returns>
+        [SecuritySafeCritical]
         protected override Size ArrangeOverride(Size arrangeBounds)
         {
             Size size = base.ArrangeOverride(arrangeBounds);
@@ -99,6 +102,7 @@ namespace BrokenHouse.Windows
         /// <summary>
         /// We need to check to see if we have a glass panel
         /// </summary>
+        [SecuritySafeCritical]
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -110,6 +114,7 @@ namespace BrokenHouse.Windows
         /// <summary>
         /// We just want to listen to the Hit test
         /// </summary>
+        [SecuritySafeCritical]
         private IntPtr MessageProc( IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled )
         {
             IntPtr result =  IntPtr.Zero;

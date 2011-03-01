@@ -6,6 +6,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Security;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -160,7 +161,7 @@ namespace BrokenHouse.Windows.Parts.Wizard
             TransitionEffectProperty          = TransitionPresenter.TransitionEffectProperty.AddOwner(typeof(WizardControl));
             ActiveIndexProperty               = DependencyProperty.Register("ActiveIndex", typeof(int), typeof(WizardControl), new FrameworkPropertyMetadata(-1, FrameworkPropertyMetadataOptions.Journal | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnActiveIndexChangedThunk, CoerceActiveIndex), ValidateActiveIndex);
             ActivePageProperty                = DependencyProperty.Register("ActivePage", typeof(WizardPage), typeof(WizardControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnActivePageChangedThunk, CoerceActivePage), null);
-            PagesSourceProperty               = DependencyProperty.Register("PagesSource", typeof(IEnumerable), typeof(WizardControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.None, OnIsFinishAlwaysVisibleChangedThunk), null);
+            PagesSourceProperty               = DependencyProperty.Register("PagesSource", typeof(IEnumerable), typeof(WizardControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.None, OnPagesSourceChangedThunk), null);
             LastErrorProperty                 = LastErrorKey.DependencyProperty;
             NextButtonStateProperty           = NextButtonStateKey.DependencyProperty;
             BackButtonStateProperty           = BackButtonStateKey.DependencyProperty;
@@ -268,7 +269,16 @@ namespace BrokenHouse.Windows.Parts.Wizard
             // Do the transition
             if (m_TransitionPresenter != null)
             {
-                m_TransitionPresenter.DoTransition(newValue, (m_LastChangeType == WizardPageChangeType.NavigateBack)? TransitionDirection.Backwards : TransitionDirection.Forwards);
+                TransitionDirection direction = (m_LastChangeType == WizardPageChangeType.NavigateBack)? TransitionDirection.Backwards : TransitionDirection.Forwards;
+
+                // if there was no previous page then transition immediately
+                if (oldValue == null)
+                {
+                    direction = TransitionDirection.Immediate;
+                }
+
+                // Do the transition
+                m_TransitionPresenter.DoTransition(newValue, direction);
             }
 
             // Trigger the event
@@ -329,6 +339,7 @@ namespace BrokenHouse.Windows.Parts.Wizard
         /// </remarks>
         /// <param name="sender">The pages collection that has changed.</param>
         /// <param name="args">The information about how the collection changed.</param>
+        [SecurityCritical]
         protected virtual void OnPagesChanged( object sender, NotifyCollectionChangedEventArgs args )
         {
              // Are we in a consistant state
@@ -443,16 +454,14 @@ namespace BrokenHouse.Windows.Parts.Wizard
         /// We have been initialised - hook into the control
         /// </summary>
         /// <param name="e"></param>
+        [SecuritySafeCritical]
         protected override void OnInitialized( EventArgs e )
         {
             // Ensure taht the events are handled
             base.OnInitialized(e);
 
             // Active index is always 0 on initialisation
-            if (!DesignerProperties.GetIsInDesignMode(this))
-            {
-                ActiveIndex = 0;
-            }
+            ActiveIndex = 0;
 
             // If we have an active page then move focus
             if (ActivePage != null)
@@ -465,6 +474,7 @@ namespace BrokenHouse.Windows.Parts.Wizard
         /// <summary>
         /// This is our chance to find the key elements of the control
         /// </summary>
+        [SecuritySafeCritical]
         public override void OnApplyTemplate()
         {
             // Call the default
@@ -478,7 +488,7 @@ namespace BrokenHouse.Windows.Parts.Wizard
             {
                 m_TransitionPresenter.BeginFrameAnimation += OnBeginFrameAnimation;
                 m_TransitionPresenter.EndFrameAnimation   += OnEndFrameAnimation;
-                m_TransitionPresenter.DoTransition(ActivePage, TransitionDirection.Forwards);
+                m_TransitionPresenter.DoTransition(ActivePage, TransitionDirection.Immediate);
             }
         }
 
@@ -486,6 +496,7 @@ namespace BrokenHouse.Windows.Parts.Wizard
         /// Custom logic stops key events whilst the wizard is in transitions. 
         /// </summary>
         /// <param name="e">The information about which key has been pressed.</param>
+        [SecuritySafeCritical]
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
             if ((m_TransitionPresenter == null) || !m_TransitionPresenter.IsInTransition)
@@ -498,6 +509,7 @@ namespace BrokenHouse.Windows.Parts.Wizard
         /// Custom logic stops key events whilst the wizard is in transitions. 
         /// </summary>
         /// <param name="e">The information about which key has been released.</param>
+        [SecuritySafeCritical]
         protected override void OnPreviewKeyUp(KeyEventArgs e)
         {
             if ((m_TransitionPresenter == null) || !m_TransitionPresenter.IsInTransition)
@@ -1080,7 +1092,7 @@ namespace BrokenHouse.Windows.Parts.Wizard
         /// </summary>
         /// <remarks>
         /// If <b>null</b> is supplied for the style then the style is obtained by searching for the 
-        /// resource by the <paramref name="pageT"/> type.
+        /// resource by the <paramtyperef name="pageT"/> type.
         /// </remarks>
         /// <typeparam name="pageT">The type of page to update.</typeparam>
         /// <param name="style">The style to be applied to the pages</param>
@@ -1318,7 +1330,8 @@ namespace BrokenHouse.Windows.Parts.Wizard
         /// Allow a item to be removed as a logical child.
         /// </summary>
         /// <param name="item"></param>
-        public void RemoveModelItem(object item)
+        [SecurityCritical]
+        void ICollectionViewModelParent.RemoveModelItem(object item)
         {
             RemoveLogicalChild(item);
         }
@@ -1327,7 +1340,8 @@ namespace BrokenHouse.Windows.Parts.Wizard
         /// Allow an item to be added as a logical child.
         /// </summary>
         /// <param name="item"></param>
-        public void AddModelItem(object item)
+        [SecurityCritical]
+        void ICollectionViewModelParent.AddModelItem(object item)
         {
             AddLogicalChild(item);
         }

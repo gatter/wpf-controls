@@ -26,7 +26,7 @@ namespace BrokenHouse.Windows.Data
         /// <summary>
         /// Construct the collection view
         /// </summary>
-        public SimpleListCollectionView( ICollectionViewModelParent collectionParent ) : base(new object[0])
+        internal SimpleListCollectionView( ICollectionViewModelParent collectionParent ) : base(new object[0])
         {
             // Save the collections parent
             m_Parent = collectionParent;

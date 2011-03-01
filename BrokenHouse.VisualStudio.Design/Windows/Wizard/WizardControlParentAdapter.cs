@@ -27,7 +27,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// <returns></returns>
         private ModelItem CheckRedirectParent( ModelItem parent, Type childType )
         {
-            WizardControl wizardControl = parent.View as WizardControl;
+            WizardControl wizardControl = (WizardControl)parent.View.PlatformObject;
             DesignerView  designerView  = DesignerView.GetDesignerView(wizardControl);
             ModelItem     checkedParent = null;
 
@@ -147,14 +147,14 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             }
 
             // Ensure that the child has the appropriate propreties set
-            child.Properties[FrameworkElement.MarginProperty].ClearValue();
-            child.Properties[FrameworkElement.HeightProperty].ClearValue();
-            child.Properties[FrameworkElement.WidthProperty].ClearValue();
-            child.Properties[WizardPage.IsNextEnabledProperty].SetValue(true);
+            child.Properties[Metadata.FrameworkElementMarginPropertyId].ClearValue();
+            child.Properties[Metadata.FrameworkElementHeightPropertyId].ClearValue();
+            child.Properties[Metadata.FrameworkElementWidthPropertyId].ClearValue();
+            child.Properties[Metadata.WizardPageIsNextEnabledPropertyId].SetValue(true);
 
             // Obtain the wizard control and page
-            WizardControl wizardControl = newParent.View as WizardControl;
-            WizardPage    wizardPage    = child.View as WizardPage;
+            WizardControl wizardControl = newParent.View.PlatformObject as WizardControl;
+            WizardPage    wizardPage    = child.View.PlatformObject as WizardPage;
             bool          isWizardEmpty = (newParent.Content.Collection.Count == 0);
             DesignerView  designerView  = DesignerView.GetDesignerView(wizardControl);
 
@@ -228,7 +228,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
                         newParent.Content.Collection.Add(newPageItem);
 
                         // Make this the active item
-                        wizardControl.ActivePage = newPageItem.View as WizardPage;
+                        wizardControl.ActivePage = newPageItem.View.PlatformObject as WizardPage;
 
                         // If we have an element then invalidate the control
                         if (wizardControl != null)

@@ -9,6 +9,7 @@ using Microsoft.Windows.Design.Interaction;
 using Microsoft.Windows.Design.Services;
 using Microsoft.Windows.Design.Policies;
 using Microsoft.Windows.Design.Model;
+using Microsoft.Windows.Design.Metadata;
 using Microsoft.Windows.Design;
 using BrokenHouse.Windows.Controls;
 using BrokenHouse.Windows.Parts.Wizard;
@@ -34,9 +35,9 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             content.Properties["Name"].ClearValue();
 
             // Update the page
-            page.Properties[FrameworkElement.WidthProperty].ClearValue();
-            page.Properties[FrameworkElement.HeightProperty].ClearValue();
-            page.Properties[AeroWizardPage.HeaderProperty].SetValue(page.Name);
+            page.Properties[Metadata.FrameworkElementHeightPropertyId].ClearValue();
+            page.Properties[Metadata.FrameworkElementWidthPropertyId].ClearValue();
+            page.Properties[Metadata.AeroWizardPageHeaderPropertyId].SetValue(page.Name);
 
             // Setthe content
             page.Content.SetValue(content);

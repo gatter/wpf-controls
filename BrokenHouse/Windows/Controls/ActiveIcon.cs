@@ -106,6 +106,7 @@ namespace BrokenHouse.Windows.Controls
         /// layout has changed. The bindings will only be updated if the ancestor that we have attached to has changed.
         /// </remarks>
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> that contains the event data</param>
+        [SecuritySafeCritical]
         protected override void OnInitialized( EventArgs e )
         {
             // Call the default
@@ -190,6 +191,7 @@ namespace BrokenHouse.Windows.Controls
         /// this element's ancestors to find another ancestor of the required <see cref="AttachedType"/>. 
         /// </remarks>
         /// <param name="oldParent">The previous parent of this elements.</param>
+        [SecuritySafeCritical]
         protected override void OnVisualParentChanged( DependencyObject oldParent )
         {
             base.OnVisualParentChanged(oldParent);

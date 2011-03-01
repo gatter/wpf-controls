@@ -164,7 +164,7 @@ namespace BrokenHouse.Windows.Parts.Wizard
           
             // Override the keyboard navigation
             KeyboardNavigation.DirectionalNavigationProperty.OverrideMetadata(typeof(WizardPage), new FrameworkPropertyMetadata(KeyboardNavigationMode.Contained));
-            KeyboardNavigation.TabNavigationProperty.OverrideMetadata(typeof(WizardPage), new FrameworkPropertyMetadata(KeyboardNavigationMode.Contained));
+            KeyboardNavigation.TabNavigationProperty.OverrideMetadata(typeof(WizardPage), new FrameworkPropertyMetadata(KeyboardNavigationMode.Local));
             KeyboardNavigation.IsTabStopProperty.OverrideMetadata(typeof(WizardPage), new FrameworkPropertyMetadata(false));
         }
 
