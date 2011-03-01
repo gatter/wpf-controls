@@ -1,0 +1,32 @@
+﻿<local:DemoItem x:Class="DemoApplication.Demos.Controls.ControlsFeatures"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                xmlns:local="clr-namespace:DemoApplication.Demos"
+                Label="Features" Group="Controls" IsContentStatic="True">
+    <FlowDocumentPageViewer>
+        <FlowDocument ColumnWidth="400" PagePadding="5" FontFamily="Arial" FontSize="12"
+                      IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
+
+            <Paragraph FontSize="14" FontWeight="Bold">Icon</Paragraph>
+            <List>
+                <ListItem>
+                    <Paragraph>Renders the best frame of an icon based on the size of the element</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>If the size of a frame does not match the control exactly then the nearest larger frame is used.</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>If <Bold>SnapToDevicePixels</Bold> is set to <Bold>true</Bold> then the image's pixels will be aligned with device pixels.</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Allows the colours of the image to be modified with a Colour transform, such as desaturation to represent a disable image.</Paragraph>
+                </ListItem>
+            </List>
+            <Paragraph FontSize="14">Active Icon</Paragraph>
+            <Paragraph>
+            
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentPageViewer>
+</local:DemoItem>

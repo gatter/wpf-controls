@@ -1,0 +1,65 @@
+﻿<demos:DemoItem x:Class="DemoApplication.Demos.Controls.StockIcons"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                xmlns:demos="clr-namespace:DemoApplication.Demos"
+                Group="Controls" Label="Stock Icons">
+
+
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Margin="2" >
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold" FontSize="14">
+                Stock Icons
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">      
+                Color transforms are used to subtly alter the appearance
+                of an icon. These transformation
+                are used within the <Bold>ActiveIcon</Bold> element
+                to change the icon appearance based on the state of its
+                button container.
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">    
+                The following matrix shows how the icon
+                    in the top-left changes in appearence when
+                    the amount of desaturation is increased (going
+                    down) and the gamma correction factor is 
+                    decreased
+            </TextBlock>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Top" Margin="2" MaxWidth="400">
+            <ComboBox DockPanel.Dock="Top" x:Name="ComboBox" ItemsSource="{x:Static demos:DataProvider.StockIconInfos}" SelectedIndex="0" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="1">
+                            <bh:Icon Width="16" Height="16"   Source="{Binding BitmapSource}" VerticalAlignment="Center"/>
+                            <TextBlock Margin="3,0,0,0" Text="{Binding Label}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+
+        <Border Margin="4" MaxWidth="600" 
+                BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" 
+                BorderThickness="1" CornerRadius="2" SnapsToDevicePixels="True"
+                Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <WrapPanel>
+                    <bh:Icon Width="16" Height="16" SnapsToDevicePixels="True" Margin="3" VerticalAlignment="Center" Source="{Binding ElementName=ComboBox, Path=SelectedItem.BitmapSource}"/>
+                    <bh:Icon Width="20" Height="20" SnapsToDevicePixels="True" Margin="3" VerticalAlignment="Center" Source="{Binding ElementName=ComboBox, Path=SelectedItem.BitmapSource}"/>
+                    <bh:Icon Width="24" Height="24" SnapsToDevicePixels="True" Margin="3" VerticalAlignment="Center" Source="{Binding ElementName=ComboBox, Path=SelectedItem.BitmapSource}"/>
+                    <bh:Icon Width="28" Height="28" SnapsToDevicePixels="True" Margin="3" VerticalAlignment="Center" Source="{Binding ElementName=ComboBox, Path=SelectedItem.BitmapSource}"/>
+                    <bh:Icon Width="32" Height="32" SnapsToDevicePixels="True" Margin="3" VerticalAlignment="Center" Source="{Binding ElementName=ComboBox, Path=SelectedItem.BitmapSource}"/>
+                    <bh:Icon Width="40" Height="40" SnapsToDevicePixels="True" Margin="3" VerticalAlignment="Center" Source="{Binding ElementName=ComboBox, Path=SelectedItem.BitmapSource}"/>
+                    <bh:Icon Width="48" Height="48" SnapsToDevicePixels="True" Margin="3" VerticalAlignment="Center" Source="{Binding ElementName=ComboBox, Path=SelectedItem.BitmapSource}"/>
+                    <bh:Icon Width="56" Height="56" SnapsToDevicePixels="True" Margin="3" VerticalAlignment="Center" Source="{Binding ElementName=ComboBox, Path=SelectedItem.BitmapSource}"/>
+                    <bh:Icon Width="64" Height="64" SnapsToDevicePixels="True" Margin="3" VerticalAlignment="Center" Source="{Binding ElementName=ComboBox, Path=SelectedItem.BitmapSource}"/>
+                    <bh:Icon Width="72" Height="72" SnapsToDevicePixels="True" Margin="3" VerticalAlignment="Center" Source="{Binding ElementName=ComboBox, Path=SelectedItem.BitmapSource}"/>
+                    <bh:Icon Width="80" Height="80" SnapsToDevicePixels="True" Margin="3" VerticalAlignment="Center" Source="{Binding ElementName=ComboBox, Path=SelectedItem.BitmapSource}"/>
+                    <bh:Icon Width="88" Height="88" SnapsToDevicePixels="True" Margin="3" VerticalAlignment="Center" Source="{Binding ElementName=ComboBox, Path=SelectedItem.BitmapSource}"/>
+                    <bh:Icon Width="96" Height="96" SnapsToDevicePixels="True" Margin="3" VerticalAlignment="Center" Source="{Binding ElementName=ComboBox, Path=SelectedItem.BitmapSource}"/>
+                </WrapPanel>
+            </ScrollViewer>
+        </Border>
+    </DockPanel>
+</demos:DemoItem>

@@ -1,0 +1,171 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:BrokenHouse.Windows.Controls"
+                    xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+                    xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase">
+    
+    <!-- A Simple scrollbar button that is based on the standard windows chrome -->
+    <Style x:Key="ScrollBarButton" TargetType="{x:Type RepeatButton}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border Background="{TemplateBinding Background}">
+                        <themes:ScrollChrome SnapsToDevicePixels="true" x:Name="Chrome" 
+										     RenderMouseOver="{TemplateBinding IsMouseOver}" 
+									 	     RenderPressed="{TemplateBinding IsPressed}"
+								 	         themes:ScrollChrome.ScrollGlyph="{TemplateBinding themes:ScrollChrome.ScrollGlyph}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- A cut down scroll bar with out the track and the thumb -->
+    <Style x:Key="ScrollBarStyle" TargetType="{x:Type ScrollBar}">
+        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                    <Grid SnapsToDevicePixels="true">
+                        <Grid.RowDefinitions>
+                            <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
+                            <RowDefinition Height="0.00001*"/>
+                            <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
+                        </Grid.RowDefinitions>
+                        <RepeatButton IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBarButton}" 
+                                      Command="{x:Static ScrollBar.LineUpCommand}" 
+                                      themes:ScrollChrome.ScrollGlyph="UpArrow" 
+                                      Background="Transparent"/>
+                        <RepeatButton IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBarButton}" 
+                                      Command="{x:Static ScrollBar.LineDownCommand}" 
+                                      themes:ScrollChrome.ScrollGlyph="DownArrow" Grid.Row="2"
+                                      Background="Transparent"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Width" Value="Auto"/>
+                <Setter Property="Height" Value="Auto"/>
+                <Setter Property="MinWidth" Value="0"/>
+                <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
+                <Setter Property="Background" Value="#01000000"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollBar}">
+                            <Grid SnapsToDevicePixels="true">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
+                                    <ColumnDefinition Width="0.00001*"/>
+                                    <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
+                                </Grid.ColumnDefinitions>
+                                <RepeatButton IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBarButton}" 
+                                              Command="{x:Static ScrollBar.LineLeftCommand}" 
+                                              themes:ScrollChrome.ScrollGlyph="LeftArrow"
+                                              Background="Transparent"/>
+                                <RepeatButton IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBarButton}" 
+                                              Command="{x:Static ScrollBar.LineRightCommand}" 
+                                              themes:ScrollChrome.ScrollGlyph="RightArrow" 
+                                              Grid.Column="2"
+                                              Background="Transparent"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- A simple scroll viewer style that has scrollbar buttons at the edges of the content -->
+    <Style TargetType="{x:Type local:EdgeScrollViewer}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:EdgeScrollViewer}">
+                    <Border SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+                        <Grid Margin="{TemplateBinding Padding}">
+                            
+                            <!-- Position the content so that it fits in the scroll bars -->
+                            <Grid.RowDefinitions>
+                                <RowDefinition x:Name="PART_TopRow" 
+                                               MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
+                                <RowDefinition Height="0.00001*"/>
+                                <RowDefinition x:Name="PART_BottomRow"
+                                               MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="PART_LeftColumn" MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
+                                <ColumnDefinition Width="0.00001*"/>
+                                <ColumnDefinition x:Name="PART_RightColumn" MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <!-- Spaces to force the grid to do the right calculation -->
+                            <Border Height="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"
+                                    Width="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
+                            <Border Grid.Row="3" Grid.Column="3" 
+                                    Height="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"
+                                    Width="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
+                            
+                            <!-- The presenter of the content -->
+                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" 
+                                                    Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="1"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                                    CanContentScroll="{TemplateBinding CanContentScroll}" 
+                                                    CanHorizontallyScroll="False" 
+                                                    CanVerticallyScroll="False" 
+                                                    Content="{TemplateBinding Content}" 
+                                                    ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                                    KeyboardNavigation.DirectionalNavigation="Local"/>
+                            
+                            <!-- The horizontal scroll bar -->
+                            <ScrollBar x:Name="PART_HorizontalScrollBar" 
+                                       Grid.Row="1" Grid.ColumnSpan="3"
+                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                       Cursor="Arrow" 
+                                       Orientation="Horizontal" 
+                                       ViewportSize="{TemplateBinding ViewportWidth}" 
+                                       Maximum="{TemplateBinding ScrollableWidth}" 
+                                       Minimum="0" 
+                                       Height="Auto"
+                                       Value="{Binding Path=HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                       Style="{StaticResource ScrollBarStyle}"/>
+                            
+                            <!-- And the vertical one -->
+                            <ScrollBar x:Name="PART_VerticalScrollBar" 
+                                       Grid.Column="1" Grid.RowSpan="3"
+                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                       Cursor="Arrow" 
+                                       Orientation="Vertical" 
+                                       ViewportSize="{TemplateBinding ViewportHeight}" 
+                                       Maximum="{TemplateBinding ScrollableHeight}" 
+                                       Minimum="0" 
+                                       Width="Auto"
+                                       Value="{Binding Path=VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                       Style="{StaticResource ScrollBarStyle}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=ComputedHorizontalScrollBarVisibility, RelativeSource={RelativeSource Self}}" Value="Collapsed">
+                            <Setter TargetName="PART_LeftColumn" Property="Width" Value="0"/>
+                            <Setter TargetName="PART_RightColumn" Property="Width" Value="0"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=ComputedVerticalScrollBarVisibility, RelativeSource={RelativeSource Self}}" Value="Collapsed">
+                            <Setter TargetName="PART_TopRow" Property="Height" Value="0"/>
+                            <Setter TargetName="PART_TopRow" Property="Height" Value="0"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

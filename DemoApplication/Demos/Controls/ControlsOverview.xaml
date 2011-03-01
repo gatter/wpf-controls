@@ -1,0 +1,51 @@
+﻿<local:DemoItem x:Class="DemoApplication.Demos.Controls.ControlsOverview"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                xmlns:local="clr-namespace:DemoApplication.Demos"
+                Label="Overview" Group="Controls" IsContentStatic="True">
+    
+    <FlowDocumentPageViewer>
+        <FlowDocument ColumnWidth="400" PagePadding="5" FontFamily="Arial" FontSize="12"
+                      IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
+
+            <Paragraph FontSize="16" FontWeight="Bold">Controls Overview</Paragraph>
+            <Paragraph FontSize="14" FontWeight="Bold">Icon</Paragraph>
+            <Paragraph>
+                The <Bold>Icon</Bold> element provides the ability to render the best frames of an icon depending on its size.
+                It can also snap the image to device pixels as well as having the ability to transform its colours.
+                Even though this element is optimised for rendering icons it can also be used to render simple bitmaps.
+            </Paragraph>
+
+            <Paragraph FontSize="14" FontWeight="Bold">Active Icon</Paragraph>
+            <Paragraph>
+                The <Bold>ActiveIcon</Bold> element provides the ability to render an icon that is 'in tune' with its button container.
+                If <Bold>ActiveIcon</Bold> is used as a child of an element that derives from the
+                <Bold>ButtonBase</Bold> element then the icon will be desatured when the button is disabled and will be highlighted
+                when the mouse hovers over the button.
+            </Paragraph>
+
+            <Paragraph FontSize="14" FontWeight="Bold">Command Link</Paragraph>
+            <Paragraph>
+                The <Bold>CommandLink</Bold> element is a pure WPF implementation of the standard Windows Command Link that was
+                introduced in Vista. To provide backwards compatibilty with Windows XP, a Luna style has been provided that fits
+                with the XP user interface.
+            </Paragraph>
+
+            <Paragraph FontSize="14" FontWeight="Bold">Shield &amp; Task Icons</Paragraph>
+            <Paragraph>
+                Provides a set of icons that can be used in buttons and Task Dialogs to provide additional context
+                to the user. Shield icons are used in Windows to provide information on security related tasks; whilst 
+                task icons are used to signify that a message is associated with a question, warning, error etc.
+                All icons have multiple frames which when used with the
+                <Bold>Icon</Bold> element provide very clear images when sized from 16x16 to 96x96.
+            </Paragraph>
+
+            <Paragraph FontSize="14" FontWeight="Bold">Snap decorator</Paragraph>
+            <Paragraph>
+                The <Bold>SnapDecorator</Bold> is a simple container that positions it child so that it is aligned with
+                device pixels.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentPageViewer>
+</local:DemoItem>

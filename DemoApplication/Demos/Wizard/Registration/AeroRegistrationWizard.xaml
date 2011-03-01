@@ -1,0 +1,55 @@
+﻿<bh:AeroWizardWindow x:Class="DemoApplication.Demos.Wizard.Registration.AeroRegistrationWizard"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                     xmlns:local="clr-namespace:DemoApplication.Demos.Wizard.Registration"
+                     Width="500" Height="410" Title="Registration">
+    
+
+    <!-- Now the actual wizard -->
+    <bh:AeroWizardControl Title="Application Registation" Icon="{x:Static bh:ShieldIcons.Tick}">
+
+        <bh:AeroWizardControl.TransitionEffect>
+            <bh:CheckerBoardTransitionEffect TransitionType="Sequential"/>
+        </bh:AeroWizardControl.TransitionEffect>
+
+        <!-- Ask the user whether they want to register or not -->
+        <bh:AeroWizardPage IsNextEnabled="False" Header="Thank you for installing this application.">
+            <StackPanel>
+                <UniformGrid Margin="0,8,0,0" Columns="1">
+                    <bh:CommandLink Instruction="Register Now" Margin="0,0,0,8" Command="{x:Static bh:WizardCommands.MoveTo}" CommandParameter="Register">
+                        You will be asked to providesome personal information to complete the registration.
+                    </bh:CommandLink>
+                    <bh:CommandLink Instruction="Register Later" Margin="0,8,0,0" Command="{x:Static bh:WizardCommands.MoveTo}" CommandParameter="Declined">
+                        It is important to register this application because by registering you will be kept informed
+                        of product updated.
+                    </bh:CommandLink>
+                </UniformGrid>
+            </StackPanel>
+        </bh:AeroWizardPage>
+        
+        <!-- Handle the registration -->
+        <bh:AeroWizardPage x:Name="Register" Header="Provide Registration Details" IsNextEnabled="{Binding IsValid}">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Bottom" FontSize="10" Text="These details will not be used for marketing or by any third party."/>
+                <local:RegistrationControl/>
+            </DockPanel>
+        </bh:AeroWizardPage>
+        
+        <!-- Tell the user that the registration is valid (once reached we will not allow the user to move back) -->
+        <bh:AeroWizardPage Header="Registration Confirmed" IsFinishEnabled="True" IsFinalPage="True" IsBackEnabled="False">
+            <TextBlock TextWrapping="Wrap">
+                Thank you for registering this application.
+            </TextBlock>
+        </bh:AeroWizardPage>
+        
+        <!-- User has declined the registration - tell them how to register later -->
+        <bh:AeroWizardPage x:Name="Declined" Header="Registration Declined" IsFinalPage="True" IsFinishEnabled="True">
+            <TextBlock TextWrapping="Wrap">
+                You have decided not to register this application at the moment.
+                If you want to register at a later date then please 
+                click the register button in the about window of the application.
+            </TextBlock>
+        </bh:AeroWizardPage>
+    </bh:AeroWizardControl>
+</bh:AeroWizardWindow>

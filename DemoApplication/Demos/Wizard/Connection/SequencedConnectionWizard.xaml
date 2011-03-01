@@ -1,0 +1,227 @@
+﻿<Window x:Class="DemoApplication.Demos.Wizard.Connection.SequencedConnectionWizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+        xmlns:bhp="http://www.brokenhouse.co.uk/wpf/primitives"
+        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+        xmlns:local="clr-namespace:DemoApplication.Demos.Wizard.Connection"
+        xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic"
+        Width="600" Height="450" Icon="{x:Static bh:ShieldIcons.Windows}"
+        Title="Sequence Wizard" >
+    
+    <Window.Resources>
+        
+        <!-- Wizard Control Style -->
+        <Style TargetType="{x:Type bh:AeroWizardControl}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type bh:AeroWizardControl}">
+                        <DockPanel x:Name="PART_RootLayout">
+
+                            <!-- Buttons With an etched line above -->
+                            <themes:ClassicBorderDecorator x:Name="PART_HeaderPanel" SnapsToDevicePixels="true" DockPanel.Dock="Top"
+                                                           Background="White"
+                                                           BorderThickness="0,0,0,2" Height="64" BorderStyle="Etched">
+                                <DockPanel VerticalAlignment="Center">
+                                    <bh:Icon Source="{x:Static bh:ShieldIcons.Windows}" Height="48" Margin="5,0,5,0"/>
+                                    <TextBlock FontSize="16" FontWeight="Bold" Margin="5" VerticalAlignment="Center"
+                                                Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActivePage.Header}"/>
+                                </DockPanel>
+                            </themes:ClassicBorderDecorator>
+                            
+                            <!-- List of pages -->
+                            <themes:ClassicBorderDecorator x:Name="PART_ListPanel" DockPanel.Dock="Left" SnapsToDevicePixels="true" 
+                                                           Background="LightGray" BorderStyle="Etched"
+                                                           BorderThickness="0,0,2,0">
+                                <ListBox BorderThickness="0" x:Name="PART_List" Margin="0" Background="Transparent"
+                                         ItemsSource="{Binding ElementName=PART_Wizard, Path=Pages}" 
+                                         DockPanel.Dock="Left">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListBoxItem}" >
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                                    
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <TextBlock x:Name="PART_TopText" Text="{Binding Header}" Margin="5" Foreground="Black"/>
+                                                <TextBlock x:Name="PART_BottomText" Text="{Binding Header}" Margin="4,4,6,6" Foreground="Transparent"/>
+                                                <TextBlock x:Name="PART_Spacer" Text="{Binding Header}" Margin="4,4,6,6" Foreground="Transparent" FontWeight="Bold"/>
+                                            </Grid>
+                                            <DataTemplate.Triggers>
+                                                <DataTrigger Binding="{Binding IsActive}" Value="true">
+                                                    <Setter Property="FontWeight" TargetName="PART_TopText" Value="Bold"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=(local:SequencedWizardPageBehaviour.IsPending)}" Value="true">
+                                                    <Setter Property="Foreground" TargetName="PART_BottomText" Value="Gray"/>
+                                                    <Setter Property="Foreground" TargetName="PART_TopText" Value="White"/>
+                                                </DataTrigger>
+                                            </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </themes:ClassicBorderDecorator>
+
+                            <!-- Buttons With an etched line above -->
+                            <themes:ClassicBorderDecorator x:Name="PART_ButtonPanel" DockPanel.Dock="Bottom" SnapsToDevicePixels="true" 
+                                                           Background="LightGray"
+                                                           BorderThickness="0,2,0,0" BorderStyle="Etched">
+                                <bhp:UniformWrapPanel Orientation="Horizontal" 
+                                                      HorizontalAlignment="Right" 
+                                                      Margin="6,6,6,6"
+                                                      KeyboardNavigation.TabNavigation="Local">
+                                    <Button x:Name="PART_BackButton" 
+                                            Command="{x:Static bh:WizardCommands.Back}"
+                                            MinWidth="70" Height="23" Margin="4"
+                                            Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BackButtonState.Label}"
+                                            Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BackButtonState.Visibility}"/>
+                                    <Button Command="{x:Static bh:WizardCommands.Next}"
+                                            MinWidth="70" Height="23" Margin="4"
+                                            Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=NextButtonState.Label}"
+                                            IsDefault="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=NextButtonState.IsDefault}"
+                                            Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=NextButtonState.Visibility}"/>
+                                    <Button Command="{x:Static bh:WizardCommands.Finish}"
+                                            MinWidth="70" Height="23" Margin="4"
+                                            Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FinishButtonState.Label}"
+                                            IsDefault="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FinishButtonState.IsDefault}"
+                                            Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FinishButtonState.Visibility}"/>
+                                    <Button Command="{x:Static bh:WizardCommands.Cancel}"
+                                            MinWidth="70" Height="23" Margin="4"
+                                            Content="Cancel"
+                                            IsCancel="True"/>
+                                </bhp:UniformWrapPanel>
+                            </themes:ClassicBorderDecorator>
+
+                            
+                            <Grid>
+                                <!-- The actual content on the wizard control - the currently selected page -->
+                                <bhp:TransitionPresenter x:Name="PART_PageHost"
+                                                           TransitionEffect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TransitionEffect}"
+                                                           VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
+                                
+                                <!-- This is the optional error section. If an error occurs we will place
+                                 the error here. We also may want to animate it. -->
+                                <bh:ErrorInfo x:Name="PART_ErrorInfo" Margin="3"
+                                              HorizontalAlignment="Stretch" VerticalAlignment="Bottom" 
+                                              Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LastError}"
+                                              CloseCommand="bh:WizardCommands.CloseLastError"/>
+                            </Grid>
+                        </DockPanel>
+
+                        <ControlTemplate.Triggers>
+
+                            <!-- If the message is blank we do not want to show the error message-->
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsLastErrorVisible, Mode=OneWay}" Value="false">
+                                <Setter TargetName="PART_ErrorInfo" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Content Wizard Page Style -->
+        <Style x:Key="newWizardPage" TargetType="{x:Type bh:AeroWizardPage}">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Padding" Value="10,10,10,10"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type bh:AeroWizardPage}">
+                        <Border SnapsToDevicePixels="true" 
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" 
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                              ContentSource="Content" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <bh:AeroWizardControl x:Name="PART_Wizard" Title="Connection Wizard" PageStyle="{DynamicResource newWizardPage}"
+                          local:SequencedWizardPageBehaviour.IsSequenced="true"> 
+        <bh:AeroWizardControl.TransitionEffect>
+            <bh:SlideTransitionEffect Direction="BottomToTop" TransitionType="Sequential"/>
+        </bh:AeroWizardControl.TransitionEffect>
+        
+        <!-- The first page -->
+        <bh:AeroWizardPage Header="Getting Started">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top" Text="You can use this wizard to define a connection to a remote server."/>
+                <TextBlock Text="To continue, Click Next." Margin="0,10,0,0"/>
+            </DockPanel>
+        </bh:AeroWizardPage>
+        
+        <!-- Use the standard check hostname page -->
+        <local:CheckHostnamePage Header="Specify Hostname"/>
+        
+        <!-- Use the standard authentication page -->
+        <local:CheckAuthenticationPage Header="Provide Credentials"/>
+        
+        <!-- Or special confirmation page -->
+        <bh:AeroWizardPage Header="Confirmation" NextLabel="Create">
+            <DockPanel>
+                <TextBlock Margin="0,0,0,5" DockPanel.Dock="Top" Text="To create the following connection click Create."/>
+                <themes:ClassicBorderDecorator BorderThickness="2" Background="White" BorderStyle="Etched">
+                    <DockPanel Margin="5" Grid.Column="1">
+                        <bh:Icon Source="{x:Static bh:TaskIcons.Information}" Width="16" />
+                        <TextBlock Margin="3,0,0,0" Text="Connection details." DockPanel.Dock="Top"/>
+                        <Grid Margin="20,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Margin="3" Grid.Column="0" Grid.Row="0" Text="Hostname :"/>
+                            <TextBlock Margin="3" Grid.Column="1" Grid.Row="0" Text="{Binding Hostname}"/>
+                            <TextBlock Margin="3" Grid.Column="0" Grid.Row="1" Text="Username :"/>
+                            <TextBlock Margin="3" Grid.Column="1" Grid.Row="1" Text="{Binding UserName}"/>
+                        </Grid>
+                    </DockPanel>
+                </themes:ClassicBorderDecorator>
+            </DockPanel>
+        </bh:AeroWizardPage>
+        
+        <!-- The results page -->
+        <bh:AeroWizardPage Header="Results" FinishLabel="Close" IsBackEnabled="false">
+            <DockPanel>
+                <TextBlock Margin="0,0,0,5" DockPanel.Dock="Top" Text="The following actions have been completed"/>
+                <themes:ClassicBorderDecorator BorderThickness="2" Background="White" BorderStyle="Etched">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Margin="5" Text="Remote Connection" FontWeight="Bold"/>
+                        <DockPanel Margin="5" Grid.Column="1">
+                            <bh:Icon Source="{x:Static bh:TaskIcons.Tick}" Width="16" />
+                            <TextBlock Margin="3,0,0,0" Text="Successfully created connection." FontWeight="Bold"/>
+                        </DockPanel>
+                    </Grid>
+                </themes:ClassicBorderDecorator>
+            </DockPanel>
+        </bh:AeroWizardPage>
+    </bh:AeroWizardControl>
+</Window>

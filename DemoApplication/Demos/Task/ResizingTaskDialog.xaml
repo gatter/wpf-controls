@@ -1,0 +1,46 @@
+﻿<bh:TaskDialogWindow x:Class="DemoApplication.Demos.Task.ResizingTaskDialog"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                     Title="TaskWindow" Width="463" Height="500"  MinWidth="300" 
+                     ShowInTaskbar="False" WindowStyle="SingleBorderWindow"
+                     SizeToContent="Height">
+    <bh:TaskDialogControl AllowExpand="True" CheckBoxContent="Optional check box."
+                          ShowMessageInFooter="True" AutoExpandMessage="True" Padding="3"
+                          ExpandedText="Less Details" CollapsedText="More Details" FooterIcon="{x:Static bh:TaskIcons.Warning}">
+        <bh:TaskDialogControl.FooterContent>
+            This could be used as warning section but different icons can be used to specify other messages.
+        </bh:TaskDialogControl.FooterContent>
+        <bh:TaskDialogControl.Message>
+            The message by default will always be wrapped if they they span more than one line in the dialog.
+        </bh:TaskDialogControl.Message>
+        <bh:TaskDialogControl.MainIcon>
+            <bh:Icon Source="{x:Static bh:TaskIcons.Question}" Width="32" Height="32"/>
+        </bh:TaskDialogControl.MainIcon>       
+        <bh:TaskDialogControl.Buttons>
+            <bh:TaskButtonBar ButtonSet="OkCancel"/>
+        </bh:TaskDialogControl.Buttons>
+        <DockPanel>
+            <TextBlock TextWrapping="Wrap" bh:TaskDialogControl.Expand="True" DockPanel.Dock="Top">
+                    Elements within the content can be made to
+                appear and dispear when the expand button is clicked.</TextBlock>
+            <Grid Margin="0,3,0,0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <bh:CommandLink Grid.Row="0" Instruction="Option 1" Margin="3" Click="OnCommandLinkClick">
+                    Each command link can be used ...
+                </bh:CommandLink>
+                <bh:CommandLink Grid.Row="1" Instruction="Option 2" Margin="3" Click="OnCommandLinkClick">
+                    ... to provide additional options ...
+                </bh:CommandLink>
+                <bh:CommandLink Grid.Row="3" Instruction="Option 3" Margin="3" Click="OnCommandLinkClick">
+                    .. including a description of the action..
+                </bh:CommandLink>
+            </Grid>
+        </DockPanel>
+    </bh:TaskDialogControl>
+</bh:TaskDialogWindow>

@@ -1,0 +1,31 @@
+﻿<bh:AeroWizardPage x:Class="DemoApplication.Demos.Wizard.Connection.CheckAuthenticationPage"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                   MinHeight="300" MinWidth="300"
+                   Header="Check Authentication"
+                   IsNextEnabled="{Binding IsHostnameValid}">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap">
+            In order to use this server you need to provide a valid set of credentials.
+        </TextBlock>
+        <TextBlock DockPanel.Dock="Bottom" TextWrapping="Wrap" FontSize="10">
+            Only guest and guest are valid credentials in this example wizard.
+        </TextBlock>
+        <Grid Margin="24,30,24,30" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right">User Name :</TextBlock>
+            <TextBox Grid.Column="1" Margin="12,3,3,3" Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" >Password :</TextBlock>
+            <PasswordBox x:Name="m_Password" Grid.Row="1" Grid.Column="1" Margin="12,3,3,3"
+                         PasswordChanged="OnPasswordChanged"/>
+        </Grid>
+    </DockPanel>
+</bh:AeroWizardPage>

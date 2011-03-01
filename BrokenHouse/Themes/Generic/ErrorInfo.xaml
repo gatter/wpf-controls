@@ -1,0 +1,150 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:BrokenHouse.Windows.Controls"
+                    xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <Style x:Key="CloseButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle SnapsToDevicePixels="true" Margin="2" Stroke="Black" StrokeDashArray="1 2" StrokeThickness="1"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <SolidColorBrush x:Key="CloseButtonBorder" Color="#FF5D5D5D"/>
+    <LinearGradientBrush x:Key="CloseButtonHoverBackground" StartPoint="0.0,0.1" EndPoint="0.0,0.9">
+        <GradientStop Color="#FFFF896B" Offset="0"/>
+        <GradientStop Color="#FFFE3030" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="CloseButtonNormalBackground" StartPoint="0.0,0.1" EndPoint="0.0,0.9">
+        <GradientStop Color="#20000000" Offset="0"/>
+        <GradientStop Color="#10000000" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="CloseButtonPressedBackground" StartPoint="0.0,0.1" EndPoint="0.0,0.9">
+        <GradientStop Color="#FFFE3030" Offset="0"/>
+        <GradientStop Color="#FFFF896B" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="CloseButtonNormalInnerBorder" StartPoint="0.43,0.43" EndPoint="0.57,0.57">
+        <GradientStop Color="#6CFFFFFF" Offset="0"/>
+        <GradientStop Color="#20000000" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="CloseButtonPressedInnerBorder" StartPoint="0.57,0.57" EndPoint="0.43,0.43">
+        <GradientStop Color="#6CFFFFFF" Offset="0"/>
+        <GradientStop Color="#4D000000" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="CloseButtonNormalForeground" Color="#FFa0a0a0"/>
+    <SolidColorBrush x:Key="CloseButtonHoverForeground" Color="#ffffffff"/>
+    <SolidColorBrush x:Key="CloseButtonPressedForeground" Color="#fff0f0f0"/>
+    <SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+
+    <Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource CloseButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource CloseButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource CloseButtonBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{StaticResource CloseButtonNormalForeground}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border CornerRadius="2" SnapsToDevicePixels="True" 
+						        BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}"
+							    Background="{TemplateBinding Background}"/>
+                        <Border x:Name="PART_PressedBackground" CornerRadius="2" SnapsToDevicePixels="True" 
+							    BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}"
+							    Background="{StaticResource CloseButtonHoverBackground}" Opacity="0.0"/>
+                        <Grid Margin="1">
+                            <Border x:Name="PART_InnerBorder"
+									CornerRadius="1" SnapsToDevicePixels="True" 
+									BorderThickness="1" BorderBrush="{StaticResource CloseButtonNormalInnerBorder}"/>
+                            <Border x:Name="PART_PressedBorder" SnapsToDevicePixels="True" Margin="1"
+								        BorderThickness="1" BorderBrush="{StaticResource CloseButtonNormalInnerBorder}" Opacity="0.0"/>
+                            <Path x:Name="PART_Cross" Width="8.5" Height="8.5" Stretch="Fill" StrokeThickness="0.5" 
+									Stroke="{TemplateBinding Foreground}" Fill="{TemplateBinding Foreground}" 
+									Data="F1 M 5,4L 4,5L 7,8L 4,11L 5,12L 8,9L 11,12L 12,11L 9,8L 12,5L 11,4L 8,7L 5,4 Z "/>
+                        </Grid>
+                     </Grid>
+                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="#ADADAD"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="PART_PressedBorder" Property="Opacity" Value="0.5"/>
+                            <Setter TargetName="PART_InnerBorder" Property="BorderBrush" Value="{StaticResource CloseButtonPressedInnerBorder}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <StopStoryboard BeginStoryboardName="STORY_HideMouseOver"/>
+                                <BeginStoryboard Name="STORY_ShowMouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PART_PressedBackground" Storyboard.TargetProperty="Opacity" To="1.0" Duration="00:00:00.2"/>
+                                        <ColorAnimation Storyboard.TargetName="PART_Cross" Storyboard.TargetProperty="Fill.Color" To="#ffffffff" Duration="00:00:00.2"/>
+                                        <ColorAnimation Storyboard.TargetName="PART_Cross" Storyboard.TargetProperty="Stroke.Color" To="#ffffffff" Duration="00:00:00.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <StopStoryboard BeginStoryboardName="STORY_ShowMouseOver"/>
+                                <BeginStoryboard Name="STORY_HideMouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PART_PressedBackground" Storyboard.TargetProperty="Opacity" Duration="00:00:00.5"/>
+                                        <ColorAnimation Storyboard.TargetName="PART_Cross" Storyboard.TargetProperty="Fill.Color" Duration="00:00:00.2"/>
+                                        <ColorAnimation Storyboard.TargetName="PART_Cross" Storyboard.TargetProperty="Stroke.Color" Duration="00:00:00.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:ErrorInfo}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.InfoBrushKey}}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ErrorInfo}">
+                    <Border x:Name="PART_ErrorPanel" CornerRadius="3" 
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            HorizontalAlignment="Stretch">
+                        <DockPanel >
+                            <Button DockPanel.Dock="Right" Style="{StaticResource CloseButtonStyle}" Width="16" Height="16" Margin="4"
+                                    Command="{TemplateBinding CloseCommand}"/>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <ContentPresenter Margin="{TemplateBinding Padding}"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                                  RecognizesAccessKey="True">
+                                    <ContentPresenter.Resources>
+                                        <DataTemplate DataType="{x:Type system:String}">
+                                            <TextBlock TextWrapping="Wrap" Text="{Binding .}"/>
+                                        </DataTemplate>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

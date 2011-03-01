@@ -1,0 +1,62 @@
+﻿<local:DemoItem x:Class="DemoApplication.Demos.Transition.TransitionFeatures"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                xmlns:local="clr-namespace:DemoApplication.Demos"
+                Label="Features" Group="Transition" IsContentStatic="True">
+    
+    <FlowDocumentPageViewer>
+        <FlowDocument ColumnWidth="300" PagePadding="5" FontFamily="Arial" FontSize="14" 
+                      IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
+            <Paragraph FontSize="16" FontWeight="Bold">Feature List</Paragraph>
+            <Paragraph>
+                <Bold>Key Features</Bold>
+            </Paragraph>
+            <List>
+                <ListItem>
+                    <Paragraph>Unique support for overlapping transitions</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>The automatic reversal of transitions if the required new content is currently being transitioned.</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Custom transitions can be easily created.</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>
+                        Source of item to be transitioned can be either controlled by the
+                        <Bold>TransitionItemsControl</Bold> or be bound to the items contained in another
+                        <Bold>ItemsControl</Bold>
+                    </Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>The speed ratio of every transition can be modified.</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Where appropriate the direction of the transition can be modified</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Events are triggered on each transition or when all the current transitions are started or finished.</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Transitions can be created either programatically or in XAML.</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Transitions can be overlapped or sequential.</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>For the
+                        <Bold>TransitionItemsControl</Bold> have a well defined
+                        direction and can be transitioned in sequence.
+                    </Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>
+                        <Bold>TransitionPresenter</Bold> for more complicated scenarios.
+                    </Paragraph>
+                </ListItem>
+            </List>
+        </FlowDocument>
+    </FlowDocumentPageViewer>
+
+</local:DemoItem>

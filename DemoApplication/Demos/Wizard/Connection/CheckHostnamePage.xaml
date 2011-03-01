@@ -1,0 +1,17 @@
+﻿<bh:AeroWizardPage x:Class="DemoApplication.Demos.Wizard.Connection.CheckHostnamePage"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                   MinHeight="300" MinWidth="300"
+                   Header="Initiate connection to server"
+                   IsNextEnabled="{Binding IsHostnameValid}">
+    <StackPanel>
+        <TextBlock TextWrapping="Wrap">
+            To initiate the connection you need to provide the hostname of the server.
+        </TextBlock>  
+        <DockPanel Margin="24,30,24,30">
+            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center">Hostname : </TextBlock>
+            <TextBox Margin="12,3,3,3" Text="{Binding Hostname, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
+    </StackPanel>
+</bh:AeroWizardPage>

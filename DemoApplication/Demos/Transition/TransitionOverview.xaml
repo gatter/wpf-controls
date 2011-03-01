@@ -1,0 +1,50 @@
+﻿<local:DemoItem x:Class="DemoApplication.Demos.Transition.TransitionOverview"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                xmlns:local="clr-namespace:DemoApplication.Demos"
+                Label="Overview" Group="Transition" IsContentStatic="True">
+
+    <FlowDocumentPageViewer>
+        <FlowDocument ColumnWidth="300" PagePadding="5" FontFamily="Arial" FontSize="14" 
+                       IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
+            <Paragraph FontSize="16" FontWeight="Bold">Introduction</Paragraph>
+            <Paragraph>
+                The transition framework is a set of controls and effects that quickly enables any developer
+                to provide stylistic transitions without writing any code. In contrast to any other transition
+                system this framework allows multiple transition to occur at the same time. This is important
+                because the last thing you want in a WPF application is the stutering effect of an animation
+                jumping to an early conclusion. This handling of multiple transitions is so complete that
+                if the required content is currently in a transition then all the inflight transitions
+                are seamlessly reversed to ensure the correct content is displayed as smoothly as possible.
+            </Paragraph><Paragraph FontSize="16" FontWeight="Bold">Effects</Paragraph>
+            <Paragraph>
+                There are numerouse transition effects that can be chosen from. Each one supports
+                the ability to run overlapped or sequential as well as being reversed if required.
+                All but the most compicated transitions can be created by simplying using XAML to
+                define styles and storyboards.
+            </Paragraph>
+            <Paragraph FontSize="16" FontWeight="Bold">Multiple Controls</Paragraph>
+            <Paragraph>
+                Transitions can be managed at three different levels:
+            </Paragraph>
+            <Paragraph>
+                <Bold>TransitionItemsControl</Bold> provides a simple way to
+                transition between items that have a well defined sequence. When transitioning 
+                between two items you have the option to transition the items in sequence, similarly
+                to shuffling a deck of cards. If the item to be transitioned is before the current
+                item then the reverse animation is used.
+            </Paragraph>
+            <Paragraph>
+                <Bold>TransitionControl</Bold> will simply perform a transition when its content is
+                changed. If the new content is being hidden by an inflight animation the appropriate
+                animations will be reversed to show the correct content.
+            </Paragraph>
+            <Paragraph>
+                <Bold>TransitionPresenter</Bold> is the primative that performs the actual transition.
+                With this FrameworkElement the transition can only be initiated programatically. However,
+                this allows the transitions to be put almost any environment.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentPageViewer>
+</local:DemoItem>

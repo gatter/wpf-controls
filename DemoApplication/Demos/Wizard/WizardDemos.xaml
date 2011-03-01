@@ -1,0 +1,55 @@
+﻿<local:DemoItem x:Class="DemoApplication.Demos.Wizard.WizardDemos"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                xmlns:local="clr-namespace:DemoApplication.Demos"
+                 Label="Wizards" Group="Wizard" MaxWidth="1000">
+
+
+    <DockPanel Margin="1">
+        <StackPanel Margin="0,0,0,5" DockPanel.Dock="Top">
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold" FontSize="14">
+                    Wizards
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">      
+                    The following examples shows how wizard framework can be used to create
+                not only classic Wizard97 but also the Aero styled wizards. Each wizard demo
+                tries to show the different ways a wizard could be created.
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel Margin="5" MinWidth="316" MaxWidth="500">
+            <bh:CommandLink Instruction="Aero Connection Wizard" Click="OnShowAeroConnectionWizard" Margin="5">
+                <TextBlock TextWrapping="Wrap">
+                    This example is an <Bold>AeroWizard</Bold> that simulates the creation of a connection
+                    to a remote server. This wizard has been constructed using separate XAML files for 
+                    each page.
+                </TextBlock>
+            </bh:CommandLink>
+            <bh:CommandLink Instruction="Styled Connection Wizard" Click="OnShowCustomConnectionWizard" Margin="5">
+                <TextBlock TextWrapping="Wrap">
+                    This example is an custom styled wizard that uses the same pages as the above
+                    Aero Connection Wizard.
+                </TextBlock>
+            </bh:CommandLink>
+            <bh:CommandLink Instruction="Sequenced Connection Wizard" Click="OnShowSequencedConnectionWizard" Margin="5">
+                <TextBlock TextWrapping="Wrap">
+                    This example is an extension of the above custom styled wizard that includes that displays a
+                    summary of the pages contained in the wizard.
+                </TextBlock>
+            </bh:CommandLink>
+            <bh:CommandLink Instruction="Aero Registration Wizard" Click="OnShowAeroRegistraionWizard" Margin="5">
+                <TextBlock TextWrapping="Wrap" >
+                    In this example we show how to create an <Bold>AeroWizard</Bold> that uses a common control
+                    to provide key registration functionality.
+                </TextBlock>
+            </bh:CommandLink>
+            <bh:CommandLink Instruction="Classic Registration Wizard" Click="OnShowClassicRegistraionWizard" Margin="5">
+                <TextBlock TextWrapping="Wrap" >
+                    In this example we show how to create an <Bold>ClassicWizard</Bold> that uses a common control
+                    to provide key registration functionality as seen in the Aero Registration Wizard.
+                </TextBlock>
+            </bh:CommandLink>
+        </StackPanel>
+    </DockPanel>
+</local:DemoItem>

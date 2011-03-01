@@ -1,0 +1,115 @@
+<!-- Luna Normal -->
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:BrokenHouse.Windows.Controls"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Luna">
+
+    <Style x:Key="ButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <Rectangle SnapsToDevicePixels="true" Margin="4" Stroke="Black" StrokeDashArray="1 2" StrokeThickness="1"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <LinearGradientBrush x:Key="ButtonBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+        <LinearGradientBrush.GradientStops>
+            <GradientStop Color="#FFFFFFFF" Offset="0" />
+            <GradientStop Color="#FFF3EEDB" Offset="0.9" />
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="BorderBrush" Color="#FF376206" />
+
+    <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="{x:Type local:CommandLink}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0,0,1,1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:CommandLink}">
+                    <themes:ButtonChrome x:Name="PART_Chrome" BorderBrush="{TemplateBinding BorderBrush}" Fill="{TemplateBinding Background}" 
+                                         RenderDefaulted="{TemplateBinding IsFocused}" 
+                                         RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                         RenderPressed="{TemplateBinding IsPressed}"
+                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                         ThemeColor="NormalColor">
+
+                        <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Margin="{TemplateBinding Padding}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <ContentPresenter x:Name="PART_IconPresenter" Margin="2,4,2,4" 
+                                              Content="{TemplateBinding Icon}"
+                                              ContentTemplate="{TemplateBinding IconTemplate}"
+                                              DockPanel.Dock="Left" VerticalAlignment="Center">
+                                <ContentPresenter.Resources>
+                                    <DataTemplate DataType="{x:Type BitmapSource}">
+                                        <local:ActiveIcon Source="{Binding .}" Width="16" Height="16" SnapsToDevicePixels="True"/>
+                                    </DataTemplate>
+                                </ContentPresenter.Resources>
+                            </ContentPresenter>
+
+                            <ContentPresenter Margin="4,0,0,0" 
+                                              Content="{TemplateBinding Instruction}"
+                                              ContentTemplate="{TemplateBinding InstructionTemplate}"
+                                              Grid.Column="1" Grid.Row="0"
+									          HorizontalAlignment="Left" VerticalAlignment="Center" RecognizesAccessKey="True">
+                                <ContentPresenter.Resources>
+                                    <DataTemplate DataType="{x:Type system:String}">
+                                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{Binding .}"/>
+                                    </DataTemplate>
+                                </ContentPresenter.Resources>
+                            </ContentPresenter>
+
+                            <ContentPresenter Margin="4,0,0,4"  Grid.Column="1" Grid.Row="1"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                              HorizontalAlignment="Left" VerticalAlignment="Center" RecognizesAccessKey="True">
+                                <ContentPresenter.Resources>
+                                    <DataTemplate DataType="{x:Type system:String}">
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding .}"/>
+                                    </DataTemplate>
+                                </ContentPresenter.Resources>
+                            </ContentPresenter>
+                        </Grid>
+                    </themes:ButtonChrome>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="PART_Chrome" Property="RenderDefaulted" Value="true" />
+                        </Trigger>
+                         <Trigger Property="IsEnabled" Value="false">
+                            <Setter Value="{DynamicResource {x:Static SystemColors.GrayTextBrush}}" Property="Foreground" />
+                        </Trigger>
+                        <Trigger Property="IconHasDropShadow" Value="true">
+                            <Setter TargetName="PART_IconPresenter" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="2" BlurRadius="5" Opacity="0.6"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

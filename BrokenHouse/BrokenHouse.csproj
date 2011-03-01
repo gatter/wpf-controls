@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="ShaderBuildTask.PixelShaderCompile" AssemblyName="ShaderBuildTask, Version=1.0.3072.18169, Culture=neutral, PublicKeyToken=44e467d1687af125" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DED77A15-ABCD-4582-ACE9-8FE6F6A97224}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BrokenHouse</RootNamespace>
+    <AssemblyName>BrokenHouse</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\BrokenHouse.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\BrokenHouse.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationFramework.Aero">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework.Classic">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework.Luna">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Windows\Data\ICollectionViewModelParent.cs" />
+    <Compile Include="Windows\Data\SimpleListCollectionView.cs" />
+    <Compile Include="Resources\Exceptions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Exceptions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Internal\CompoundDictionary.cs" />
+    <Compile Include="Internal\ResourceHelper.cs" />
+    <Compile Include="Windows\Controls\GlassPanel.cs" />
+    <Compile Include="Windows\Controls\EdgeScrollViewer.cs" />
+    <Compile Include="Windows\Controls\Primitives\UniformWrapPanel.cs" />
+    <Compile Include="Windows\Extensions\DispatcherObjectExtensions.cs" />
+    <Compile Include="Windows\Extensions\NativeWindowStyles.cs" />
+    <Compile Include="Windows\Extensions\PointExtensions.cs" />
+    <Compile Include="Windows\Extensions\SizeExtensions.cs" />
+    <Compile Include="Windows\Extensions\ThicknessExtensions.cs" />
+    <Compile Include="Windows\Extensions\VisualExtensions.cs" />
+    <Compile Include="Windows\Int32Size.cs" />
+    <Compile Include="Windows\Int32Thickness.cs" />
+    <Compile Include="Windows\Int32ThicknessConverter.cs" />
+    <Compile Include="Utils\PropertyNotifier.cs" />
+    <Compile Include="Internal\WeakReference.cs" />
+    <Compile Include="Windows\Controls\CommandLink.cs" />
+    <Compile Include="Windows\Controls\ActiveIcon.cs" />
+    <Compile Include="Windows\Controls\ErrorInfo.cs" />
+    <Compile Include="Windows\Controls\ShieldIcons.cs" />
+    <Compile Include="Windows\Controls\Icon.cs" />
+    <Compile Include="Windows\Controls\SnapDecorator.cs" />
+    <Compile Include="Windows\Controls\TaskIcons.cs" />
+    <Compile Include="Windows\Controls\Themes\Aero\CommandLinkChrome.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Windows\Converters\TrueFalseConverter.cs" />
+    <Compile Include="Extensions\DoubleExtensions.cs" />
+    <Compile Include="Extensions\EnumerationExtensions.cs" />
+    <Compile Include="Windows\Converters\IsNullOrEmptyConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Windows\Interop\NativeMethods.cs" />
+    <Compile Include="Windows\Media\Effects\GammaCorrectionEffect.cs" />
+    <Compile Include="Windows\Media\Effects\DesaturationEffect.cs" />
+    <Compile Include="Windows\Media\Imaging\ColorTransformCollection.cs" />
+    <Compile Include="Windows\Media\Imaging\ColorTransformGroup.cs" />
+    <Compile Include="Windows\Media\Imaging\ColorTransform.cs" />
+    <Compile Include="Windows\Media\Imaging\DesaturationTransform.cs" />
+    <Compile Include="Windows\Media\Imaging\GammaCorrectionTransform.cs" />
+    <Compile Include="Windows\Media\Imaging\CustomBitmap.cs" />
+    <Compile Include="Windows\Media\Imaging\ExpandedBitmap.cs" />
+    <Compile Include="Windows\Media\Imaging\ColorTransformedBitmap.cs" />
+    <Compile Include="Windows\Parts\Task\TaskButtonBar.cs" />
+    <Compile Include="Windows\Parts\Task\TaskButtonClickEventArgs.cs" />
+    <Compile Include="Windows\Parts\Task\TaskDialog.cs" />
+    <Compile Include="Windows\Parts\Task\TaskDialogResult.cs" />
+    <Compile Include="Windows\Parts\Task\TaskDialogWindow.cs" />
+    <Compile Include="Windows\Parts\Task\TaskElements.cs" />
+    <Compile Include="Windows\Parts\Transition\Effects\BlurAndFadeTransitionEffect.cs" />
+    <Compile Include="Windows\Parts\Transition\Effects\CheckerBoardTransitionEffect.cs" />
+    <Compile Include="Windows\Parts\Transition\Effects\DiamondTransitionEffect.cs" />
+    <Compile Include="Windows\Parts\Transition\Effects\EmptyTransitionEffect.cs" />
+    <Compile Include="Windows\Parts\Transition\Effects\GrowAndFadeTransitionEffect.cs" />
+    <Compile Include="Windows\Parts\Transition\Effects\ResourceDictionaryEffectStore.cs" />
+    <Compile Include="Windows\Parts\Transition\Primitives\TransitionPresenter.cs" />
+    <Compile Include="Windows\Parts\Transition\Effects\ResourceDictionaryEffectAnimation.cs" />
+    <Compile Include="Windows\Parts\Transition\Effects\SimpleFadeTransitionEffect.cs" />
+    <Compile Include="Windows\Parts\Transition\Effects\SlideTransitionEffect.cs" />
+    <Compile Include="Windows\Parts\Transition\Effects\WipeTransitionEffect.cs" />
+    <Compile Include="Windows\Parts\Transition\TransitionAnimationEventArgs.cs" />
+    <Compile Include="Windows\Parts\Transition\TransitionControl.cs" />
+    <Compile Include="Windows\Parts\Transition\TransitionFrame.cs" />
+    <Compile Include="Windows\Parts\Transition\TransitionElements.cs" />
+    <Compile Include="Windows\Parts\Transition\TransitionMovement.cs" />
+    <Compile Include="Windows\Parts\Transition\TransitionEffect.cs" />
+    <Compile Include="Windows\Parts\Transition\TransitionEffectAnimation.cs" />
+    <Compile Include="Windows\Parts\Transition\TransitionItemsControl.cs" />
+    <Compile Include="Windows\Parts\Transition\TransitionDirection.cs" />
+    <Compile Include="Windows\Parts\Transition\TransitionPosition.cs" />
+    <Compile Include="Windows\Parts\Transition\TransitionType.cs" />
+    <Compile Include="Windows\Parts\Wizard\AeroWizardControl.cs" />
+    <Compile Include="Windows\Parts\Wizard\AeroWizardPage.cs" />
+    <Compile Include="Windows\Parts\Wizard\ClassicWizardContentPage.cs" />
+    <Compile Include="Windows\Parts\Wizard\ClassicWizardControl.cs" />
+    <Compile Include="Windows\Parts\Wizard\ClassicWizardTitlePage.cs" />
+    <Compile Include="Windows\Parts\Wizard\Input\WizardCommands.cs" />
+    <Compile Include="Windows\Interop\HitTester.cs" />
+    <Compile Include="Windows\AeroWindow.cs" />
+    <Compile Include="Windows\Parts\Wizard\AeroWizardWindow.cs" />
+    <Compile Include="Windows\Parts\Wizard\WizardElements.cs" />
+    <Compile Include="Windows\Parts\Wizard\WizardPage.cs" />
+    <Compile Include="Windows\Parts\Wizard\Primitives\ClassicWizardHeader.cs" />
+    <Compile Include="Windows\Parts\Wizard\WizardControl.cs" />
+    <Compile Include="Windows\Parts\Wizard\WizardPageChangingEventArgs.cs" />
+    <Compile Include="Windows\Parts\Wizard\WizardPageChangedEventArgs.cs" />
+    <Compile Include="Windows\Parts\Task\TaskDialogControl.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Windows\Parts\Wizard\WizardSeparatorStyle.cs" />
+    <Compile Include="Windows\Data\CompoundCollectionView.cs" />
+    <EmbeddedResource Include="Resources\Exceptions.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Exceptions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings.fr.resx" />
+    <EmbeddedResource Include="Resources\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="BrokenHouse.snk" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Windows\Controls\Resources\TaskIcons_16.design" />
+    <None Include="Windows\Controls\Resources\TaskIcons_24.design" />
+    <None Include="Windows\Controls\Resources\TaskIcons_32.design" />
+    <None Include="Windows\Controls\Resources\TaskIcons_48.design" />
+    <None Include="Windows\Controls\Resources\TaskIcons_64.design" />
+    <None Include="Windows\Controls\Resources\TaskIcons_96.design" />
+    <Effect Include="Windows\Media\Effects\GammaCorrectionEffect.fx" />
+    <Effect Include="Windows\Media\Effects\DesaturationEffect.fx" />
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\Classic\AeroWizard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Classic\ErrorInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Classic\TaskButtonBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic\AeroWizard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Aero.normalcolor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Classic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Classic\CommandLink.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Classic\TaskDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic\CommandLink.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic\ActiveIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic\ErrorInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic\EdgeScrollViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic\TaskButtonBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic\TaskDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic\ClassicWizard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic\TransitionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic\TransitionItemsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Luna.homestead.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Luna.Homestead\CommandLink.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Luna.metalic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Luna.Metallic\CommandLink.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Luna.normalcolor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Luna.NormalColor\CommandLink.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Parts\Transition\Effects\Resources\BlurAndFade.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Parts\Transition\Effects\Resources\CheckerBoard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Parts\Transition\Effects\Resources\Diamond.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Parts\Transition\Effects\Resources\GrowAndFade.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Parts\Transition\Effects\Resources\SimpleFade.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Parts\Transition\Effects\Resources\Slide.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Parts\Transition\Effects\Resources\Wipe.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Windows\Controls\Resources\AltRunning.ico" />
+    <Resource Include="Windows\Controls\Resources\AltTick.ico" />
+    <Resource Include="Windows\Controls\Resources\Arrow.ico" />
+    <Resource Include="Windows\Controls\Resources\Error.ico" />
+    <Resource Include="Windows\Controls\Resources\ErrorShield.ico" />
+    <Resource Include="Windows\Controls\Resources\Information.ico" />
+    <Resource Include="Windows\Controls\Resources\NoEntry.ico" />
+    <Resource Include="Windows\Controls\Resources\None.ico" />
+    <Resource Include="Windows\Controls\Resources\Question.ico" />
+    <Resource Include="Windows\Controls\Resources\QuestionShield.ico" />
+    <Resource Include="Windows\Controls\Resources\Running.ico" />
+    <Resource Include="Windows\Controls\Resources\Tick.ico" />
+    <Resource Include="Windows\Controls\Resources\TickShield.ico" />
+    <Resource Include="Windows\Controls\Resources\Warning.ico" />
+    <Resource Include="Windows\Controls\Resources\WarningShield.ico" />
+    <Resource Include="Windows\Controls\Resources\WindowsShield.ico" />
+    <Resource Include="Windows\Controls\Resources\WizardBannerImage.png" />
+    <Resource Include="Windows\Controls\Resources\WizardWatermark.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EffectCompile" Condition="'@(Effect)' != '' ">
+    <PixelShaderCompile Sources="@(Effect)">
+      <Output TaskParameter="Outputs" ItemName="Resource" />
+    </PixelShaderCompile>
+  </Target>
+  <PropertyGroup>
+    <!-- Add effect compilation to the PrepareResourcesDependsOn so that the effect fx  get compiled before resources are collected -->
+    <PrepareResourcesDependsOn>EffectCompile;$(PrepareResourcesDependsOn)</PrepareResourcesDependsOn>
+  </PropertyGroup>
+</Project>

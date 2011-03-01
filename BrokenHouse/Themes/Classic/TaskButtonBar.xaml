@@ -1,0 +1,90 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:BrokenHouse.Windows.Parts.Task"
+    xmlns:ext="clr-namespace:BrokenHouse.Windows.Extensions"
+    xmlns:controls="clr-namespace:BrokenHouse.Windows.Controls"
+    xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+    xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+    xmlns:resources="clr-namespace:BrokenHouse.Resources">
+    
+    <!-- Focus Visual -->
+    <Style x:Key="ButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <Rectangle Stroke="Black" StrokeDashArray="1 2" StrokeThickness="1" Margin="3,3,4,4" SnapsToDevicePixels="true"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- The button set used for the Task Dialog -->
+    <Style x:Key="{x:Static local:TaskElements.TaskButtonBarControlStyleKey}" TargetType="{x:Type local:TaskButtonBar}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:TaskButtonBar}">   
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Margin="1" x:Name="PART_Ok"     Content="{x:Static resources:Strings.TaskButtonBar_Ok}"     MinHeight="22" MinWidth="60" Visibility="Collapsed" FocusVisualStyle="{StaticResource ButtonFocusVisual}"/>
+                        <Button Margin="1" x:Name="PART_Retry"  Content="{x:Static resources:Strings.TaskButtonBar_Retry}"  MinHeight="22" MinWidth="60" Visibility="Collapsed" FocusVisualStyle="{StaticResource ButtonFocusVisual}"/>
+                        <Button Margin="1" x:Name="PART_Yes"    Content="{x:Static resources:Strings.TaskButtonBar_Yes}"    MinHeight="22" MinWidth="60" Visibility="Collapsed" FocusVisualStyle="{StaticResource ButtonFocusVisual}"/>
+                        <Button Margin="1" x:Name="PART_No"     Content="{x:Static resources:Strings.TaskButtonBar_No}"     MinHeight="22" MinWidth="60" Visibility="Collapsed" FocusVisualStyle="{StaticResource ButtonFocusVisual}"/>
+                        <Button Margin="1" x:Name="PART_Cancel" Content="{x:Static resources:Strings.TaskButtonBar_Cancel}" MinHeight="22" MinWidth="60" Visibility="Collapsed" FocusVisualStyle="{StaticResource ButtonFocusVisual}"/>
+                        <Button Margin="1" x:Name="PART_Close"  Content="{x:Static resources:Strings.TaskButtonBar_Close}"  MinHeight="22" MinWidth="60" Visibility="Collapsed" FocusVisualStyle="{StaticResource ButtonFocusVisual}"/>
+                    </WrapPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ButtonSet" Value="Cancel">
+                            <Setter TargetName="PART_Cancel" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_Cancel" Property="IsCancel" Value="True"/>
+                            <Setter TargetName="PART_Cancel" Property="IsDefault" Value="True"/>
+                        </Trigger>
+                        <Trigger Property="ButtonSet" Value="OkCancel">
+                            <Setter TargetName="PART_Ok" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_Cancel" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_Cancel" Property="IsCancel" Value="True"/>
+                            <Setter TargetName="PART_Ok" Property="IsDefault" Value="True"/>
+                        </Trigger>
+                        <Trigger Property="ButtonSet" Value="Ok">
+                            <Setter TargetName="PART_Ok" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_Ok" Property="IsCancel" Value="True"/>
+                            <Setter TargetName="PART_Ok" Property="IsDefault" Value="True"/>
+                        </Trigger>
+                        <Trigger Property="ButtonSet" Value="RetryCancel">
+                            <Setter TargetName="PART_Retry" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_Cancel" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_Cancel" Property="IsCancel" Value="True"/>
+                            <Setter TargetName="PART_Retry" Property="IsDefault" Value="True"/>
+                        </Trigger>
+                        <Trigger Property="ButtonSet" Value="Yes">
+                            <Setter TargetName="PART_Yes" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_Yes" Property="IsCancel" Value="True"/>
+                            <Setter TargetName="PART_Yes" Property="IsDefault" Value="True"/>
+                        </Trigger>
+                        <Trigger Property="ButtonSet" Value="YesNo">
+                            <Setter TargetName="PART_Yes" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_No" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_No" Property="IsCancel" Value="True"/>
+                            <Setter TargetName="PART_Yes" Property="IsDefault" Value="True"/>
+                        </Trigger>
+                        <Trigger Property="ButtonSet" Value="YesNoCancel">
+                            <Setter TargetName="PART_Cancel" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_Yes" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_No" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_Cancel" Property="IsCancel" Value="True"/>
+                            <Setter TargetName="PART_Yes" Property="IsDefault" Value="True"/>
+                        </Trigger> 
+                        <Trigger Property="ButtonSet" Value="Close">
+                            <Setter TargetName="PART_Close" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_Close" Property="IsCancel" Value="True"/>
+                            <Setter TargetName="PART_Close" Property="IsDefault" Value="True"/>
+                        </Trigger> 
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+ 
+</ResourceDictionary>

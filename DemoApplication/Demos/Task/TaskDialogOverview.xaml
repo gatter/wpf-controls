@@ -1,0 +1,21 @@
+﻿<local:DemoItem x:Class="DemoApplication.Demos.Task.TaskDialogOverview"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                xmlns:local="clr-namespace:DemoApplication.Demos"
+                Width="400" Label="Overview" Group="Task Dialog" IsContentStatic="True">
+    <StackPanel>
+        
+        <TextBlock TextWrapping="Wrap" Margin="5">
+            The <Bold>TaskDialog</Bold> was introduced in Vista as a replacement of the <Bold>MessageBox</Bold>
+            that had been around in its current style since Windows95. The <Bold>TaskDialogControl</Bold> that forms
+            the basis of all these tests is a pure WPF implementation of the Vista <Bold>TaskDialog</Bold> and as such
+            can run on Windows XP.
+        </TextBlock>
+        <TextBlock TextWrapping="Wrap" Margin="5">
+            Unlike the Windows API Code Pack this implementation of <Bold>TaskDialog</Bold> is fully customisable from
+            within WPF. The flexability of this control is shown in the way it can be used to create a simple version
+            of the Windows Vista Copy dialog.
+        </TextBlock>
+    </StackPanel>
+</local:DemoItem>

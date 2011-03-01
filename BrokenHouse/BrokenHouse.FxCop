@@ -1,0 +1,1470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FxCopProject Version="1.36" Name="My FxCop Project">
+ <ProjectOptions>
+  <SharedProject>True</SharedProject>
+  <Stylesheet Apply="False">c:\program files\microsoft fxcop 1.36\Xml\FxCopReport.xsl</Stylesheet>
+  <SaveMessages>
+   <Project Status="Active, Excluded" NewOnly="False" />
+   <Report Status="Active" NewOnly="False" />
+  </SaveMessages>
+  <ProjectFile Compress="True" DefaultTargetCheck="True" DefaultRuleCheck="True" SaveByRuleGroup="" Deterministic="True" />
+  <EnableMultithreadedLoad>True</EnableMultithreadedLoad>
+  <EnableMultithreadedAnalysis>True</EnableMultithreadedAnalysis>
+  <SourceLookup>True</SourceLookup>
+  <AnalysisExceptionsThreshold>10</AnalysisExceptionsThreshold>
+  <RuleExceptionsThreshold>1</RuleExceptionsThreshold>
+  <Spelling Locale="en-US" />
+  <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
+  <CustomDictionaries SearchFxCopDir="True" SearchUserProfile="True" SearchProjectDir="True" />
+  <SearchGlobalAssemblyCache>False</SearchGlobalAssemblyCache>
+  <DeadlockDetectionTimeout>120</DeadlockDetectionTimeout>
+  <IgnoreGeneratedCode>False</IgnoreGeneratedCode>
+ </ProjectOptions>
+ <Targets>
+  <Target Name="$(ProjectDir)/bin/Debug/BrokenHouse.Windows.dll" Analyze="True" AnalyzeAllChildren="True" />
+ </Targets>
+ <Rules>
+  <RuleFiles>
+   <RuleFile Name="$(FxCopDir)\Rules\DesignRules.dll" Enabled="True" AllRulesEnabled="False">
+    <Rule Name="AbstractTypesShouldNotHaveConstructors" Enabled="True" />
+    <Rule Name="AssembliesShouldHaveValidStrongNames" Enabled="True" />
+    <Rule Name="AvoidEmptyInterfaces" Enabled="True" />
+    <Rule Name="AvoidExcessiveParametersOnGenericTypes" Enabled="True" />
+    <Rule Name="AvoidNamespacesWithFewTypes" Enabled="True" />
+    <Rule Name="AvoidOutParameters" Enabled="True" />
+    <Rule Name="CollectionsShouldImplementGenericInterface" Enabled="True" />
+    <Rule Name="DeclareEventHandlersCorrectly" Enabled="True" />
+    <Rule Name="DeclareTypesInNamespaces" Enabled="True" />
+    <Rule Name="DefaultParametersShouldNotBeUsed" Enabled="True" />
+    <Rule Name="DefineAccessorsForAttributeArguments" Enabled="True" />
+    <Rule Name="DoNotDeclareProtectedMembersInSealedTypes" Enabled="True" />
+    <Rule Name="DoNotDeclareStaticMembersOnGenericTypes" Enabled="True" />
+    <Rule Name="DoNotDeclareVirtualMembersInSealedTypes" Enabled="True" />
+    <Rule Name="DoNotExposeGenericLists" Enabled="True" />
+    <Rule Name="DoNotHideBaseClassMethods" Enabled="True" />
+    <Rule Name="DoNotNestGenericTypesInMemberSignatures" Enabled="True" />
+    <Rule Name="DoNotOverloadOperatorEqualsOnReferenceTypes" Enabled="True" />
+    <Rule Name="DoNotPassTypesByReference" Enabled="True" />
+    <Rule Name="DoNotRaiseExceptionsInUnexpectedLocations" Enabled="True" />
+    <Rule Name="EnumeratorsShouldBeStronglyTyped" Enabled="True" />
+    <Rule Name="EnumsShouldHaveZeroValue" Enabled="True" />
+    <Rule Name="EnumStorageShouldBeInt32" Enabled="True" />
+    <Rule Name="ExceptionsShouldBePublic" Enabled="True" />
+    <Rule Name="ICollectionImplementationsHaveStronglyTypedMembers" Enabled="True" />
+    <Rule Name="ImplementIDisposableCorrectly" Enabled="True" />
+    <Rule Name="ImplementStandardExceptionConstructors" Enabled="True" />
+    <Rule Name="IndexersShouldNotBeMultidimensional" Enabled="True" />
+    <Rule Name="InterfaceMethodsShouldBeCallableByChildTypes" Enabled="True" />
+    <Rule Name="ListsAreStronglyTyped" Enabled="True" />
+    <Rule Name="MarkAssembliesWithAssemblyVersion" Enabled="True" />
+    <Rule Name="MarkAssembliesWithClsCompliant" Enabled="True" />
+    <Rule Name="MarkAssembliesWithComVisible" Enabled="True" />
+    <Rule Name="MarkAttributesWithAttributeUsage" Enabled="True" />
+    <Rule Name="MarkEnumsWithFlags" Enabled="True" />
+    <Rule Name="MembersShouldNotExposeCertainConcreteTypes" Enabled="True" />
+    <Rule Name="MovePInvokesToNativeMethodsClass" Enabled="True" />
+    <Rule Name="NestedTypesShouldNotBeVisible" Enabled="True" />
+    <Rule Name="OverloadOperatorEqualsOnOverloadingAddAndSubtract" Enabled="True" />
+    <Rule Name="OverrideMethodsOnComparableTypes" Enabled="True" />
+    <Rule Name="PropertiesShouldNotBeWriteOnly" Enabled="True" />
+    <Rule Name="ProvideObsoleteAttributeMessage" Enabled="True" />
+    <Rule Name="ReplaceRepetitiveArgumentsWithParamsArray" Enabled="True" />
+    <Rule Name="StaticHolderTypesShouldBeSealed" Enabled="True" />
+    <Rule Name="StringUriOverloadsCallSystemUriOverloads" Enabled="True" />
+    <Rule Name="TypesShouldNotExtendCertainBaseTypes" Enabled="True" />
+    <Rule Name="TypesThatOwnDisposableFieldsShouldBeDisposable" Enabled="True" />
+    <Rule Name="TypesThatOwnNativeResourcesShouldBeDisposable" Enabled="True" />
+    <Rule Name="UriParametersShouldNotBeStrings" Enabled="True" />
+    <Rule Name="UriPropertiesShouldNotBeStrings" Enabled="True" />
+    <Rule Name="UriReturnValuesShouldNotBeStrings" Enabled="True" />
+    <Rule Name="UseEventsWhereAppropriate" Enabled="True" />
+    <Rule Name="UseGenericEventHandlerInstances" Enabled="True" />
+    <Rule Name="UseGenericsWhereAppropriate" Enabled="True" />
+    <Rule Name="UseIntegralOrStringArgumentForIndexers" Enabled="True" />
+    <Rule Name="UsePropertiesWhereAppropriate" Enabled="True" />
+   </RuleFile>
+   <RuleFile Name="$(FxCopDir)\Rules\GlobalizationRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\InteroperabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\MobilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\NamingRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PerformanceRules.dll" Enabled="True" AllRulesEnabled="False">
+    <Rule Name="AvoidExcessiveLocals" Enabled="True" />
+    <Rule Name="AvoidUninstantiatedInternalClasses" Enabled="True" />
+    <Rule Name="AvoidUnsealedAttributes" Enabled="True" />
+    <Rule Name="AvoidUnusedPrivateFields" Enabled="True" />
+    <Rule Name="DoNotCastUnnecessarily" Enabled="True" />
+    <Rule Name="MarkAssembliesWithNeutralResourcesLanguage" Enabled="True" />
+    <Rule Name="MarkMembersAsStatic" Enabled="True" />
+    <Rule Name="OverrideEqualsAndOperatorEqualsOnValueTypes" Enabled="True" />
+    <Rule Name="PreferJaggedArraysOverMultidimensional" Enabled="True" />
+    <Rule Name="PropertiesShouldNotReturnArrays" Enabled="True" />
+    <Rule Name="RemoveEmptyFinalizers" Enabled="True" />
+    <Rule Name="RemoveUnusedLocals" Enabled="True" />
+    <Rule Name="TestForEmptyStringsUsingStringLength" Enabled="True" />
+    <Rule Name="UseLiteralsWhereAppropriate" Enabled="True" />
+   </RuleFile>
+   <RuleFile Name="$(FxCopDir)\Rules\PortabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\UsageRules.dll" Enabled="True" AllRulesEnabled="True" />
+  </RuleFiles>
+  <Groups />
+  <Settings />
+ </Rules>
+ <FxCopReport Version="1.36">
+  <Namespaces>
+   <Namespace Name="BrokenHouse.Utils">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Status="Excluded" Created="2009-04-22 20:41:54Z">
+      <Issue>
+       <Item>BrokenHouse.Utils</Item>
+      </Issue>
+      <Notes>
+       <User Name="Admin">
+        <Note Id="1" />
+       </User>
+      </Notes>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="BrokenHouse.Windows">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Status="Excluded" Created="2009-04-22 20:01:01Z">
+      <Issue>
+       <Item>BrokenHouse.Windows</Item>
+      </Issue>
+      <Notes>
+       <User Name="Admin">
+        <Note Id="1" />
+       </User>
+      </Notes>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="BrokenHouse.Windows.Controls.Themes.Aero">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Status="Excluded" Created="2009-04-22 20:01:01Z">
+      <Issue>
+       <Item>BrokenHouse.Windows.Controls.Themes.Aero</Item>
+      </Issue>
+      <Notes>
+       <User Name="Admin">
+        <Note Id="1" />
+       </User>
+      </Notes>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="BrokenHouse.Windows.Converters">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Status="Excluded" Created="2009-04-22 20:50:41Z">
+      <Issue>
+       <Item>BrokenHouse.Windows.Converters</Item>
+      </Issue>
+      <Notes>
+       <User Name="Admin">
+        <Note Id="1" />
+       </User>
+      </Notes>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="BrokenHouse.Windows.Media.Effects">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Status="Excluded" Created="2009-04-22 20:01:01Z">
+      <Issue>
+       <Item>BrokenHouse.Windows.Media.Effects</Item>
+      </Issue>
+      <Notes>
+       <User Name="Admin">
+        <Note Id="1" />
+       </User>
+      </Notes>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="BrokenHouse.Windows.Parts.Wizard.Input">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Status="Excluded" Created="2009-04-22 20:01:01Z">
+      <Issue>
+       <Item>BrokenHouse.Windows.Parts.Wizard.Input</Item>
+      </Issue>
+      <Notes>
+       <User Name="Admin">
+        <Note Id="1" />
+       </User>
+      </Notes>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="XamlGeneratedNamespace">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Status="Excluded" Created="2009-04-22 20:01:01Z">
+      <Issue>
+       <Item>XamlGeneratedNamespace</Item>
+      </Issue>
+      <Notes>
+       <User Name="Admin">
+        <Note Id="1" />
+       </User>
+      </Notes>
+     </Message>
+    </Messages>
+   </Namespace>
+  </Namespaces>
+  <Targets>
+   <Target Name="$(ProjectDir)/bin/Debug/BrokenHouse.Windows.dll">
+    <Modules>
+     <Module Name="brokenhouse.windows.dll">
+      <Namespaces>
+       <Namespace Name="BrokenHouse.Utils">
+        <Types>
+         <Type Name="PropertyChangedNotifier`1">
+          <Members>
+           <Member Name="#RegisterDependency(System.String,System.Collections.Generic.IEnumerable`1&lt;System.String&gt;)">
+            <Messages>
+             <Message TypeName="DoNotDeclareStaticMembersOnGenericTypes" Category="Microsoft.Design" CheckId="CA1000" Status="Excluded" Created="2009-04-22 20:58:24Z">
+              <Issue>
+               <Item>'PropertyChangedNotifier&lt;T&gt;.RegisterDependency(string, IEnumerable&lt;string&gt;)'</Item>
+               <Item>'PropertyChangedNotifier&lt;T&gt;'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="3" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#RegisterDependency(System.String,System.String[])">
+            <Messages>
+             <Message TypeName="DoNotDeclareStaticMembersOnGenericTypes" Category="Microsoft.Design" CheckId="CA1000" Status="Excluded" Created="2009-04-22 20:58:24Z">
+              <Issue>
+               <Item>'PropertyChangedNotifier&lt;T&gt;.RegisterDependency(string, params string[])'</Item>
+               <Item>'PropertyChangedNotifier&lt;T&gt;'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="3" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="BrokenHouse.Windows">
+        <Types>
+         <Type Name="AeroWindow">
+          <Members>
+           <Member Name="#IsGlassEnabled">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2009-04-22 20:01:01Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'AeroWindow.IsGlassEnabled'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Int32Size">
+          <Members>
+           <Member Name="#.cctor()">
+            <Messages>
+             <Message TypeName="InitializeValueTypeStaticFieldsInline" Category="Microsoft.Usage" CheckId="CA2207" Created="2009-04-22 20:41:54Z">
+              <Issue>
+               <Item>'Int32Size'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Equals(System.Object)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:41:54Z">
+              <Issue>
+               <Item>'Int32Size.Equals(object)'</Item>
+               <Item>'o'</Item>
+               <Item>'obj'</Item>
+               <Item>'ValueType.Equals(object)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Int32Thickness">
+          <Members>
+           <Member Name="#Equals(BrokenHouse.Windows.Int32Thickness)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:41:54Z">
+              <Issue>
+               <Item>'Int32Thickness.Equals(Int32Thickness)'</Item>
+               <Item>'thickness'</Item>
+               <Item>'other'</Item>
+               <Item>'IEquatable&lt;Int32Thickness&gt;.Equals(Int32Thickness)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Int32ThicknessConverter">
+          <Members>
+           <Member Name="#CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:41:54Z">
+              <Issue>
+               <Item>'Int32ThicknessConverter.CanConvertFrom(ITypeDescriptorContext, Type)'</Item>
+               <Item>'typeDescriptorContext'</Item>
+               <Item>'context'</Item>
+               <Item>'TypeConverter.CanConvertFrom(ITypeDescriptorContext, Type)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:41:54Z">
+              <Issue>
+               <Item>'Int32ThicknessConverter.CanConvertTo(ITypeDescriptorContext, Type)'</Item>
+               <Item>'typeDescriptorContext'</Item>
+               <Item>'context'</Item>
+               <Item>'TypeConverter.CanConvertTo(ITypeDescriptorContext, Type)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2009-04-22 20:41:54Z">
+              <Issue Name="Parameter">
+               <Item>'source'</Item>
+               <Item>'string'</Item>
+               <Item>'Int32ThicknessConverter.ConvertFrom(ITypeDescriptorContext, CultureInfo, object)'</Item>
+               <Item>castclass</Item>
+              </Issue>
+             </Message>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:41:54Z">
+              <Issue>
+               <Item>'Int32ThicknessConverter.ConvertFrom(ITypeDescriptorContext, CultureInfo, object)'</Item>
+               <Item>'typeDescriptorContext'</Item>
+               <Item>'context'</Item>
+               <Item>'TypeConverter.ConvertFrom(ITypeDescriptorContext, CultureInfo, object)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="1#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:41:54Z">
+              <Issue>
+               <Item>'Int32ThicknessConverter.ConvertFrom(ITypeDescriptorContext, CultureInfo, object)'</Item>
+               <Item>'cultureInfo'</Item>
+               <Item>'culture'</Item>
+               <Item>'TypeConverter.ConvertFrom(ITypeDescriptorContext, CultureInfo, object)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="2#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:41:54Z">
+              <Issue>
+               <Item>'Int32ThicknessConverter.ConvertFrom(ITypeDescriptorContext, CultureInfo, object)'</Item>
+               <Item>'source'</Item>
+               <Item>'value'</Item>
+               <Item>'TypeConverter.ConvertFrom(ITypeDescriptorContext, CultureInfo, object)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:41:54Z">
+              <Issue>
+               <Item>'Int32ThicknessConverter.ConvertTo(ITypeDescriptorContext, CultureInfo, object, Type)'</Item>
+               <Item>'typeDescriptorContext'</Item>
+               <Item>'context'</Item>
+               <Item>'TypeConverter.ConvertTo(ITypeDescriptorContext, CultureInfo, object, Type)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="1#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:41:54Z">
+              <Issue>
+               <Item>'Int32ThicknessConverter.ConvertTo(ITypeDescriptorContext, CultureInfo, object, Type)'</Item>
+               <Item>'cultureInfo'</Item>
+               <Item>'culture'</Item>
+               <Item>'TypeConverter.ConvertTo(ITypeDescriptorContext, CultureInfo, object, Type)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="BrokenHouse.Windows.Controls">
+        <Types>
+         <Type Name="ActiveIcon">
+          <Members>
+           <Member Name="#OnAttachedTypeChanged(System.Type,System.Type)">
+            <Messages>
+             <Message Id="oldValue" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2009-04-22 20:01:01Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'oldValue'</Item>
+               <Item>'ActiveIcon.OnAttachedTypeChanged(Type, Type)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Icon">
+          <Members>
+           <Member Name="#MeasureOverride(System.Windows.Size)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'Icon.MeasureOverride(Size)'</Item>
+               <Item>'constraintSize'</Item>
+               <Item>'availableSize'</Item>
+               <Item>'FrameworkElement.MeasureOverride(Size)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="fromPixels" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'Icon.MeasureOverride(Size)'</Item>
+               <Item>'fromPixels'</Item>
+               <Item>'GeneralTransform'</Item>
+              </Issue>
+             </Message>
+             <Message Id="toPixels" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'Icon.MeasureOverride(Size)'</Item>
+               <Item>'toPixels'</Item>
+               <Item>'GeneralTransform'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#OnRender(System.Windows.Media.DrawingContext)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'Icon.OnRender(DrawingContext)'</Item>
+               <Item>'dc'</Item>
+               <Item>'drawingContext'</Item>
+               <Item>'UIElement.OnRender(DrawingContext)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#UpdateRenderBitmap()">
+            <Messages>
+             <Message Id="currentBitmap" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'Icon.UpdateRenderBitmap()'</Item>
+               <Item>'currentBitmap'</Item>
+               <Item>'BitmapSource'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Transition">
+          <Members>
+           <Member Name="#BeginTransition(BrokenHouse.Windows.Controls.TransitionControl,System.Windows.Controls.ContentPresenter,System.Windows.Controls.ContentPresenter)">
+            <Messages>
+             <Message Id="transitionPresenter" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2009-04-22 20:01:01Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'transitionPresenter'</Item>
+               <Item>'Transition.BeginTransition(TransitionControl, ContentPresenter, ContentPresenter)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="TransitionItemsControl">
+          <Members>
+           <Member Name="#OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'TransitionItemsControl.OnItemsChanged(NotifyCollectionChangedEventArgs)'</Item>
+               <Item>'args'</Item>
+               <Item>'e'</Item>
+               <Item>'ItemsControl.OnItemsChanged(NotifyCollectionChangedEventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="BrokenHouse.Windows.Controls.Themes.Aero">
+        <Types>
+         <Type Name="CommandLinkChrome">
+          <Members>
+           <Member Name="#OnRenderDefaultedChanged(System.Boolean,System.Boolean)">
+            <Messages>
+             <Message Id="oldValue" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2009-04-22 20:01:01Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'oldValue'</Item>
+               <Item>'CommandLinkChrome.OnRenderDefaultedChanged(bool, bool)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#OnRenderEnabledChanged(System.Boolean,System.Boolean)">
+            <Messages>
+             <Message Id="oldValue" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2009-04-22 20:01:01Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'oldValue'</Item>
+               <Item>'CommandLinkChrome.OnRenderEnabledChanged(bool, bool)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#OnRenderMouseOverChanged(System.Boolean,System.Boolean)">
+            <Messages>
+             <Message Id="oldValue" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2009-04-22 20:01:01Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'oldValue'</Item>
+               <Item>'CommandLinkChrome.OnRenderMouseOverChanged(bool, bool)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#OnRenderPressedChanged(System.Boolean,System.Boolean)">
+            <Messages>
+             <Message Id="oldValue" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2009-04-22 20:01:01Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'oldValue'</Item>
+               <Item>'CommandLinkChrome.OnRenderPressedChanged(bool, bool)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="BrokenHouse.Windows.Converters">
+        <Types>
+         <Type Name="ImageSourceConverter">
+          <Members>
+           <Member Name="#Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2009-04-22 20:50:41Z">
+              <Issue Name="Parameter">
+               <Item>'value'</Item>
+               <Item>'ImageSource'</Item>
+               <Item>'ImageSourceConverter.Convert(object, Type, object, CultureInfo)'</Item>
+               <Item>isint</Item>
+              </Issue>
+             </Message>
+             <Message Id="1#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'ImageSourceConverter.Convert(object, Type, object, CultureInfo)'</Item>
+               <Item>'typeTarget'</Item>
+               <Item>'targetType'</Item>
+               <Item>'IValueConverter.Convert(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="2#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'ImageSourceConverter.Convert(object, Type, object, CultureInfo)'</Item>
+               <Item>'param'</Item>
+               <Item>'parameter'</Item>
+               <Item>'IValueConverter.Convert(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <Messages>
+             <Message Id="1#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'ImageSourceConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+               <Item>'typeTarget'</Item>
+               <Item>'targetType'</Item>
+               <Item>'IValueConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="2#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'ImageSourceConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+               <Item>'param'</Item>
+               <Item>'parameter'</Item>
+               <Item>'IValueConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="IsFlagSetConverter">
+          <Messages>
+           <Message Id="Flag" TypeName="UsePreferredTerms" Category="Microsoft.Naming" CheckId="CA1726" Created="2009-04-22 20:50:41Z">
+            <Issue Name="TypeNoAlternate">
+             <Item>Flag</Item>
+             <Item>'IsFlagSetConverter'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <Messages>
+             <Message Id="1#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'IsFlagSetConverter.Convert(object, Type, object, CultureInfo)'</Item>
+               <Item>'typeTarget'</Item>
+               <Item>'targetType'</Item>
+               <Item>'IValueConverter.Convert(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="2#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'IsFlagSetConverter.Convert(object, Type, object, CultureInfo)'</Item>
+               <Item>'param'</Item>
+               <Item>'parameter'</Item>
+               <Item>'IValueConverter.Convert(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <Messages>
+             <Message Id="1#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'IsFlagSetConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+               <Item>'typeTarget'</Item>
+               <Item>'targetType'</Item>
+               <Item>'IValueConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="2#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'IsFlagSetConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+               <Item>'param'</Item>
+               <Item>'parameter'</Item>
+               <Item>'IValueConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="IsNullOrEmptyConverter">
+          <Members>
+           <Member Name="#Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <Messages>
+             <Message Id="1#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'IsNullOrEmptyConverter.Convert(object, Type, object, CultureInfo)'</Item>
+               <Item>'typeTarget'</Item>
+               <Item>'targetType'</Item>
+               <Item>'IValueConverter.Convert(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="2#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'IsNullOrEmptyConverter.Convert(object, Type, object, CultureInfo)'</Item>
+               <Item>'param'</Item>
+               <Item>'parameter'</Item>
+               <Item>'IValueConverter.Convert(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <Messages>
+             <Message Id="1#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'IsNullOrEmptyConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+               <Item>'typeTarget'</Item>
+               <Item>'targetType'</Item>
+               <Item>'IValueConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="2#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'IsNullOrEmptyConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+               <Item>'param'</Item>
+               <Item>'parameter'</Item>
+               <Item>'IValueConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="TrueFalseConverter">
+          <Members>
+           <Member Name="#Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <Messages>
+             <Message Id="2#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'TrueFalseConverter.Convert(object, Type, object, CultureInfo)'</Item>
+               <Item>'param'</Item>
+               <Item>'parameter'</Item>
+               <Item>'IValueConverter.Convert(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <Messages>
+             <Message Id="1#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'TrueFalseConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+               <Item>'typeTarget'</Item>
+               <Item>'targetType'</Item>
+               <Item>'IValueConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="2#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:50:41Z">
+              <Issue>
+               <Item>'TrueFalseConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+               <Item>'param'</Item>
+               <Item>'parameter'</Item>
+               <Item>'IValueConverter.ConvertBack(object, Type, object, CultureInfo)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="BrokenHouse.Windows.Interop">
+        <Types>
+         <Type Name="NativeMethods">
+          <Members>
+           <Member Name="#BringToFront(System.Windows.Window)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.BringToFront(this Window)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#HWND_BOTTOM">
+            <Messages>
+             <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.HWND_BOTTOM'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#HWND_NOTOPMOST">
+            <Messages>
+             <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.HWND_NOTOPMOST'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#HWND_TOPMOST">
+            <Messages>
+             <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.HWND_TOPMOST'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetLayered(System.Windows.Window,System.Boolean)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.SetLayered(this Window, bool)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetNoActivate(System.Windows.Window,System.Boolean)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.SetNoActivate(this Window, bool)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetPopup(System.Windows.Window,System.Boolean)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.SetPopup(this Window, bool)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetTransparent(System.Windows.Window,System.Boolean)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.SetTransparent(this Window, bool)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetWindowFlags(System.Windows.Window,System.Int32,System.UInt32,System.Boolean)">
+            <Messages>
+             <Message Id="oldValue" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2009-04-22 22:12:47Z">
+              <Issue>
+               <Item>'NativeMethods.SetWindowFlags(this Window, int, uint, bool)'</Item>
+               <Item>'oldValue'</Item>
+               <Item>'uint'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ShowContextHelp(System.Windows.Window,System.Boolean)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.ShowContextHelp(this Window, bool)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="NativeMethods+NativeMethodImports">
+          <Members>
+           <Member Name="#AdjustWindowRectEx(BrokenHouse.Windows.Interop.NativeMethods+RECT&amp;,System.UInt32,System.Boolean,System.UInt32)">
+            <Messages>
+             <Message TypeName="ReviewSuppressUnmanagedCodeSecurityUsage" Category="Microsoft.Security" CheckId="CA2118" Created="2009-04-22 20:01:01Z">
+              <Issue Name="PlatformInvokeStack">
+               <Item>'NativeMethods.NativeMethodImports.AdjustWindowRectEx(ref NativeMethods.RECT, uint, bool, uint)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'NativeMethods.NativeMethodImports.AdjustWindowRectEx(ref NativeMethods.RECT, uint, bool, uint)'&#xD;&#xA;   -&gt;'NativeMethods.GetNonClientAreaSize(this Window)'&#xD;&#xA;   -&gt;'AeroWindow.CheckGlassPanel()'&#xD;&#xA;   -&gt;'AeroWindow.ArrangeOverride(Size)'</Item>
+              </Issue>
+              <Issue Name="PlatformInvokeStack">
+               <Item>'NativeMethods.NativeMethodImports.AdjustWindowRectEx(ref NativeMethods.RECT, uint, bool, uint)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'NativeMethods.NativeMethodImports.AdjustWindowRectEx(ref NativeMethods.RECT, uint, bool, uint)'&#xD;&#xA;   -&gt;'NativeMethods.GetNonClientAreaSize(this Window)'&#xD;&#xA;   -&gt;'AeroWindow.CheckGlassPanel()'&#xD;&#xA;   -&gt;'AeroWindow.OnApplyTemplate()'</Item>
+              </Issue>
+              <Issue Name="PlatformInvokeStack">
+               <Item>'NativeMethods.NativeMethodImports.AdjustWindowRectEx(ref NativeMethods.RECT, uint, bool, uint)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'NativeMethods.NativeMethodImports.AdjustWindowRectEx(ref NativeMethods.RECT, uint, bool, uint)'&#xD;&#xA;   -&gt;'NativeMethods.GetNonClientAreaSize(this Window)'&#xD;&#xA;   -&gt;'TaskDialogWindow.MeasureOverride(Size)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DeleteDC(System.Runtime.InteropServices.HandleRef)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.NativeMethodImports.DeleteDC(HandleRef)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DwmExtendFrameIntoClientArea(System.IntPtr,BrokenHouse.Windows.Interop.NativeMethods+MARGINS&amp;)">
+            <Messages>
+             <Message TypeName="ReviewSuppressUnmanagedCodeSecurityUsage" Category="Microsoft.Security" CheckId="CA2118" Created="2009-04-22 20:01:01Z">
+              <Issue Name="PlatformInvokeStack">
+               <Item>'NativeMethods.NativeMethodImports.DwmExtendFrameIntoClientArea(IntPtr, ref NativeMethods.MARGINS)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'NativeMethods.NativeMethodImports.DwmExtendFrameIntoClientArea(IntPtr, ref NativeMethods.MARGINS)'&#xD;&#xA;   -&gt;'NativeMethods.ExtendGlassFrame(Window, Thickness)'&#xD;&#xA;   -&gt;'AeroWindow.CheckGlassPanel()'&#xD;&#xA;   -&gt;'AeroWindow.ArrangeOverride(Size)'</Item>
+              </Issue>
+              <Issue Name="PlatformInvokeStack">
+               <Item>'NativeMethods.NativeMethodImports.DwmExtendFrameIntoClientArea(IntPtr, ref NativeMethods.MARGINS)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'NativeMethods.NativeMethodImports.DwmExtendFrameIntoClientArea(IntPtr, ref NativeMethods.MARGINS)'&#xD;&#xA;   -&gt;'NativeMethods.ExtendGlassFrame(Window, Thickness)'&#xD;&#xA;   -&gt;'AeroWindow.CheckGlassPanel()'&#xD;&#xA;   -&gt;'AeroWindow.OnApplyTemplate()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DwmIsCompositionEnabled()">
+            <Messages>
+             <Message TypeName="ReviewSuppressUnmanagedCodeSecurityUsage" Category="Microsoft.Security" CheckId="CA2118" Created="2009-04-22 20:01:01Z">
+              <Issue Name="PlatformInvokeStack">
+               <Item>'NativeMethods.NativeMethodImports.DwmIsCompositionEnabled()'</Item>
+               <Item>&#xD;&#xA;   -&gt;'NativeMethods.NativeMethodImports.DwmIsCompositionEnabled()'&#xD;&#xA;   -&gt;'NativeMethods.IsGlassEnabled.get()'&#xD;&#xA;   -&gt;'AeroWindow.IsGlassEnabled.get()'</Item>
+              </Issue>
+              <Issue Name="PlatformInvokeStack">
+               <Item>'NativeMethods.NativeMethodImports.DwmIsCompositionEnabled()'</Item>
+               <Item>&#xD;&#xA;   -&gt;'NativeMethods.NativeMethodImports.DwmIsCompositionEnabled()'&#xD;&#xA;   -&gt;'NativeMethods.IsGlassEnabled.get()'&#xD;&#xA;   -&gt;'NativeMethods.ExtendGlassFrame(Window, Thickness)'&#xD;&#xA;   -&gt;'AeroWindow.CheckGlassPanel()'&#xD;&#xA;   -&gt;'AeroWindow.ArrangeOverride(Size)'</Item>
+              </Issue>
+              <Issue Name="PlatformInvokeStack">
+               <Item>'NativeMethods.NativeMethodImports.DwmIsCompositionEnabled()'</Item>
+               <Item>&#xD;&#xA;   -&gt;'NativeMethods.NativeMethodImports.DwmIsCompositionEnabled()'&#xD;&#xA;   -&gt;'NativeMethods.IsGlassEnabled.get()'&#xD;&#xA;   -&gt;'NativeMethods.ExtendGlassFrame(Window, Thickness)'&#xD;&#xA;   -&gt;'AeroWindow.CheckGlassPanel()'&#xD;&#xA;   -&gt;'AeroWindow.OnApplyTemplate()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetCursorPos(BrokenHouse.Windows.Interop.NativeMethods+POINT&amp;)">
+            <Messages>
+             <Message TypeName="ReviewSuppressUnmanagedCodeSecurityUsage" Category="Microsoft.Security" CheckId="CA2118" Created="2009-04-22 20:01:01Z">
+              <Issue Name="PlatformInvokeStack">
+               <Item>'NativeMethods.NativeMethodImports.GetCursorPos(out NativeMethods.POINT)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'NativeMethods.NativeMethodImports.GetCursorPos(out NativeMethods.POINT)'&#xD;&#xA;   -&gt;'NativeMethods.CurrentPos.get()'&#xD;&#xA;   -&gt;'HitTester.HitTestFromCurrentPos()'</Item>
+              </Issue>
+              <Issue Name="PlatformInvokeStack">
+               <Item>'NativeMethods.NativeMethodImports.GetCursorPos(out NativeMethods.POINT)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'NativeMethods.NativeMethodImports.GetCursorPos(out NativeMethods.POINT)'&#xD;&#xA;   -&gt;'NativeMethods.CurrentPos.get()'&#xD;&#xA;   -&gt;'HitTester.RootVisualFromCurrentPos()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetDC(System.Runtime.InteropServices.HandleRef)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.NativeMethodImports.GetDC(HandleRef)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetMonitorInfo(System.Runtime.InteropServices.HandleRef,BrokenHouse.Windows.Interop.NativeMethods+MONITORINFOEX)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.NativeMethodImports.GetMonitorInfo(HandleRef, NativeMethods.MONITORINFOEX)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetSystemMetrics(System.Int32)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.NativeMethodImports.GetSystemMetrics(int)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetWindowLong(System.IntPtr,System.Int32)">
+            <Messages>
+             <Message TypeName="ReviewSuppressUnmanagedCodeSecurityUsage" Category="Microsoft.Security" CheckId="CA2118" Created="2009-04-22 20:01:01Z">
+              <Issue Name="PlatformInvokeStack">
+               <Item>'NativeMethods.NativeMethodImports.GetWindowLong(IntPtr, int)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'NativeMethods.NativeMethodImports.GetWindowLong(IntPtr, int)'&#xD;&#xA;   -&gt;'NativeMethods.GetNonClientAreaSize(this Window)'&#xD;&#xA;   -&gt;'AeroWindow.CheckGlassPanel()'&#xD;&#xA;   -&gt;'AeroWindow.ArrangeOverride(Size)'</Item>
+              </Issue>
+              <Issue Name="PlatformInvokeStack">
+               <Item>'NativeMethods.NativeMethodImports.GetWindowLong(IntPtr, int)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'NativeMethods.NativeMethodImports.GetWindowLong(IntPtr, int)'&#xD;&#xA;   -&gt;'NativeMethods.GetNonClientAreaSize(this Window)'&#xD;&#xA;   -&gt;'AeroWindow.CheckGlassPanel()'&#xD;&#xA;   -&gt;'AeroWindow.OnApplyTemplate()'</Item>
+              </Issue>
+              <Issue Name="PlatformInvokeStack">
+               <Item>'NativeMethods.NativeMethodImports.GetWindowLong(IntPtr, int)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'NativeMethods.NativeMethodImports.GetWindowLong(IntPtr, int)'&#xD;&#xA;   -&gt;'NativeMethods.GetNonClientAreaSize(this Window)'&#xD;&#xA;   -&gt;'TaskDialogWindow.MeasureOverride(Size)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetWindowRect(System.IntPtr,BrokenHouse.Windows.Interop.NativeMethods+RECT&amp;)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.NativeMethodImports.GetWindowRect(IntPtr, out NativeMethods.RECT)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#MonitorFromPoint(BrokenHouse.Windows.Interop.NativeMethods+POINT,System.Int32)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.NativeMethodImports.MonitorFromPoint(NativeMethods.POINT, int)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#MonitorFromRect(BrokenHouse.Windows.Interop.NativeMethods+RECT&amp;,System.Int32)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.NativeMethodImports.MonitorFromRect(ref NativeMethods.RECT, int)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ReleaseDC(System.Runtime.InteropServices.HandleRef,System.Runtime.InteropServices.HandleRef)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.NativeMethodImports.ReleaseDC(HandleRef, HandleRef)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetWindowPos(System.IntPtr,System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.NativeMethodImports.SetWindowPos(IntPtr, IntPtr, int, int, int, int, int)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#WindowFromPoint(BrokenHouse.Windows.Interop.NativeMethods+POINT)">
+            <Messages>
+             <Message Id="0" TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901" Created="2009-04-22 20:01:01Z" FixCategory="NonBreaking">
+              <Issue Name="Parameter">
+               <Item>'pt'</Item>
+               <Item>'NativeMethods.NativeMethodImports.WindowFromPoint(NativeMethods.POINT)'</Item>
+               <Item>8</Item>
+               <Item>32-bit</Item>
+               <Item>4</Item>
+               <Item>'NativeMethods.POINT'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="ReviewSuppressUnmanagedCodeSecurityUsage" Category="Microsoft.Security" CheckId="CA2118" Created="2009-04-22 20:01:01Z">
+              <Issue Name="PlatformInvokeStack">
+               <Item>'NativeMethods.NativeMethodImports.WindowFromPoint(NativeMethods.POINT)'</Item>
+               <Item>&#xD;&#xA;   -&gt;'NativeMethods.NativeMethodImports.WindowFromPoint(NativeMethods.POINT)'&#xD;&#xA;   -&gt;'NativeMethods.WindowFromPoint(Point)'&#xD;&#xA;   -&gt;'HitTester.RootVisualFromScreenPoint(Point)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="NativeMethods+POINT">
+          <Members>
+           <Member Name="#.ctor(System.Int32,System.Int32)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.POINT.POINT(int, int)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="NativeMethods+RECT">
+          <Members>
+           <Member Name="#.ctor(System.Windows.Rect)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'NativeMethods.RECT.RECT(Rect)'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="2" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="BrokenHouse.Windows.Media.Imaging">
+        <Types>
+         <Type Name="ColorTransformGroup">
+          <Members>
+           <Member Name="#Children">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Excluded" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'ColorTransformGroup.Children'</Item>
+              </Issue>
+              <Notes>
+               <User Name="Admin">
+                <Note Id="0" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="BrokenHouse.Windows.Parts.Task">
+        <Types>
+         <Type Name="TaskButton">
+          <Messages>
+           <Message TypeName="FlagsEnumsShouldHavePluralNames" Category="Microsoft.Naming" CheckId="CA1714" Created="2009-04-22 20:01:01Z">
+            <Issue>
+             <Item>'TaskButton'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="TaskDialog">
+          <Members>
+           <Member Name="#AddElement(System.Windows.FrameworkElement,System.Windows.GridLength)">
+            <Messages>
+             <Message Id="height" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2009-04-22 20:01:01Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'height'</Item>
+               <Item>'TaskDialog.AddElement(FrameworkElement, GridLength)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CANCEL">
+            <Messages>
+             <Message Id="CANCEL" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2009-04-22 22:38:08Z">
+              <Issue Name="Member">
+               <Item>CANCEL</Item>
+               <Item>'TaskDialog.CANCEL'</Item>
+               <Item>Cancel</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CLOSE">
+            <Messages>
+             <Message Id="CLOSE" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2009-04-22 22:38:08Z">
+              <Issue Name="Member">
+               <Item>CLOSE</Item>
+               <Item>'TaskDialog.CLOSE'</Item>
+               <Item>Close</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#OK">
+            <Messages>
+             <Message Id="OK" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2009-04-22 22:38:08Z">
+              <Issue Name="MemberAbbreviation">
+               <Item>OK</Item>
+               <Item>'TaskDialog.OK'</Item>
+               <Item>Ok</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#OnButtonClicked(System.Object,System.Windows.RoutedEventArgs)">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2009-04-22 20:01:01Z">
+              <Issue Name="Parameter">
+               <Item>'sender'</Item>
+               <Item>'FrameworkElement'</Item>
+               <Item>'TaskDialog.OnButtonClicked(object, RoutedEventArgs)'</Item>
+               <Item>isint</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#RETRY">
+            <Messages>
+             <Message Id="RETRY" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2009-04-22 22:38:08Z">
+              <Issue Name="Member">
+               <Item>RETRY</Item>
+               <Item>'TaskDialog.RETRY'</Item>
+               <Item>Retry</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetExpandable(System.Windows.FrameworkElement,System.Boolean)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2009-04-22 20:01:01Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'TaskDialog.SetExpandable(FrameworkElement, bool)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="flag" TypeName="UsePreferredTerms" Category="Microsoft.Naming" CheckId="CA1726" Created="2009-04-22 20:01:01Z">
+              <Issue Name="MemberParameterNoAlternate">
+               <Item>'TaskDialog.SetExpandable(FrameworkElement, bool)'</Item>
+               <Item>flag</Item>
+               <Item>'flag'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#YES">
+            <Messages>
+             <Message Id="YES" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2009-04-22 22:38:08Z">
+              <Issue Name="Member">
+               <Item>YES</Item>
+               <Item>'TaskDialog.YES'</Item>
+               <Item>Yes</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="TaskDialogControl">
+          <Members>
+           <Member Name="#OnIsExpandedChanged(System.Boolean,System.Boolean)">
+            <Messages>
+             <Message Id="Flag" TypeName="UsePreferredTerms" Category="Microsoft.Naming" CheckId="CA1726" Created="2009-04-22 20:01:01Z">
+              <Issue Name="MemberParameterNoAlternate">
+               <Item>'TaskDialogControl.OnIsExpandedChanged(bool, bool)'</Item>
+               <Item>Flag</Item>
+               <Item>'newFlag'</Item>
+              </Issue>
+              <Issue Name="MemberParameterNoAlternate">
+               <Item>'TaskDialogControl.OnIsExpandedChanged(bool, bool)'</Item>
+               <Item>Flag</Item>
+               <Item>'oldFlag'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="TaskDialogWindow">
+          <Members>
+           <Member Name="#MeasureOverride(System.Windows.Size)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'TaskDialogWindow.MeasureOverride(Size)'</Item>
+               <Item>'constraintSize'</Item>
+               <Item>'availableSize'</Item>
+               <Item>'Window.MeasureOverride(Size)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="BrokenHouse.Windows.Parts.Wizard">
+        <Types>
+         <Type Name="AeroWizardPage">
+          <Members>
+           <Member Name="#OnHeaderChanged(System.String,System.String)">
+            <Messages>
+             <Message Id="newHeader" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2009-04-22 20:01:01Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'newHeader'</Item>
+               <Item>'AeroWizardPage.OnHeaderChanged(string, string)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="oldHeader" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Created="2009-04-22 20:01:01Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'oldHeader'</Item>
+               <Item>'AeroWizardPage.OnHeaderChanged(string, string)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="WizardControl">
+          <Members>
+           <Member Name="#OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <Messages>
+             <Message Id="0#" TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'WizardControl.OnItemsChanged(NotifyCollectionChangedEventArgs)'</Item>
+               <Item>'args'</Item>
+               <Item>'e'</Item>
+               <Item>'ItemsControl.OnItemsChanged(NotifyCollectionChangedEventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#RaisePageActivated(BrokenHouse.Windows.Parts.Wizard.WizardPage,System.Windows.RoutedEventArgs)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2009-04-22 20:01:01Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'WizardControl.RaisePageActivated(WizardPage, RoutedEventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#RaisePageActivating(BrokenHouse.Windows.Parts.Wizard.WizardPage,System.Windows.RoutedEventArgs)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2009-04-22 20:01:01Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'WizardControl.RaisePageActivating(WizardPage, RoutedEventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#RaisePageDeactivated(BrokenHouse.Windows.Parts.Wizard.WizardPage,System.Windows.RoutedEventArgs)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2009-04-22 20:01:01Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'WizardControl.RaisePageDeactivated(WizardPage, RoutedEventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#RaisePageDeactivating(BrokenHouse.Windows.Parts.Wizard.WizardPage,System.Windows.RoutedEventArgs)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2009-04-22 20:01:01Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'WizardControl.RaisePageDeactivating(WizardPage, RoutedEventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#UpdateButtonState()">
+            <Messages>
+             <Message Id="isFirstPage" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2009-04-22 20:01:01Z">
+              <Issue>
+               <Item>'WizardControl.UpdateButtonState()'</Item>
+               <Item>'isFirstPage'</Item>
+               <Item>'bool'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+  </Targets>
+  <Notes>
+   <User Name="Admin">
+    <Note Id="0" Modified="2009-04-22 20:19:35Z">Need a setter so that the collection can be used in WPF</Note>
+    <Note Id="1" Modified="2009-04-22 21:01:38Z">The namespace will grow in future versions</Note>
+    <Note Id="2" Modified="2009-04-22 21:02:09Z">These methods will be used in future.</Note>
+    <Note Id="3" Modified="2009-04-22 21:03:59Z">By design</Note>
+   </User>
+  </Notes>
+  <Rules>
+   <Rule TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020">
+    <Resolution Name="Default">Consider merging the types defined in '{0}' with another namespace.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811">
+    <Resolution Name="Default">{0} appears to have no upstream public or protected callers.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823">
+    <Resolution Name="Default">It appears that field {0} is never used or is only ever assigned to. Use this field or remove it.</Resolution>
+   </Rule>
+   <Rule TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227">
+    <Resolution Name="Default">Change {0} to be read-only by removing the property setter.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800">
+    <Resolution Name="Parameter">{0}, a parameter, is cast to type {1} multiple times in method {2}. Cache the result of the 'as' operator or direct cast in order to eliminate the redundant {3} instruction.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotDeclareStaticMembersOnGenericTypes" Category="Microsoft.Design" CheckId="CA1000">
+    <Resolution Name="Default">Remove {0} from {1} or make it an instance member.</Resolution>
+   </Rule>
+   <Rule TypeName="FlagsEnumsShouldHavePluralNames" Category="Microsoft.Naming" CheckId="CA1714">
+    <Resolution Name="Default">If enumeration name {0} is singular, change it to a plural form.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709">
+    <Resolution Name="Member">Correct the casing of '{0}' in member name {1} by changing it to '{2}'.</Resolution>
+    <Resolution Name="MemberAbbreviation">Correct the casing of '{0}' in member name {1} by changing it to '{2}'. '{2}' is an abbreviation and therefore is not subject to acronym casing guidelines.</Resolution>
+   </Rule>
+   <Rule TypeName="InitializeValueTypeStaticFieldsInline" Category="Microsoft.Usage" CheckId="CA2207">
+    <Resolution Name="Default">Initialize all static fields in {0} when those fields are declared and remove the explicit static constructor.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822">
+    <Resolution Name="Default">The 'this' parameter (or 'Me' in Visual Basic) of {0} is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Resolution>
+   </Rule>
+   <Rule TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901">
+    <Resolution Name="Parameter">As it is declared in your code, parameter {0} of P/Invoke {1} will be {2} bytes wide on {3} platforms. This is not correct, as the actual native declaration of this API indicates it should be {4} bytes wide on {3} platforms. Consult the MSDN Platform SDK documentation for help determining what data type should be used instead of {5}.</Resolution>
+   </Rule>
+   <Rule TypeName="ParameterNamesShouldMatchBaseDeclaration" Category="Microsoft.Naming" CheckId="CA1725">
+    <Resolution Name="Default">In member {0}, change parameter name {1} to {2} in order to match the identifier as it has been declared in {3}.</Resolution>
+   </Rule>
+   <Rule TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804">
+    <Resolution Name="Default">{0} declares a variable, {1}, of type {2}, which is never used or is only assigned to. Use this variable or remove it.</Resolution>
+   </Rule>
+   <Rule TypeName="ReviewSuppressUnmanagedCodeSecurityUsage" Category="Microsoft.Security" CheckId="CA2118">
+    <Resolution Name="PlatformInvokeStack">Review declarative security for {0} and its callers for potential vulnerabilities. The following call stack might expose a way to circumvent security protection: {1}</Resolution>
+   </Rule>
+   <Rule TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801">
+    <Resolution Name="Default">Parameter {0} of {1} is never used. Remove the parameter or use it in the method body.</Resolution>
+   </Rule>
+   <Rule TypeName="UsePreferredTerms" Category="Microsoft.Naming" CheckId="CA1726">
+    <Resolution Name="MemberParameterNoAlternate">In member {0}, replace the term '{1}' in parameter name {2} with an appropriate alternate or remove it entirely.</Resolution>
+    <Resolution Name="TypeNoAlternate">Replace the term '{0}' in type name {1} with an appropriate alternate or remove it entirely.</Resolution>
+   </Rule>
+  </Rules>
+ </FxCopReport>
+</FxCopProject>

@@ -1,0 +1,22 @@
+<Dictionary>
+  <Words>
+    <Unrecognized>
+    </Unrecognized>
+    <Recognized>
+      <Word>Desaturation</Word>
+      <Word>Desaturate</Word>
+      <Word>Utils</Word>
+      <Word>Notifier</Word>
+      <Word>Toggler</Word>
+    </Recognized>
+    <Deprecated>
+      <Term PreferredAlternate="EnterpriseServices">ComPlus</Term>
+    </Deprecated>
+  </Words>
+  <Acronyms>
+    <CasingExceptions>
+      <Acronym>CJK</Acronym>
+      <Acronym>Pi</Acronym>
+    </CasingExceptions>
+  </Acronyms>
+</Dictionary>

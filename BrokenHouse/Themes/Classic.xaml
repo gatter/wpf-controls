@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/BrokenHouse;component/Themes/Classic/CommandLink.xaml"/>
+        <ResourceDictionary Source="/BrokenHouse;component/Themes/Classic/AeroWizard.xaml"/>
+        <ResourceDictionary Source="/BrokenHouse;component/Themes/Generic/TransitionControl.xaml"/>
+        <ResourceDictionary Source="/BrokenHouse;component/Themes/Generic/TransitionItemsControl.xaml"/>
+        <ResourceDictionary Source="/BrokenHouse;component/Themes/Generic/ClassicWizard.xaml"/>
+        <ResourceDictionary Source="/BrokenHouse;component/Themes/Classic/TaskDialog.xaml"/>
+        <ResourceDictionary Source="/BrokenHouse;component/Themes/Classic/TaskButtonBar.xaml"/>
+        <ResourceDictionary Source="/BrokenHouse;component/Themes/Generic/TaskIcon.xaml"/>
+        <ResourceDictionary Source="/BrokenHouse;component/Themes/Generic/ActiveIcon.xaml"/>
+        <ResourceDictionary Source="/BrokenHouse;component/Themes/Classic/ErrorInfo.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>
+

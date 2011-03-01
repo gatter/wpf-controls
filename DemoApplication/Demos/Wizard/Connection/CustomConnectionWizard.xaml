@@ -1,0 +1,128 @@
+﻿<Window x:Class="DemoApplication.Demos.Wizard.Connection.CustomConnectionWizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+        xmlns:bhp="http://www.brokenhouse.co.uk/wpf/primitives"
+        xmlns:local="clr-namespace:DemoApplication.Demos.Wizard.Connection"
+        xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic"
+        Width="600" Height="450" Icon="{x:Static bh:ShieldIcons.Windows}"
+        Title="Connection Wizard">
+    
+    <Window.Resources>
+
+        <!-- Wizard Control Style -->
+        <Style TargetType="{x:Type bh:AeroWizardControl}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type bh:AeroWizardControl}">
+                        <DockPanel x:Name="PART_RootLayout">
+
+                            <!-- Buttons With an etched line above -->
+                            <themes:ClassicBorderDecorator x:Name="PART_ButtonPanel" DockPanel.Dock="Bottom" SnapsToDevicePixels="true" 
+                                                           Background="gray"
+                                                           BorderThickness="0,2,0,0">
+                                <StackPanel Orientation="Horizontal" 
+                                        HorizontalAlignment="Right" 
+                                        Margin="6,6,6,6"
+                                        KeyboardNavigation.TabNavigation="Local">
+                                    <Button x:Name="PART_BackButton" 
+                                        Command="{x:Static bh:WizardCommands.Back}"
+                                        Width="70" Height="23" Margin="4"
+                                        Content="Back"
+                                        Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BackButtonState.Visibility}"/>
+                                    <Button Command="{x:Static bh:WizardCommands.Next}"
+                                        Width="70" Height="23" Margin="4"
+                                        Content="Next"
+                                        IsDefault="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=NextButtonState.IsDefault}"
+                                        Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=NextButtonState.Visibility}"/>
+                                    <Button Command="{x:Static bh:WizardCommands.Finish}"
+                                        Width="70" Height="23" Margin="4"
+                                        Content="Finish"
+                                        IsDefault="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FinishButtonState.IsDefault}"
+                                        Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FinishButtonState.Visibility}"/>
+                                    <Button Command="{x:Static bh:WizardCommands.Cancel}"
+                                        Width="70" Height="23" Margin="4"
+                                        Content="Cancel"
+                                        IsCancel="True"/>
+                                </StackPanel>
+                            </themes:ClassicBorderDecorator>
+
+                            <Grid>
+                                <!-- The actual content on the wizard control - the currently selected page -->
+                                <bhp:TransitionPresenter x:Name="PART_PageHost"
+                                                           TransitionEffect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TransitionEffect}"
+                                                           VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
+                                
+                                <!-- This is the optional error section. If an error occurs we will place
+                                 the error here. We also may want to animate it. -->
+                                <bh:ErrorInfo x:Name="PART_ErrorInfo" 
+                                              HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                                              Background="Yellow"
+                                              Margin="2"
+                                              BorderThickness="1" BorderBrush="Gray"
+                                              Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LastError}"
+                                              CloseCommand="bh:WizardCommands.CloseLastError"/>
+                            </Grid>
+                        </DockPanel>
+
+                        <ControlTemplate.Triggers>
+
+                            <!-- If the message is blank we do not want to show the error message-->
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsLastErrorVisible, Mode=OneWay}" Value="false">
+                                <Setter TargetName="PART_ErrorInfo" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Content Wizard Page Style -->
+        <Style x:Key="newWizardPage" TargetType="{x:Type bh:AeroWizardPage}">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="10,10,10,10"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type bh:AeroWizardPage}">
+                        <Border BorderThickness="{TemplateBinding BorderThickness}"  
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                            <DockPanel Margin="0">
+                                 <Grid Background="Blue">
+                                    <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Width="Auto"  Margin="15"
+                                               Height="Auto" FontSize="20" Foreground="White" HorizontalAlignment="Stretch"
+                                               Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Header}"
+                                               >
+                                        <TextBlock.LayoutTransform>
+                                            <RotateTransform Angle="-90" CenterX="0.5" CenterY="0.5"/>
+                                        </TextBlock.LayoutTransform>
+                                    </TextBlock>
+                                </Grid>
+                                           
+                                <ContentPresenter Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" 
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                                  ContentSource="Content" 
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"/>
+                            </DockPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <bh:AeroWizardControl Title="Connection Wizard" PageStyle="{DynamicResource newWizardPage}">
+        <bh:AeroWizardControl.TransitionEffect>
+            <bh:SlideTransitionEffect Direction="RightToLeft" TransitionType="Sequential"/>
+        </bh:AeroWizardControl.TransitionEffect>
+        <local:CheckHostnamePage/>
+        <local:CheckAuthenticationPage/>
+    </bh:AeroWizardControl>
+</Window>

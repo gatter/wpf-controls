@@ -1,0 +1,15 @@
+﻿<bh:AeroWizardWindow x:Class="DemoApplication.Demos.Wizard.Connection.AeroConnectionWizard"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                     xmlns:local="clr-namespace:DemoApplication.Demos.Wizard.Connection"
+                     Width="600" Height="450" Title="AeroConnectionWizard" Icon="{x:Static bh:ShieldIcons.Windows}">
+    
+    <bh:AeroWizardControl Title="Connection Wizard">
+        <bh:AeroWizardControl.TransitionEffect>
+            <bh:SlideTransitionEffect Direction="RightToLeft" TransitionType="Sequential" SpeedRatio="2"/>
+        </bh:AeroWizardControl.TransitionEffect>
+        <local:CheckHostnamePage/>
+        <local:CheckAuthenticationPage/>
+    </bh:AeroWizardControl>
+</bh:AeroWizardWindow>

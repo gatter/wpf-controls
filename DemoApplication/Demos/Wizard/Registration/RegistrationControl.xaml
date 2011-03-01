@@ -1,0 +1,153 @@
+﻿<UserControl x:Class="DemoApplication.Demos.Wizard.Registration.RegistrationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+             xmlns:local="clr-namespace:DemoApplication.Demos.Wizard.Registration">
+    
+    <!-- We want data triggers on page of the model, the only simple way to do this
+         is to define the content of the page as a DataTemplate. -->
+    <UserControl.Resources>
+
+        <!-- Simple converter to determine if a field is empty -->
+        <bh:IsNullOrEmptyConverter x:Key="IsNullConverter"/>
+        
+        <!-- Sty;e fpr the text box to render a red star if invalid -->
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="3,3,14,3"/>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <TextBlock DockPanel.Dock="Right"
+                                       Foreground="Red"
+                                       FontSize="14pt"
+                                       FontWeight="Bold"
+                                       Margin="2,0,0,0"
+                                       VerticalAlignment="Center"
+                                       Text="*">
+                            </TextBlock>
+                            <AdornedElementPlaceholder Name="PART_PlaceHolder" />
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Style for the text box to render a red star if invalid -->
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Margin" Value="3,3,14,3"/>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <TextBlock DockPanel.Dock="Right"
+                                       Foreground="Red"
+                                       FontSize="14pt"
+                                       FontWeight="Bold"
+                                       Margin="2,0,0,0"
+                                       VerticalAlignment="Center"
+                                       Text="*">
+                            </TextBlock>
+                            <AdornedElementPlaceholder Name="PART_PlaceHolder" />
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+
+    </UserControl.Resources>
+
+    <AdornerDecorator>
+        
+    <Grid Margin="0,3,0,3">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="First Name :" VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <TextBox   Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
+            <TextBox.Text>
+                <Binding Path="FirstName" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringLengthValidationRule Minimum="1" ErrorMessage="A First Name must be supplied." ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Last Name :" VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <TextBox   Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
+            <TextBox.Text>
+                <Binding Path="LastName" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringLengthValidationRule Minimum="1" ErrorMessage="A Last Name must be supplied." ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Address :" VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <TextBox   Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
+            <TextBox.Text>
+                <Binding Path="Address1" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringLengthValidationRule Minimum="1" ErrorMessage="The first line of the Address must be supplied." ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox   Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Address2, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="City :" VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <TextBox   Grid.Row="4" Grid.Column="1">
+            <TextBox.Text>
+                <Binding Path="City" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringLengthValidationRule Minimum="1" ErrorMessage="A city must be supplied" ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Grid.Row="4" Grid.Column="2" Text="Postal/Zip Code :" VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <TextBox   Grid.Row="4" Grid.Column="3">
+            <TextBox.Text>
+                <Binding Path="PostalCode" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringLengthValidationRule Minimum="1" ErrorMessage="A Postal or Zip Code must be supplied" ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="State/Province :" VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <TextBox   Grid.Row="5" Grid.Column="1">
+            <TextBox.Text>
+                <Binding Path="State" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringLengthValidationRule Minimum="1" ErrorMessage="A State of Province must be supplied." ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Grid.Row="5" Grid.Column="2" Text="Country :" VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <ComboBox  Grid.Row="5" Grid.Column="3" ItemsSource="{Binding AvailableCountries}">
+            <ComboBox.SelectedItem>
+                <Binding Path="Country" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:IsRequiredValidationRule ErrorMessage="A Country must be selected." ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </ComboBox.SelectedItem>
+        </ComboBox>
+    </Grid>
+    </AdornerDecorator>
+
+</UserControl>

@@ -1,0 +1,57 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:BrokenHouse.Windows.Parts.Transition">
+    
+    <Style x:Key="STYLE_AtStart" TargetType="{x:Type local:TransitionFrame}" 
+           BasedOn="{StaticResource {x:Static local:TransitionElements.TransitionFrameStyleKey}}" >
+        <Setter Property="Opacity" Value="0.0"/>
+        <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="STYLE_AtCenter" TargetType="{x:Type local:TransitionFrame}" 
+           BasedOn="{StaticResource {x:Static local:TransitionElements.TransitionFrameStyleKey}}" >
+        <Setter Property="Opacity" Value="1.0"/>
+        <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleX="1" ScaleY="1"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="STYLE_AtEnd" TargetType="{x:Type local:TransitionFrame}" 
+           BasedOn="{StaticResource {x:Static local:TransitionElements.TransitionFrameStyleKey}}" >
+        <Setter Property="Opacity" Value="0.0"/>
+        <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Storyboard x:Key="TRANS_ToStart">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.0" Duration="0:0:1" />
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="1.3" Duration="0:0:1"/>
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To="1.3" Duration="0:0:1"/>
+    </Storyboard>
+
+    <Storyboard x:Key="TRANS_ToCenter">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1.0" Duration="0:0:1" />
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="1.0" Duration="0:0:1"/>
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To="1.0" Duration="0:0:1"/>
+    </Storyboard>
+
+    <Storyboard x:Key="TRANS_ToEnd">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.0" Duration="0:0:1" />
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="0.7" Duration="0:0:1"/>
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To="0.7" Duration="0:0:1"/>
+    </Storyboard>
+    
+   
+</ResourceDictionary>

@@ -1,0 +1,99 @@
+﻿<Window x:Class="DemoApplication.Demos.Wizard.Registration.ClassicRegistrationWizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+        xmlns:local="clr-namespace:DemoApplication.Demos.Wizard.Registration"
+        Title="Wizard" 
+        Width="500" Height="400" bh:NativeWindowStyles.CanMaximize="False">     
+    
+    <Window.Resources>
+        
+        <!-- Define the style for all pages in the wizard -->
+        <Style TargetType="{x:Type bh:ClassicWizardTitlePage}">
+            <Setter Property="HorizontalWatermarkAlignment" Value="Center"/>
+            <Setter Property="WatermarkTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <DockPanel>
+                            <bh:Icon Source="/DemoApplication;component/Demos/Wizard/Resources/Watermark.png" Margin="0,0,15,0"/>
+                        </DockPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="WatermarkBackground">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#FFB4CCE1" Offset="0"/>
+                            <GradientStop Color="#FFBAD5E9" Offset="1"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Define the style for all pages in the wizard -->
+        <Style TargetType="{x:Type bh:ClassicWizardContentPage}" >
+            <Setter Property="HorizontalBannerAlignment" Value="Right"/> 
+            <Setter Property="BannerPadding" Value="0,0,64,0"/> 
+            <Setter Property="BannerTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <bh:Icon Source="/DemoApplication;component/Demos/Wizard/Resources/Header.png" Margin="6"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BannerBackground">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#FFB4CCE1" Offset="0"/>
+                            <GradientStop Color="#FFBAD5E9" Offset="1"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <bh:ClassicWizardControl>
+        <bh:ClassicWizardControl.TransitionEffect>
+            <bh:WipeTransitionEffect TransitionType="Overlapped" Angle="45"  SpeedRatio="2"/>
+        </bh:ClassicWizardControl.TransitionEffect>
+        <bh:ClassicWizardTitlePage Title="Welcome to the Registration Wizard">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Bottom"  Text="To contine click Next."
+                           TextWrapping="Wrap"/>
+                <TextBlock Text="This wizard will guide you through the process of registering this application."
+                           TextWrapping="Wrap"/>
+            </DockPanel>
+        </bh:ClassicWizardTitlePage>
+        <bh:ClassicWizardContentPage Title="Thank you for installing this application."
+                                     Description="You have the option of registering support for this application now or at a later date."
+                                     IsNextEnabled="False">
+            <StackPanel>
+                <UniformGrid Margin="0,8,0,0" Columns="1">
+                    <bh:CommandLink Instruction="Register Now" Margin="0,0,0,8" Command="{x:Static bh:WizardCommands.MoveTo}" CommandParameter="Register">
+                        You will be asked to providesome personal information to complete the registration.
+                    </bh:CommandLink>
+                    <bh:CommandLink Instruction="Register Later" Margin="0,8,0,0" Command="{x:Static bh:WizardCommands.MoveTo}" CommandParameter="Declined">
+                        It is important to register this application because by registering you will be kept informed
+                        of product updated.
+                    </bh:CommandLink>
+                </UniformGrid>
+            </StackPanel>
+        </bh:ClassicWizardContentPage>
+        <bh:ClassicWizardContentPage x:Name="Register" Title="Provide your details" 
+                                     Description="These details will not be used for marketing or by any third party." 
+                                     IsNextEnabled="{Binding IsValid}">
+            <local:RegistrationControl/>
+        </bh:ClassicWizardContentPage>
+        <bh:ClassicWizardTitlePage x:Name="Declined" Title="Registration Declined" IsFinalPage="True" Style="{DynamicResource SuccessStyle}">
+            <TextBlock TextWrapping="Wrap">
+                    You have decided not to register this application at the moment.
+                    If you want to register at a later date then please 
+                    click the register button in the about window of the application.
+            </TextBlock>
+        </bh:ClassicWizardTitlePage>
+    </bh:ClassicWizardControl>
+</Window>

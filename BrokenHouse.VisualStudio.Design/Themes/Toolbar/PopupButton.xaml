@@ -1,0 +1,80 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:BrokenHouse.VisualStudio.Design.Windows.Controls"
+                    xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+                    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
+
+    <SolidColorBrush x:Key="ToolBarButtonHoverBorder"   Color="#3399FF"/>
+    <SolidColorBrush x:Key="ToolBarButtonHover"         Color="#C2E0FF"/>
+    <SolidColorBrush x:Key="ToolBarButtonPressedBorder" Color="#3399FF"/>
+    <SolidColorBrush x:Key="ToolBarButtonPressed"       Color="#99CCFF"/>
+    
+    <Style TargetType="{x:Type local:PopupButton}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:PopupButton}">
+                    <Border x:Name="PART_Background"
+                            SnapsToDevicePixels="true" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="PART_Button" Grid.Column="0" 
+                                    SnapsToDevicePixels="true"
+                                    Background="Transparent" 
+                            Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Border>
+                            <Line x:Name="PART_Line" Grid.Column="1" X1="0" X2="0" Y1="0" Y2="1" Stretch="Uniform" Stroke="{TemplateBinding BorderBrush}" />
+                            <Border x:Name="PART_Toggle" Grid.Column="2" 
+                                    SnapsToDevicePixels="true" 
+                                    Background="Transparent" >
+                                <Path VerticalAlignment="Center" Margin="0,0,3,0"
+							          Fill="{TemplateBinding Foreground}" Data="M 2.5 0 L 8.5 0 L 5.5 3 Z"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="BorderBrush" TargetName="PART_Background" Value="{StaticResource ToolBarButtonHoverBorder}"/>
+                            <Setter Property="Background" TargetName="PART_Background" Value="{StaticResource ToolBarButtonHover}"/>
+                            <Setter Property="Stroke" TargetName="PART_Line" Value="{StaticResource ToolBarButtonHoverBorder}"/>
+                        </Trigger>
+                        <!--<Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter Property="BorderBrush" TargetName="PART_Background" Value="{StaticResource ToolBarButtonHoverBorder}"/>
+                            <Setter Property="Background" TargetName="PART_Background" Value="{StaticResource ToolBarButtonHover}"/>
+                            <Setter Property="Stroke" TargetName="PART_Line" Value="{StaticResource ToolBarButtonHoverBorder}"/>
+                        </Trigger>-->
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="BorderBrush" TargetName="PART_Background" Value="{StaticResource ToolBarButtonPressedBorder}"/>
+                            <Setter Property="Background" TargetName="PART_Button" Value="{StaticResource ToolBarButtonPressed}"/>
+                        </Trigger>
+                        <Trigger Property="IsOpen" Value="true">
+                            <Setter Property="BorderBrush" TargetName="PART_Background" Value="{StaticResource ToolBarButtonPressedBorder}"/>
+                            <Setter Property="Background" TargetName="PART_Background" Value="{StaticResource ToolBarButtonPressed}"/>
+                            <Setter Property="Visibility" TargetName="PART_Line" Value="Hidden"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

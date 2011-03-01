@@ -1,0 +1,140 @@
+﻿<Window x:Class="DemoApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+        xmlns:demos="clr-namespace:DemoApplication.Demos"
+        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+        Title="MainWindow" Height="600" Width="690"
+        Background="{DynamicResource BackgroundGradient}">
+    
+    <Window.Resources>
+        <DataTemplate x:Key="ListItemTemplate">
+            <TextBlock Text="{Binding Label}" Margin="0,0,0,0"/>
+        </DataTemplate>
+        
+        <CollectionViewSource Source="{Binding AllItems}" x:Key="DemoItemsCollection">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Group"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+
+        <LinearGradientBrush x:Key="BackgroundGradient" EndPoint="1,0.5" StartPoint="0,0.5">
+            <GradientStop Color="#FFE4F4E6" Offset="0"/>
+            <GradientStop Color="#FFCFF8D1" Offset="0.5"/>
+            <GradientStop Color="#FFE4F4E6" Offset="1"/>
+        </LinearGradientBrush>
+        
+        <DrawingBrush x:Key="BackgroundFill" Viewbox="0,0,1,1" ViewboxUnits="Absolute" Viewport="0,0,3,3" ViewportUnits="Absolute" TileMode="Tile" Stretch="UniformToFill">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="#FFe0e0e0">
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry Center="0.5,0.5" RadiusX="0.3" RadiusY="0.3"/>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+
+        <Style x:Key="ListViewStyle1" TargetType="{x:Type ListView}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="#FF042271"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListView}">
+                        <bh:EdgeScrollViewer Padding="{TemplateBinding Padding}">
+                           <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </bh:EdgeScrollViewer>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <DockPanel Background="{DynamicResource BackgroundFill}">
+        <ListView x:Name="ItemsList" ItemsSource="{Binding Source={StaticResource DemoItemsCollection}}"
+                  BorderThickness="0" Margin="10,10,0,10" Background="Transparent" Width="160"
+                  Style="{DynamicResource ListViewStyle1}">
+            <ListView.GroupStyle>
+                <GroupStyle HidesIfEmpty="True">
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="3" FontWeight="Bold" FontSize="15" Text="{Binding Path=Name}"/>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=Name}" Value="{x:Null}">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+            <ListView.View>
+                <GridView>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Label}" Header="Section"  />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
+        <Border Margin="10" CornerRadius="4" BorderBrush="#ff000000" BorderThickness="1,1,1,1" SnapsToDevicePixels="True"
+                Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+            <Grid>
+                <Border CornerRadius="4" BorderBrush="#ffffffff" BorderThickness="1,1,1,1" SnapsToDevicePixels="True" ClipToBounds="True">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.05">
+                            <GradientStop Color="#3000FF16" Offset="1"/>
+                            <GradientStop Color="#0000FF14" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border BorderBrush="#ffffffff" BorderThickness="10,4,10,30" SnapsToDevicePixels="True">
+                        <Border.BitmapEffect>
+                            <BlurBitmapEffect Radius="30" KernelType="Gaussian"/>
+                        </Border.BitmapEffect>
+                    </Border>
+                </Border>
+                <bh:TransitionItemsControl x:Name="ItemsControl" Margin="5"
+                                           TransitionInSequence="false"
+                                           ItemsSource="{Binding ElementName=ItemsList, Path=Items}"
+                                           ActiveItem="{Binding ElementName=ItemsList, Path=SelectedItem, Mode=TwoWay}"
+                                           HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top">
+                   <!-- <bh:TransitionItemsControl.TransitionEffect>
+                        <bh:BlurAndFadeTransitionEffect SpeedRatio="1.5"/>
+                    </bh:TransitionItemsControl.TransitionEffect>-->
+                    <bh:TransitionItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ScrollViewer x:Name="PART_Viewer" HorizontalScrollBarVisibility="Disabled" 
+                                          VerticalScrollBarVisibility="Auto"
+                                          HorizontalAlignment="Stretch">
+                                <ContentPresenter Content="{Binding .}"/>
+                            </ScrollViewer>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsContentStatic}" Value="true">
+                                    <Setter TargetName="PART_Viewer" Property="VerticalScrollBarVisibility" Value="Disabled"/>
+                                </DataTrigger> 
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </bh:TransitionItemsControl.ItemTemplate>
+                </bh:TransitionItemsControl>
+
+            </Grid>
+        </Border>
+    </DockPanel>
+</Window>

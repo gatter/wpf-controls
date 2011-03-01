@@ -1,0 +1,78 @@
+﻿<bh:TaskDialogWindow x:Class="DemoApplication.Demos.Task.CopyProgressDialog"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                     Title="{Binding TimeRemainingText, StringFormat='{}{0} remaining'}" 
+                     Height="222" MinWidth="450"
+                     ResizeMode="NoResize">
+    
+    <bh:TaskDialogControl Padding="0" CollapsedText="More information" ExpandedText="Less information" IsExpanded="false">
+        <bh:TaskDialogControl.Buttons>
+            <bh:TaskButtonBar ButtonSet="Cancel"/>
+        </bh:TaskDialogControl.Buttons>
+        <bh:TaskDialogControl.Instruction>
+            <Border>
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#06476D" Offset="0.0"/>
+                        <GradientStop Color="#026D59" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <TextBlock Margin="20,10,20,10" Text="{Binding InstructionText}" FontSize="16" Foreground="White"/>
+            </Border>
+        </bh:TaskDialogControl.Instruction>
+        <StackPanel Margin="17,10,17,10">
+            <Grid bh:TaskDialogControl.Expand="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>    
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Margin="3" Grid.Row="0" Grid.Column="0" Text="From"/>
+                <TextBlock Margin="3" Grid.Row="1" Grid.Column="0" Text="To"/>
+                <TextBlock Margin="3" Grid.Row="2" Grid.Column="0" Text="Time remaining"/>
+                <TextBlock Margin="3" Grid.Row="3" Grid.Column="0" Text="Items remaining"/>
+                <TextBlock Margin="3" Grid.Row="4" Grid.Column="0" Text="Speed"/>
+                <TextBlock Margin="3" Grid.Row="0" Grid.Column="1">
+                    <Run FontWeight="Bold" Text="Test"/> (C:\Temp\Test)
+                </TextBlock>
+                <TextBlock Margin="3" Grid.Row="1" Grid.Column="1">
+                    <Run FontWeight="Bold" Text="Documents"/> (C:\Users\Admin\Documents)
+                </TextBlock>
+                <TextBlock Margin="3" Grid.Row="2" Grid.Column="1" Text="{Binding TimeRemainingText, StringFormat='About {0}'}"/>
+                <TextBlock Margin="3" Grid.Row="3" Grid.Column="1" Text="{Binding ItemsRemainingText}"/>
+                <TextBlock Margin="3" Grid.Row="4" Grid.Column="1" Text="{Binding SpeedText}"/>
+            </Grid>
+            <Grid bh:TaskDialogControl.Expand="True" bh:TaskDialogControl.InvertExpand="True" HorizontalAlignment="Stretch" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Margin="3,3,0,3" Grid.Row="0" Grid.Column="0" TextWrapping="NoWrap" TextTrimming="None">
+                    from <Run FontWeight="Bold" Text="Test "/>
+                </TextBlock>
+                <TextBlock Margin="0,3,0,3" Grid.Row="0" Grid.Column="1" Text="(C:\Temp\Test) " TextTrimming="CharacterEllipsis"/>
+                <TextBlock Margin="0,3,0,3" Grid.Row="0" Grid.Column="2" TextWrapping="NoWrap" TextTrimming="None">
+                    to <Run FontWeight="Bold" Text="Documents "/>
+                </TextBlock>
+                <TextBlock Margin="0,3,3,3" Grid.Row="0" Grid.Column="3" Text="(C:\Users\Admin\Documents\dfgsdfgsdfgsdfg)" TextTrimming="CharacterEllipsis"/>
+                <TextBlock Margin="3" Grid.Row="1" Grid.ColumnSpan="3" Text="{Binding TimeRemainingText, StringFormat='About {0} remaining'}"/>
+            </Grid>
+            <ProgressBar Margin="3,6,3,6" Height="20"
+                         Minimum="0.0" Maximum="100.0" Value="{Binding PercentageDone, Mode=OneWay}"/>
+        </StackPanel>
+    </bh:TaskDialogControl>
+</bh:TaskDialogWindow>

@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{591F5B21-7187-4086-AE84-E1C88DBFBD2A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DemoApplication</RootNamespace>
+    <AssemblyName>DemoApplication</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationFramework.Aero">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework.Classic">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Demos\Controls\CommandLinkElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Controls\ControlsOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\Controls\ActiveIconElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Controls\ControlsFeatures.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Controls\EdgeScrollViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Controls\IconColorTransforms.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Controls\StockIconsElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Releases.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Introduction.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Task\MoveConfirmationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\Transition\TransitionControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Transition\TransitionItemsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Transition\TransitionFeatures.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Transition\TransitionOverview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Wizard\Connection\SequencedConnectionWizard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Wizard\Connection\CustomConnectionWizard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Wizard\WizardFeatures.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Task\TaskDialogFeatures.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Wizard\WizardOverview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Task\TaskDialogOverview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Wizard\WizardDemos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\Task\CopyProgressDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\Task\TaskDialogCreator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Controls\SnapDecoratorElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Controls\IconElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\Task\TaskDialogDemos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\Wizard\Connection\AeroConnectionWizard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\Wizard\Connection\CheckAuthenticationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\Wizard\Connection\CheckHostnamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demos\Wizard\Registration\AeroRegistrationWizard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Wizard\Registration\ClassicRegistrationWizard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Wizard\Registration\RegistrationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demos\Task\ResizingTaskDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Demos\Controls\CommandLinkElement.xaml.cs">
+      <DependentUpon>CommandLinkElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Controls\ControlsOverview.xaml.cs">
+      <DependentUpon>ControlsOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Controls\ActiveIconElement.xaml.cs">
+      <DependentUpon>ActiveIconElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Controls\ControlsFeatures.xaml.cs">
+      <DependentUpon>ControlsFeatures.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Controls\EdgeScrollViewer.xaml.cs">
+      <DependentUpon>EdgeScrollViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Controls\IconColorTransforms.xaml.cs">
+      <DependentUpon>IconColorTransforms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Controls\StockIconsElement.xaml.cs">
+      <DependentUpon>StockIconsElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Releases.xaml.cs">
+      <DependentUpon>Releases.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Introduction.xaml.cs">
+      <DependentUpon>Introduction.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Task\MoveConfirmationDialog.xaml.cs">
+      <DependentUpon>MoveConfirmationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Transition\TransitionControl.xaml.cs">
+      <DependentUpon>TransitionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Transition\TransitionItemsControl.xaml.cs">
+      <DependentUpon>TransitionItemsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Transition\TransitionFeatures.xaml.cs">
+      <DependentUpon>TransitionFeatures.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Transition\TransitionOverview.xaml.cs">
+      <DependentUpon>TransitionOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Wizard\Connection\SequencedConnectionWizard.xaml.cs">
+      <DependentUpon>SequencedConnectionWizard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Wizard\Connection\CustomConnectionWizard.xaml.cs">
+      <DependentUpon>CustomConnectionWizard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Wizard\Connection\SequencedWizardPageBehaviour.cs" />
+    <Compile Include="Demos\Wizard\Registration\IsRequiredValidationRule.cs" />
+    <Compile Include="Demos\Wizard\Registration\StringLengthValidationRule.cs" />
+    <Compile Include="Demos\Wizard\WizardFeatures.xaml.cs">
+      <DependentUpon>WizardFeatures.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Task\TaskDialogFeatures.xaml.cs">
+      <DependentUpon>TaskDialogFeatures.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Wizard\WizardOverview.xaml.cs">
+      <DependentUpon>WizardOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Task\TaskDialogOverview.xaml.cs">
+      <DependentUpon>TaskDialogOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\DemoItem.cs" />
+    <Compile Include="Demos\Wizard\WizardDemos.xaml.cs">
+      <DependentUpon>WizardDemos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\DataProvider.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Task\CopyProgressDialog.xaml.cs">
+      <DependentUpon>CopyProgressDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Task\TaskDialogCreator.xaml.cs">
+      <DependentUpon>TaskDialogCreator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Controls\SnapDecoratorElement.xaml.cs">
+      <DependentUpon>SnapDecoratorElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Controls\IconElement.xaml.cs">
+      <DependentUpon>IconElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Task\TaskDialogDemos.xaml.cs">
+      <DependentUpon>TaskDialogDemos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Wizard\Connection\AeroConnectionWizard.xaml.cs">
+      <DependentUpon>AeroConnectionWizard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Wizard\Connection\CheckAuthenticationPage.xaml.cs">
+      <DependentUpon>CheckAuthenticationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Wizard\Connection\CheckHostnamePage.xaml.cs">
+      <DependentUpon>CheckHostnamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Wizard\Connection\ConnectionModel.cs" />
+    <Compile Include="Demos\Wizard\Connection\MockAuthenticationService.cs" />
+    <Compile Include="Demos\Wizard\Connection\MockHandshakeService.cs" />
+    <Compile Include="Demos\Wizard\Registration\AeroRegistrationWizard.xaml.cs">
+      <DependentUpon>AeroRegistrationWizard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Wizard\Registration\ClassicRegistrationWizard.xaml.cs">
+      <DependentUpon>ClassicRegistrationWizard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Wizard\Registration\RegistrationControl.xaml.cs">
+      <DependentUpon>RegistrationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demos\Wizard\Registration\RegistrationModel.cs" />
+    <Compile Include="Demos\Task\ResizingTaskDialog.xaml.cs">
+      <DependentUpon>ResizingTaskDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Demos\Wizard\Resources\Header.png" />
+    <Resource Include="Demos\Wizard\Resources\Watermark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BrokenHouse\BrokenHouse.csproj">
+      <Project>{DED77A15-ABCD-4582-ACE9-8FE6F6A97224}</Project>
+      <Name>BrokenHouse</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="TestIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Demos\Wizard\Resources\Snapshots.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Demos\Wizard\Resources\DesignTime.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Demos\Wizard\Resources\Transitions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Demos\Task\Resources\Document.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

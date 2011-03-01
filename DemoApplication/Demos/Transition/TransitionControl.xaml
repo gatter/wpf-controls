@@ -1,0 +1,77 @@
+﻿<demos:DemoItem x:Class="DemoApplication.Demos.Transition.TransitionControl"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                xmlns:local="clr-namespace:DemoApplication.Demos.Transition"
+                xmlns:demos="clr-namespace:DemoApplication.Demos"
+                Label="Simple Transitions" Group="Transition" MaxWidth="1000">
+
+
+    <DockPanel Margin="1">
+        <StackPanel Margin="0,0,0,5" DockPanel.Dock="Top">
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold" FontSize="14">
+                    Transitions
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">      
+                    The following examples shows how wizard framework can be used to create
+                not only classic Wizard97 but also the Aero styled wizards. Each wizard demo
+                tries to show the different ways a wizard could be created.
+            </TextBlock>
+        </StackPanel>
+
+        <Grid Margin="2" x:Name="ControlGrid" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" 
+                       Text="Effect" Margin="6" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" 
+                       Text="View" Margin="6" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" 
+                       Text="Content" Margin="6" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            
+            <ComboBox x:Name="ComboBox" 
+                      Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"
+                      ItemsSource="{x:Static demos:DataProvider.TransitionEffectInfos}" 
+                      SelectedIndex="0" Margin="10,0,10,0"
+                      DisplayMemberPath="Label"/>
+        
+            <Border Margin="10" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"  
+                    Grid.Row="1" Grid.Column="1" 
+                    BorderThickness="1" CornerRadius="2" SnapsToDevicePixels="True"
+                    Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                    HorizontalAlignment="Center">
+                <bh:TransitionControl x:Name="m_TransitionControl" Width="240" Height="240"
+                                      HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                                      TransitionEffect="{Binding ElementName=ComboBox, Path=SelectedItem.Effect}"/>
+             </Border>
+            
+             <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center"
+                         TextElement.Foreground="White">
+                <Button Margin="3" Padding="2" IsEnabled="{Binding CanMovePrev}" Click="OnSelectContent">
+                    <Border Background="Violet" Width="50" Height="50" ><Viewbox><TextBlock Text="Aa"/></Viewbox></Border>
+                </Button>
+                <Button Margin="3" Padding="2" IsEnabled="{Binding CanMovePrev}" Click="OnSelectContent">
+                    <Border Background="BlueViolet" Width="50" Height="50" ><Viewbox><TextBlock Text="Bb"/></Viewbox></Border>
+                </Button>
+                 <Button Margin="3" Padding="2" IsEnabled="{Binding CanMovePrev}" Click="OnSelectContent">
+                    <Border Background="Blue" Width="50" Height="50" ><Viewbox><TextBlock Text="Cc"/></Viewbox></Border>
+                </Button>
+                <Button Margin="3" Padding="2" IsEnabled="{Binding CanMovePrev}" Click="OnSelectContent">
+                    <Border Background="Cyan" Width="50" Height="50" ><Viewbox><TextBlock Text="Dd"/></Viewbox></Border>
+                </Button>
+             </StackPanel>
+        </Grid>
+    </DockPanel>
+</demos:DemoItem>

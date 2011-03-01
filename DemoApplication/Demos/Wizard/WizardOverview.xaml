@@ -1,0 +1,56 @@
+﻿<local:DemoItem x:Class="DemoApplication.Demos.Wizard.WizardOverview"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                xmlns:local="clr-namespace:DemoApplication.Demos"
+                Label="Overview" Group="Wizard" IsContentStatic="True">
+    
+    <FlowDocumentPageViewer>
+        <FlowDocument ColumnWidth="300" PagePadding="5" FontFamily="Arial" FontSize="14" 
+                       IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
+            <Paragraph FontSize="16" FontWeight="Bold" KeepWithNext="True">Introduction</Paragraph>
+            <Paragraph>
+                The wizard framework is a set of controls that allows a developer to
+                create Windows Presentation Framework (WPF) wizards that
+                conform to the Wizard97 and Aero guidelines. The features of the 
+                wizard framework have been designed, from the outset, to be highly
+                configurable but importantly without compromising ease of use. Wizards
+                can be quickly created irresepctive of whether they are a
+                linear sequence of pages or a more complex decision based pages. 
+            </Paragraph>
+            <Paragraph FontSize="16" FontWeight="Bold" KeepWithNext="True">Styling</Paragraph>
+            <Paragraph KeepWithNext="True">
+                By building on key WPF concepts such as Templates and Styles this wizard framework
+                can be used to create highly customisable wizards. Along with some additional properties it 
+                is these concepts that are used to provide the Aero and Wizard97 styled wizards. The same
+                concepts can be used to extend the default styles to ensure that all the wizards in an 
+                application have a consistant appearance.
+            </Paragraph>
+            <BlockUIContainer>
+                <bh:Icon HorizontalAlignment="Center" Source="/DemoApplication;component/Demos/Wizard/Resources/Snapshots.png" Height="140"/>
+            </BlockUIContainer>
+            <Paragraph FontSize="16" FontWeight="Bold" KeepWithNext="True">Design Time Support</Paragraph>
+            <Paragraph KeepWithNext="True">
+                The wizard framwork provides a feature rich set of design-time adornmets that simplifies 
+                the navigation between pages whilst the wizards are being created. 
+                These adornments have been disigned to be unintrusive and
+                to augment the deisgn-time support already present in Visual Studio.
+            </Paragraph>
+            <BlockUIContainer>
+                <bh:Icon HorizontalAlignment="Center" Source="/DemoApplication;component/Demos/Wizard/Resources/DesignTime.png" Height="140"/>
+            </BlockUIContainer>
+            <Paragraph FontSize="16" FontWeight="Bold" KeepWithNext="True">Feature Rich</Paragraph>
+            <Paragraph KeepWithNext="True">
+                All wizards support the use of transitions to animate the movement between pages. These transitions
+                lift the wizard in a way that is unique to WPF applications. Each page can
+                control whether the user is allowed to navigate to the next page by simply binding properties of the page 
+                to the underlying model. Move complex navigation can be achieved by simply assigning wizard commands to
+                <Bold>CommandLink</Bold> buttons.
+            </Paragraph>
+            <BlockUIContainer>
+                <bh:Icon HorizontalAlignment="Center" Source="/DemoApplication;component/Demos/Wizard/Resources/Transitions.png" Height="140"/>
+            </BlockUIContainer>
+            
+        </FlowDocument>
+    </FlowDocumentPageViewer>
+</local:DemoItem>

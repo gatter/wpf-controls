@@ -1,0 +1,69 @@
+﻿<demos:DemoItem x:Class="DemoApplication.Demos.Controls.CommandLinkElement"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                xmlns:demos="clr-namespace:DemoApplication.Demos"
+                Label="Command Link" Group="Controls" MaxWidth="1000">
+    
+    
+    <DockPanel>
+        <StackPanel Margin="0,0,0,5" DockPanel.Dock="Top">
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold" FontSize="14">
+                    Command Link
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">      
+                    The introduction of Vista brought a number of new visual
+                elements that were not available in earlier versions of Windows.
+                One of these visual elements is called a 
+                <Run FontWeight="Bold">CommandLink</Run>,
+                it is an extension to the standard button that allows additional text and icon
+                to be associated with a button.
+            </TextBlock>
+            
+        </StackPanel>
+        
+        <Grid DockPanel.Dock="Top" Margin="2" MaxWidth="600">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Instruction" Margin="6" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="1" Text="Content" Margin="6" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="2" Text="Icon" Margin="6" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="3" Text="Use Drop Shadow" Margin="6" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="4" Text="Enabled" Margin="6" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBox x:Name="InstructionText" Grid.Column="1" VerticalAlignment="Center" Text="Action" Margin="3"/>
+            <TextBox x:Name="ContentText" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" MinLines="3" Margin="3"
+                     Text="Message"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" x:Name="IconCombo" 
+                      ItemsSource="{x:Static demos:DataProvider.StockIconInfos}" SelectedIndex="0" Margin="3">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="1">
+                            <bh:Icon Width="16" Height="16"   Source="{Binding BitmapSource}" VerticalAlignment="Center"/>
+                            <TextBlock Margin="3,0,0,0" Text="{Binding Label}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <CheckBox Grid.Row="3" Grid.Column="1" x:Name="DropShadowCheck" IsChecked="True" VerticalAlignment="Center" Margin="3"/>
+            <CheckBox Grid.Row="4" Grid.Column="1" x:Name="EnabledCheck" IsChecked="True" VerticalAlignment="Center" Margin="3"/>
+        </Grid>
+
+        <bh:CommandLink Margin="10" MaxWidth="400" VerticalAlignment="Top" 
+                        Content="{Binding ElementName=ContentText, Path=Text}" 
+                        Instruction="{Binding ElementName=InstructionText, Path=Text}"
+                        IsEnabled="{Binding ElementName=EnabledCheck, Path=IsChecked}"
+                        Icon="{Binding ElementName=IconCombo, Path=SelectedItem.BitmapSource}"
+                        IconHasDropShadow="{Binding ElementName=DropShadowCheck, Path=IsChecked}" Height="56" Width="400" />
+
+            
+    </DockPanel>
+</demos:DemoItem>

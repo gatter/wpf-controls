@@ -1,0 +1,47 @@
+﻿<local:DemoItem x:Class="DemoApplication.Demos.Task.TaskDialogDemos"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:bh="http://www.brokenhouse.co.uk/wpf"
+                xmlns:local="clr-namespace:DemoApplication.Demos"
+                Label="Task Dialogs" Group="Task Dialog">
+    
+    <DockPanel Margin="1">
+        <StackPanel Margin="0,0,0,5" DockPanel.Dock="Top">
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold" FontSize="14">
+                    Task Dialogs
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">      
+                    The following examples show how the task dialog can be used to generate
+                    quick and effective message dialogs. In addition there is also a demo
+                    showing how much the dialog can be changed using a few simple customisations.
+            </TextBlock>
+        </StackPanel>
+        
+        <StackPanel MaxWidth="500">
+            <bh:CommandLink Instruction="Simple Vista Copy Progress Dialog" Click="OnShowCopyProgressDialog" Margin="5">
+                <TextBlock TextWrapping="Wrap" >This example shows how the
+                        <Run FontWeight="Bold">TaskDialogControl</Run> can be used to create the Copy progress dialog found in Vista.
+                        Even though it is only an example it highlights the flexibilty of the basic control.</TextBlock>
+            </bh:CommandLink>
+            <bh:CommandLink Instruction="Simple Vista Move Confirmation Dialog" Click="OnShowMoveConfirmationDialog" Margin="5">
+                <TextBlock TextWrapping="Wrap" >This example shows how the
+                        <Run FontWeight="Bold">TaskDialogControl</Run> can be used to create the Move confirmation dialog found in Vista.
+                        Again this example shows the flexibility of this basic control.</TextBlock>
+            </bh:CommandLink>
+            <bh:CommandLink Instruction="Resizable TaskDialog" Click="OnShowResizingTaskDialog" Margin="5">
+                <TextBlock TextWrapping="Wrap" >This example we show how the  
+                        <Run FontWeight="Bold">TaskDialogControl</Run> can be used in a 
+                        <Run FontWeight="Bold">TaskDialogWindow</Run>. This special
+                        window element allows the 
+                        dialog to support resizing, expansion and contraction whilst keeping
+                        track of the dialogs minimum size.</TextBlock>
+            </bh:CommandLink>
+            <bh:CommandLink Instruction="TaskDialog Builder" Click="OnShowTaskDialogCreator" Margin="5">
+                <TextBlock TextWrapping="Wrap" >
+                    This example allows you to define all the key properties of a 
+                    <Bold>TaskDialog</Bold> and to generate the C# 
+                    required to display the defined dialog.</TextBlock>
+            </bh:CommandLink>
+        </StackPanel>
+    </DockPanel>
+</local:DemoItem>

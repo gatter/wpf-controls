@@ -1,0 +1,129 @@
+<!-- Classic Version -->
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:BrokenHouse.Windows.Controls"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic">
+
+    <Style x:Key="ButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <Rectangle SnapsToDevicePixels="true" Margin="2" Stroke="Black" StrokeDashArray="1 2" StrokeThickness="1"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="{x:Type local:CommandLink}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0,0,1,1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:CommandLink}">
+                    <themes:ClassicBorderDecorator x:Name="PART_Border"  SnapsToDevicePixels="true" 
+                                                   Background="{TemplateBinding Background}" 
+                                                   BorderBrush="{TemplateBinding BorderBrush}" 
+                                                   BorderStyle="None" BorderThickness="2" >
+                        <Border x:Name="PART_Adjust" Margin="1">
+
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Left" Margin="{TemplateBinding Padding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <ContentPresenter x:Name="PART_IconPresenter" Margin="2,4,2,4" 
+                                                  Content="{TemplateBinding Icon}"
+                                                  ContentTemplate="{TemplateBinding IconTemplate}"
+                                                  DockPanel.Dock="Left" VerticalAlignment="Center">
+                                    <ContentPresenter.Resources>
+                                        <DataTemplate DataType="{x:Type BitmapSource}">
+                                            <local:ActiveIcon Source="{Binding .}" Width="16" Height="16" SnapsToDevicePixels="True"/>
+                                        </DataTemplate>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+
+                                <ContentPresenter Margin="4,0,0,0" 
+                                                  Content="{TemplateBinding Instruction}"
+                                                  ContentTemplate="{TemplateBinding InstructionTemplate}"
+                                                  Grid.Column="1" Grid.Row="0"
+									              HorizontalAlignment="Left" VerticalAlignment="Center" RecognizesAccessKey="True">
+                                    <ContentPresenter.Resources>
+                                        <DataTemplate DataType="{x:Type system:String}">
+                                            <TextBlock FontSize="16" TextWrapping="Wrap" Text="{Binding .}"/>
+                                        </DataTemplate>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+
+                                <ContentPresenter Margin="4,0,0,4"  Grid.Column="1" Grid.Row="1"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                  HorizontalAlignment="Left" VerticalAlignment="Center" RecognizesAccessKey="True">
+                                    <ContentPresenter.Resources>
+                                        <DataTemplate DataType="{x:Type system:String}">
+                                            <TextBlock TextWrapping="Wrap" Text="{Binding .}"/>
+                                        </DataTemplate>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+                            </Grid>
+                        </Border>
+                    </themes:ClassicBorderDecorator>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="PART_Border" Property="BorderStyle" Value="RaisedFocused" />
+                            <Setter TargetName="PART_Border" Property="BorderThickness" Value="2" />
+                            <Setter TargetName="PART_Adjust" Property="Margin" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <Setter TargetName="PART_Border" Property="BorderStyle" Value="RaisedFocused" />
+                            <Setter TargetName="PART_Border" Property="BorderThickness" Value="3" />
+                            <Setter TargetName="PART_Adjust" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="PART_Border" Property="BorderStyle" Value="RaisedPressed" />
+                            <Setter TargetName="PART_Border" Property="BorderThickness" Value="3" />
+                            <Setter TargetName="PART_Adjust" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Value="{DynamicResource {x:Static SystemColors.GrayTextBrush}}" Property="Foreground" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{x:Static themes:ClassicBorderDecorator.ClassicBorderBrush}"/>
+                            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsKeyboardFocused" Value="False"/>
+                                <Condition Property="IsDefaulted" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_Border" Property="BorderStyle" Value="Raised" />
+                        </MultiTrigger>
+                        <Trigger Property="IconHasDropShadow" Value="true">
+                            <Setter TargetName="PART_IconPresenter" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="2" BlurRadius="5" Opacity="0.6"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

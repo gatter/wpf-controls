@@ -1,0 +1,59 @@
+﻿<project schemaVersion="1.6.0.7">
+    <assemblies>
+        <assembly assemblyPath=".\BrokenHouse.Windows\bin\Debug\BrokenHouse.Windows.dll" xmlCommentsPath=".\BrokenHouse.Windows\bin\Debug\BrokenHouse.Windows.xml" commentsOnly="False" />
+    </assemblies>
+    <namespaceSummaries>
+        <namespaceSummaryItem name="" isDocumented="False" />
+        <namespaceSummaryItem name="BrokenHouse.Util" isDocumented="True">Provides utility class that are provide simple functionality that is useful not only to this assemply but also any application that references this assembly.</namespaceSummaryItem>
+        <namespaceSummaryItem name="BrokenHouse.Windows" isDocumented="True">Provides a small number of WPF base element classes.</namespaceSummaryItem>
+        <namespaceSummaryItem name="BrokenHouse.Windows.Controls" isDocumented="True">Provides an additional set of classes that can be used in conjunction with the standard WPF control elements.</namespaceSummaryItem>
+        <namespaceSummaryItem name="BrokenHouse.Windows.Controls.Themes.Aero" isDocumented="True">Provides exposure to the helper classes that are used to provide custom rendering for some of our custom control.</namespaceSummaryItem>
+        <namespaceSummaryItem name="BrokenHouse.Windows.Extensions" isDocumented="True">Provides a set of extensions of the form of either extension classes or value converters.</namespaceSummaryItem>
+        <namespaceSummaryItem name="BrokenHouse.Windows.Interop" isDocumented="True">Provides a few helper classes that aids the interoperability between WPF and Win32.</namespaceSummaryItem>
+        <namespaceSummaryItem name="BrokenHouse.Windows.Parts.Task" isDocumented="True">Provides that classes that are used to create and dispaly task dialogs.</namespaceSummaryItem>
+        <namespaceSummaryItem name="BrokenHouse.Windows.Parts.Wizard" isDocumented="True">Provides a set of classes that are used to provide the wizards.</namespaceSummaryItem>
+        <namespaceSummaryItem name="BrokenHouse.Windows.Parts.Wizard.Input" isDocumented="True">Provides a simple set of commands that are used in the wizard system.</namespaceSummaryItem>
+        <namespaceSummaryItem name="XamlGeneratedNamespace" isDocumented="False" />
+    </namespaceSummaries>
+    <ProjectSummary />
+    <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
+    <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
+    <HtmlHelp1xCompilerPath path="" />
+    <HtmlHelp2xCompilerPath path="" />
+    <OutputPath>.\Help\</OutputPath>
+    <SandcastlePath path="" />
+    <WorkingPath path="" />
+    <CleanIntermediates>True</CleanIntermediates>
+    <KeepLogFile>True</KeepLogFile>
+    <BuildLogFile path="" />
+    <HelpFileFormat>HtmlHelp1x</HelpFileFormat>
+    <CppCommentsFixup>False</CppCommentsFixup>
+    <FrameworkVersion>2.0.50727</FrameworkVersion>
+    <IndentHtml>False</IndentHtml>
+    <Preliminary>False</Preliminary>
+    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <RootNamespaceTitle />
+    <HelpTitle>BrokenHouse control library</HelpTitle>
+    <HtmlHelpName>Documentation</HtmlHelpName>
+    <Language>en-US</Language>
+    <CopyrightHref />
+    <CopyrightText />
+    <FeedbackEMailAddress />
+    <FeedbackEMailLinkText />
+    <HeaderText />
+    <FooterText />
+    <ProjectLinkType>Local</ProjectLinkType>
+    <SdkLinkType>Msdn</SdkLinkType>
+    <SdkLinkTarget>Blank</SdkLinkTarget>
+    <PresentationStyle>hana</PresentationStyle>
+    <NamingMethod>Guid</NamingMethod>
+    <SyntaxFilters>Standard</SyntaxFilters>
+    <ShowFeedbackControl>False</ShowFeedbackControl>
+    <BinaryTOC>True</BinaryTOC>
+    <IncludeFavorites>False</IncludeFavorites>
+    <CollectionTocStyle>Hierarchical</CollectionTocStyle>
+    <IncludeStopWordList>True</IncludeStopWordList>
+    <PlugInNamespaces>ms.vsipcc+, ms.vsexpresscc+</PlugInNamespaces>
+    <HelpFileVersion>1.0.0.0</HelpFileVersion>
+    <ContentPlacement>AboveNamespaces</ContentPlacement>
+</project>

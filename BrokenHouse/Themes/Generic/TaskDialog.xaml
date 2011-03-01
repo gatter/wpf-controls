@@ -1,0 +1,410 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:BrokenHouse.Windows.Parts.Task"
+    xmlns:converters="clr-namespace:BrokenHouse.Windows.Converters"
+    xmlns:controls="clr-namespace:BrokenHouse.Windows.Controls"
+    xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+    xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Helper converter -->
+    <converters:IsNullOrEmptyConverter x:Key="NullOrEmpty"/>
+
+    <!-- Aero dialog content Background -->
+    <SolidColorBrush x:Key="{x:Static local:TaskElements.AeroDialogContentBackgroundKey}"
+                     Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}"/>
+
+    <!-- Aero dialog footer Background -->
+    <SolidColorBrush x:Key="{x:Static local:TaskElements.AeroDialogFooterBackgroundKey}"
+                     Color="#fff0f0f0"/>
+
+    <!-- Aero dialog separator highlight Background -->
+    <SolidColorBrush x:Key="{x:Static local:TaskElements.AeroDialogSeparatorHighlightKey}"
+                     Color="#ffffffff"/>
+
+    <!-- Aero dialog separator lowlight Background -->
+    <SolidColorBrush x:Key="{x:Static local:TaskElements.AeroDialogSeparatorLowlightKey}"
+                     Color="#ffdfdfdf"/>
+
+   
+<!-- The visual style when the check box is empty -->
+    <Style x:Key="EmptyCheckBoxFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Stroke="Black" StrokeDashArray="1 2" StrokeThickness="1" Margin="3,0,3,0" SnapsToDevicePixels="true"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- The visual when we are selected -->
+    <Style x:Key="CheckBoxFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Stroke="Black" StrokeDashArray="1 2" StrokeThickness="1" Margin="28,0,0,0" SnapsToDevicePixels="true"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- The check box style for the task dialog -->
+    <Style x:Key="{x:Static local:TaskElements.AeroDialogCheckBoxStyleKey}" TargetType="{x:Type CheckBox}">
+        <Style.Resources>
+            <SolidColorBrush x:Key="CheckBoxFillNormal" Color="#F4F4F4"/>
+            <SolidColorBrush x:Key="CheckBoxStroke" Color="#8E8F8F"/>
+        </Style.Resources>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="Background" Value="{StaticResource CheckBoxFillNormal}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource CheckBoxStroke}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource EmptyCheckBoxFocusVisual}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <BulletDecorator SnapsToDevicePixels="true" Background="Transparent" Margin="0,0,3,1">
+                        <BulletDecorator.Bullet>
+                            <Border Width="28">
+                                <themes:BulletChrome Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
+                                                     IsChecked="{TemplateBinding IsChecked}" RenderMouseOver="{TemplateBinding IsMouseOver}" 
+                                                     RenderPressed="{TemplateBinding IsPressed}" Width="13"/>
+                            </Border>
+                        </BulletDecorator.Bullet>
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
+                    </BulletDecorator>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasContent" Value="true">
+                            <Setter Property="FocusVisualStyle" Value="{StaticResource CheckBoxFocusVisual}"/>
+                            <Setter Property="Padding" Value="4,0,0,0"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Visual for the focus -->
+    <Style x:Key="ExpanderFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <Rectangle Stroke="Black" StrokeDashArray="1 2" StrokeThickness="1" Margin="28,0,0,0" SnapsToDevicePixels="true"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Style for the expander -->
+    <Style x:Key="{x:Static local:TaskElements.AeroDialogExpanderStyleKey}" TargetType="{x:Type ToggleButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ExpanderFocusVisual}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <ControlTemplate.Resources>
+                        <LinearGradientBrush x:Key="ExpanderArrowHoverFill" EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF0F8FE" Offset="0"/>
+                            <GradientStop Color="#FFE0F3FE" Offset="0.3"/>
+                            <GradientStop Color="#FF6FA7C5" Offset="1"/>
+                        </LinearGradientBrush>
+                        <LinearGradientBrush x:Key="ExpanderArrowPressedFill" EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFDCF0FA" Offset="0"/>
+                            <GradientStop Color="#FFC5E6F7" Offset="0.2"/>
+                            <GradientStop Color="#FF5690D0" Offset="1"/>
+                        </LinearGradientBrush>
+                        <LinearGradientBrush x:Key="ExpanderArrowFill" EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="#FFECECEC" Offset="0.5"/>
+                            <GradientStop Color="#FFd0d0d0" Offset="1"/>
+                        </LinearGradientBrush>
+                    </ControlTemplate.Resources>
+                    <Border Padding="{TemplateBinding Padding}">
+                        <DockPanel Background="Transparent">
+                            <Grid DockPanel.Dock="Left" Width="28" Height="28">
+                                <Ellipse x:Name="circle" Fill="{DynamicResource ExpanderArrowFill}" Stroke="DarkGray" 
+                                         HorizontalAlignment="Center" VerticalAlignment="Center" Width="19" Height="19"/>
+                                <Path x:Name="PART_Arrow" Data="M6.0,0L11,5A0.5,0.5,0,1,1,9.2,7.2L6,4 3.3,7A0.5,0.5,0,1,1,0.8,5.2z"
+                                      StrokeThickness="1.2" Stroke="White" Fill="Black" Margin="1"
+		                              HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
+                            </Grid>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              Margin="3,0,3,0" SnapsToDevicePixels="True" RecognizesAccessKey="True"/>
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="false">
+                            <Setter Property="RenderTransform" TargetName="PART_Arrow">
+                                <Setter.Value>
+                                    <RotateTransform Angle="180"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Stroke" TargetName="circle" Value="#FF3C7FB1"/>
+                            <Setter Property="Fill" TargetName="circle" Value="{DynamicResource ExpanderArrowHoverFill}"/>
+                            <Setter Property="Fill" TargetName="PART_Arrow" Value="#222"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Stroke" TargetName="circle" Value="#FF526C7B"/>
+                            <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
+                            <Setter Property="Fill" TargetName="circle" Value="{DynamicResource ExpanderArrowPressedFill}"/>
+                            <Setter Property="Fill" TargetName="PART_Arrow" Value="#FF003366"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Task Dialog Control -->
+    <Style x:Key="{x:Static local:TaskElements.DialogControlStyleKey}" TargetType="{x:Type local:TaskDialogControl}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static local:TaskElements.AeroDialogContentBackgroundKey}}"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:TaskDialogControl}">
+                    <DockPanel Background="{TemplateBinding Background}">
+                        <StackPanel x:Name="PART_BottomPanel" DockPanel.Dock="Bottom" 
+                                    Background="{DynamicResource {x:Static local:TaskElements.AeroDialogFooterBackgroundKey}}">
+
+                            <!-- Separator -->
+                            <Line X1="0" Y1="0" X2="1" Y2="0" Stretch="Fill" 
+                                  Stroke="{DynamicResource {x:Static local:TaskElements.AeroDialogSeparatorLowlightKey}}"
+                                  StrokeThickness="1" SnapsToDevicePixels="true"/>
+                            <Line X1="0" Y1="0" X2="1" Y2="0" Stretch="Fill" 
+                                  Stroke="{DynamicResource {x:Static local:TaskElements.AeroDialogSeparatorHighlightKey}}"
+                                  StrokeThickness="1" SnapsToDevicePixels="true"/>
+
+                            <!-- Buttons -->
+                            <controls:SnapDecorator VerticalAlignment="Center" Margin="3" HorizontalAlignment="Stretch">
+
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                                        <ToggleButton x:Name="PART_ExpanderControl" Margin="3,2,3,2"
+                                                      Style="{DynamicResource {x:Static local:TaskElements.AeroDialogExpanderStyleKey}}"
+                                                      IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay}"
+                                                      VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                      Visibility="Visible">
+                                            <TextBlock x:Name="PART_ExpanderText"
+                                                       Text="{TemplateBinding CollapsedText}"
+                                                       TextWrapping="Wrap"/>
+                                        </ToggleButton>
+
+                                        <CheckBox x:Name="PART_CheckBoxControl"  
+                                                  Style="{DynamicResource {x:Static local:TaskElements.AeroDialogCheckBoxStyleKey}}"
+                                                  VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                  Margin="3" 
+                                                  IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CheckBoxState}"
+                                                  Content="{TemplateBinding CheckBoxContent}"/>
+                                    </StackPanel>
+                                    <controls:SnapDecorator HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" Grid.Column="1" > 
+                                        <ContentPresenter x:Name="PART_Buttons" ContentSource="Buttons"/>
+                                    </controls:SnapDecorator>
+                                </Grid>
+                            </controls:SnapDecorator>
+
+
+                            <!-- Icon Footer -->
+                            <StackPanel x:Name="PART_FooterContentPanel" Visibility="Collapsed">
+                                <Line X1="0" Y1="0" X2="1" Y2="0" Stretch="Fill" 
+                                           Stroke="{DynamicResource {x:Static local:TaskElements.AeroDialogSeparatorLowlightKey}}"
+                                           StrokeThickness="1" SnapsToDevicePixels="true"/>
+                                <Line X1="0" Y1="0" X2="1" Y2="0" Stretch="Fill" 
+                                      Stroke="{DynamicResource {x:Static local:TaskElements.AeroDialogSeparatorHighlightKey}}"
+                                      StrokeThickness="1" SnapsToDevicePixels="true"/>
+                                <Grid Margin="6">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="28" />
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <!-- The icon for the footer with helper template to render icons -->
+                                    <ContentPresenter Grid.Column="0"  Grid.Row="1" 
+                                                      ContentSource="FooterIcon" Margin="3"
+                                                      VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <ContentPresenter.Resources>
+                                            <DataTemplate DataType="{x:Type BitmapSource}">
+                                                <controls:ActiveIcon Source="{Binding .}" Width="16" Height="16" SnapsToDevicePixels="True"/>
+                                            </DataTemplate>
+                                        </ContentPresenter.Resources>
+                                    </ContentPresenter>
+
+                                    <!-- The footer content with template to do wrapping for text elements -->
+                                    <ContentPresenter Grid.Column="1"  Grid.Row="1"
+                                                      ContentSource="FooterContent" Margin="3"
+                                                      VerticalAlignment="Center" HorizontalAlignment="Left">
+                                        <ContentPresenter.Resources>
+                                            <DataTemplate DataType="{x:Type system:String}">
+                                                <TextBlock Text="{Binding .}" TextWrapping="Wrap"/>
+                                            </DataTemplate>
+                                        </ContentPresenter.Resources>
+                                    </ContentPresenter>
+                                </Grid>
+                            </StackPanel>
+
+                            <!-- Expandable Footer -->
+                            <controls:SnapDecorator x:Name="PART_FooterMessagePanel">
+                                <StackPanel>
+                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stretch="Fill" 
+                                          Stroke="{DynamicResource {x:Static local:TaskElements.AeroDialogSeparatorLowlightKey}}"
+                                          StrokeThickness="1" SnapsToDevicePixels="true"/>
+                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stretch="Fill" 
+                                          Stroke="{DynamicResource {x:Static local:TaskElements.AeroDialogSeparatorHighlightKey}}"
+                                          StrokeThickness="1" SnapsToDevicePixels="true"/>
+                                       
+                                    <!-- We want the text to wrap - so if someone provides text directly we can wrap it -->
+                                    <ContentPresenter x:Name="PART_FooterMessagePresenter" Content="{x:Null}" Margin="6,9,6,9">
+                                        <ContentPresenter.Resources>
+                                            <DataTemplate DataType="{x:Type system:String}">
+                                                <TextBlock Text="{Binding .}" TextWrapping="Wrap"/>
+                                            </DataTemplate>
+                                        </ContentPresenter.Resources>
+                                    </ContentPresenter>
+                                </StackPanel>
+                            </controls:SnapDecorator>
+                        </StackPanel>
+
+                        <!-- Content Section -->
+                        <Grid Background="{DynamicResource {x:Static local:TaskElements.AeroDialogContentBackgroundKey}}">
+                            <Grid Margin="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Padding}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- The main icon with active icon helper -->
+                                <ContentPresenter x:Name="PART_MainIconPresenter" Grid.Row="0" Grid.Column="0" Visibility="Collapsed"
+                                          HorizontalAlignment="Left" VerticalAlignment="Center" ContentSource="MainIcon"
+                                          Margin="6,6,6,0">
+                                    <ContentPresenter.Resources>
+                                        <DataTemplate DataType="{x:Type BitmapSource}">
+                                            <controls:ActiveIcon Source="{Binding .}" Width="16" Height="16" SnapsToDevicePixels="True"/>
+                                        </DataTemplate>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+
+                                <!-- The main instruction with data template to render text in the correct way -->
+                                <ContentPresenter Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"
+                                          Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Instruction}">
+                                    <ContentPresenter.Resources>
+                                        <DataTemplate DataType="{x:Type system:String}">
+                                            <TextBlock Text="{Binding .}" 
+                                               FontSize="16" Foreground="#FF00339A"
+                                               VerticalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+
+                                <!-- This is where the message goes if it is not in the footer -->
+                                <controls:SnapDecorator x:Name="PART_ContentMessagePanel" Grid.Row="1" Grid.Column="1">
+                                    <ContentPresenter x:Name="PART_ContentMessagePresenter" Margin="0,3,0,3"
+                                              Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Message}">
+                                        <ContentPresenter.Resources>
+                                            <DataTemplate DataType="{x:Type system:String}">
+                                                <TextBlock Text="{Binding .}" TextWrapping="Wrap"/>
+                                            </DataTemplate>
+                                        </ContentPresenter.Resources>
+                                    </ContentPresenter>
+                                </controls:SnapDecorator>
+
+                                <!-- This is the content of the control -->
+                                <controls:SnapDecorator x:Name="PART_ContentPanel" Grid.Row="2" Grid.Column="1">
+                                    <ContentPresenter x:Name="PART_ContentPresenter" ContentSource="Content" Margin="0"/>
+                                </controls:SnapDecorator>
+                            </Grid>
+                        </Grid>
+                    </DockPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="PART_ExpanderControl" Property="IsChecked" Value="true">
+                            <Trigger.Setters>
+                                <Setter TargetName="PART_ExpanderText" Property="Text" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ExpandedText}"/>
+                            </Trigger.Setters>
+                        </Trigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasFooterContent}" Value="true">
+                            <DataTrigger.Setters>
+                                <Setter TargetName="PART_FooterContentPanel" Property="Visibility" Value="Visible"/>
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasMainIcon}" Value="true">
+                            <DataTrigger.Setters>
+                                <Setter TargetName="PART_MainIconPresenter" Property="Visibility" Value="Visible"/>
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasMessage}" Value="true">
+                            <DataTrigger.Setters>
+                                <Setter TargetName="PART_ContentMessagePanel" Property="Visibility" Value="Visible"/>
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=ShowMessageInFooter}" Value="true">
+                            <DataTrigger.Setters>
+                                <Setter TargetName="PART_ContentMessagePresenter" Property="Content" Value="{x:Null}"/>
+                                <Setter TargetName="PART_FooterMessagePresenter" Property="Content" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Message}"/>
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=AllowExpand}" Value="false">
+                            <DataTrigger.Setters>
+                                <Setter TargetName="PART_ExpanderControl" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="PART_Buttons" Property="VerticalAlignment" Value="Center"/> 
+                                <Setter TargetName="PART_ContentMessagePanel" Property="Margin" Value="0,2,0,6"/>  
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasCheckBoxContent}" Value="false">
+                            <DataTrigger.Setters>
+                                <Setter TargetName="PART_CheckBoxControl" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasFooterContent}" Value="false"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasFooterIcon}" Value="false"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasButtons}" Value="false"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasCheckBoxContent}" Value="false"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=ShowMessageInFooter}" Value="false"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter TargetName="PART_BottomPanel" Property="Visibility" Value="Collapsed"/>
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasFooterContent}" Value="false"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasFooterIcon}" Value="false"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasButtons}" Value="false"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasCheckBoxContent}" Value="false"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=ShowMessageInFooter}" Value="true"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasMessage}" Value="false"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter TargetName="PART_BottomPanel" Property="Visibility" Value="Collapsed"/>
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+ 
+</ResourceDictionary>
