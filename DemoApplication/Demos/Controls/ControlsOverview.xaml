@@ -6,7 +6,7 @@
                 Label="Overview" Group="Controls" IsContentStatic="True">
     
     <FlowDocumentPageViewer>
-        <FlowDocument ColumnWidth="400" PagePadding="5" FontFamily="Arial" FontSize="12"
+        <FlowDocument ColumnWidth="2000" PagePadding="5" FontFamily="Arial" FontSize="12" 
                       IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
 
             <Paragraph FontSize="16" FontWeight="Bold">Controls Overview</Paragraph>

@@ -6,8 +6,8 @@
                 Label="Overview" Group="Wizard" IsContentStatic="True">
     
     <FlowDocumentPageViewer>
-        <FlowDocument ColumnWidth="300" PagePadding="5" FontFamily="Arial" FontSize="14" 
-                       IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
+        <FlowDocument ColumnWidth="2000" PagePadding="5" FontFamily="Arial" FontSize="12" 
+                      IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
             <Paragraph FontSize="16" FontWeight="Bold" KeepWithNext="True">Introduction</Paragraph>
             <Paragraph>
                 The wizard framework is a set of controls that allows a developer to

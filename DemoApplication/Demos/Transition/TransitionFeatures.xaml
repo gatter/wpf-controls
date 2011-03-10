@@ -6,7 +6,7 @@
                 Label="Features" Group="Transition" IsContentStatic="True">
     
     <FlowDocumentPageViewer>
-        <FlowDocument ColumnWidth="300" PagePadding="5" FontFamily="Arial" FontSize="14" 
+        <FlowDocument ColumnWidth="2000" PagePadding="5" FontFamily="Arial" FontSize="12" 
                       IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
             <Paragraph FontSize="16" FontWeight="Bold">Feature List</Paragraph>
             <Paragraph>

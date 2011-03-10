@@ -5,9 +5,9 @@
                 xmlns:local="clr-namespace:DemoApplication.Demos"
                 Label="Overview" Group="Transition" IsContentStatic="True">
 
-    <FlowDocumentPageViewer>
-        <FlowDocument ColumnWidth="300" PagePadding="5" FontFamily="Arial" FontSize="14" 
-                       IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
+    <FlowDocumentPageViewer >
+        <FlowDocument ColumnWidth="2000" PagePadding="5" FontFamily="Arial" FontSize="12" 
+                      IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
             <Paragraph FontSize="16" FontWeight="Bold">Introduction</Paragraph>
             <Paragraph>
                 The transition framework is a set of controls and effects that quickly enables any developer

@@ -3,11 +3,25 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:bh="http://www.brokenhouse.co.uk/wpf"
                 xmlns:local="clr-namespace:DemoApplication.Demos"
-                Width="400" Label="Features" Group="Task Dialog" IsContentStatic="True">
-    <TextBlock TextWrapping="Wrap" Margin="5">
-            The <Bold>TaskDialog</Bold> was introduced in Vista as a replacement of the <Bold>MessageBox</Bold>
-            that had been around in its current from since Windows95. The <Bold>TaskDialogControl</Bold> that forms
-            the basis of all these tests is a pure WPF implementation of the Vista <Bold>TaskDialog</Bold> and as such
-            can run on WindowsXP.
-    </TextBlock>
+                Label="Features" Group="Task Dialog" IsContentStatic="True">
+
+    <FlowDocumentPageViewer>
+        <FlowDocument ColumnWidth="2000" PagePadding="5" FontFamily="Arial" FontSize="12" 
+                      IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
+            <Paragraph FontSize="16" FontWeight="Bold">Feature List</Paragraph>
+            <Paragraph>
+                <Bold>Key Features</Bold>
+            </Paragraph>
+            <Paragraph>
+                The
+                <Bold>TaskDialog</Bold> was introduced in Vista as a replacement of the
+                <Bold>MessageBox</Bold>
+                that had been around in its current from since Windows95. The
+                <Bold>TaskDialogControl</Bold> that forms
+                the basis of all these tests is a pure WPF implementation of the Vista
+                <Bold>TaskDialog</Bold> and as such
+                can run on WindowsXP.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentPageViewer>
 </local:DemoItem>
