@@ -3,10 +3,10 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:bh="http://www.brokenhouse.co.uk/wpf"
                 xmlns:local="clr-namespace:DemoApplication.Demos"
-                Width="400" Label="Features" Group="Wizard" IsContentStatic="True">
+                Label="Features" Group="Wizard" IsContentStatic="True">
     
     <FlowDocumentPageViewer>
-        <FlowDocument ColumnWidth="300" PagePadding="5" FontFamily="Arial" FontSize="14" 
+        <FlowDocument ColumnWidth="2000" PagePadding="5" FontFamily="Arial" FontSize="12" 
                       IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
             <Paragraph FontSize="16" FontWeight="Bold">Feature List</Paragraph>
             <Paragraph>

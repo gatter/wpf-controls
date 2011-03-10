@@ -18,23 +18,8 @@
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
 
-        <LinearGradientBrush x:Key="BackgroundGradient" EndPoint="1,0.5" StartPoint="0,0.5">
-            <GradientStop Color="#FFE4F4E6" Offset="0"/>
-            <GradientStop Color="#FFCFF8D1" Offset="0.5"/>
-            <GradientStop Color="#FFE4F4E6" Offset="1"/>
-        </LinearGradientBrush>
-        
-        <DrawingBrush x:Key="BackgroundFill" Viewbox="0,0,1,1" ViewboxUnits="Absolute" Viewport="0,0,3,3" ViewportUnits="Absolute" TileMode="Tile" Stretch="UniformToFill">
-            <DrawingBrush.Drawing>
-                <DrawingGroup>
-                    <GeometryDrawing Brush="#FFe0e0e0">
-                        <GeometryDrawing.Geometry>
-                            <EllipseGeometry Center="0.5,0.5" RadiusX="0.3" RadiusY="0.3"/>
-                        </GeometryDrawing.Geometry>
-                    </GeometryDrawing>
-                </DrawingGroup>
-            </DrawingBrush.Drawing>
-        </DrawingBrush>
+        <SolidColorBrush x:Key="BackgroundGradient" Color="#FFf0f0f0"/>
+     
 
         <Style x:Key="ListViewStyle1" TargetType="{x:Type ListView}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
@@ -62,9 +47,9 @@
 
     </Window.Resources>
 
-    <DockPanel Background="{DynamicResource BackgroundFill}">
+    <DockPanel Margin="10">
         <ListView x:Name="ItemsList" ItemsSource="{Binding Source={StaticResource DemoItemsCollection}}"
-                  BorderThickness="0" Margin="10,10,0,10" Background="Transparent" Width="160"
+                  BorderThickness="0" Margin="0,0,10,0" Background="Transparent" Width="160"
                   Style="{DynamicResource ListViewStyle1}">
             <ListView.GroupStyle>
                 <GroupStyle HidesIfEmpty="True">
@@ -94,8 +79,11 @@
             </ListView.View>
         </ListView>
         
-        <Border Margin="10" CornerRadius="4" BorderBrush="#ff000000" BorderThickness="1,1,1,1" SnapsToDevicePixels="True"
+        <Border CornerRadius="4" BorderBrush="#ff000000" BorderThickness="1,1,1,1" SnapsToDevicePixels="True"
                 Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="3" Color="#808080" Opacity="0.3"/>
+            </Border.Effect>
             <Grid>
                 <Border CornerRadius="4" BorderBrush="#ffffffff" BorderThickness="1,1,1,1" SnapsToDevicePixels="True" ClipToBounds="True">
                     <Border.Background>

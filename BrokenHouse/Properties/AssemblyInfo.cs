@@ -8,9 +8,6 @@ using System.Windows.Markup;
 using System.Security;
 
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
 [assembly: AssemblyTitle("BrokenHouse.Windows")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
@@ -24,8 +21,8 @@ using System.Security;
 
 [assembly: ComVisible(false)]
 [assembly: ThemeInfo(ResourceDictionaryLocation.SourceAssembly, ResourceDictionaryLocation.SourceAssembly)]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.9.0.0")]
+[assembly: AssemblyFileVersion("0.9.0.0")]
 [assembly: XmlnsDefinitionAttribute("http://www.brokenhouse.co.uk/wpf", "BrokenHouse.Windows.Parts.Wizard")]
 [assembly: XmlnsDefinitionAttribute("http://www.brokenhouse.co.uk/wpf", "BrokenHouse.Windows.Parts.Transition")]
 [assembly: XmlnsDefinitionAttribute("http://www.brokenhouse.co.uk/wpf", "BrokenHouse.Windows.Parts.Transition.Effects")]
