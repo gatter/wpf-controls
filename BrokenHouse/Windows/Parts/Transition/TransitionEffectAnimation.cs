@@ -235,8 +235,6 @@ namespace BrokenHouse.Windows.Parts.Transition
                     m_StartPosition = m_ActivePosition;
                     InitialiseTransitionFrame(m_StartPosition);
 
-                    OnCompleted();
-
                     // Did we get the time? 
                     if (animationTime.HasValue)
                     {
