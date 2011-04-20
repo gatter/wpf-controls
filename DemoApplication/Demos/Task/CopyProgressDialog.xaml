@@ -10,16 +10,14 @@
         <bh:TaskDialogControl.Buttons>
             <bh:TaskButtonBar ButtonSet="Cancel"/>
         </bh:TaskDialogControl.Buttons>
+        <bh:TaskDialogControl.HeaderBackground>
+            <LinearGradientBrush>
+                <GradientStop Color="#06476D" Offset="0.0"/>
+                <GradientStop Color="#026D59" Offset="1.0"/>
+            </LinearGradientBrush>
+        </bh:TaskDialogControl.HeaderBackground>
         <bh:TaskDialogControl.Instruction>
-            <Border>
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="#06476D" Offset="0.0"/>
-                        <GradientStop Color="#026D59" Offset="1.0"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-                <TextBlock Margin="20,10,20,10" Text="{Binding InstructionText}" FontSize="16" Foreground="White"/>
-            </Border>
+            <TextBlock Margin="20,10,20,10" Text="{Binding InstructionText}" FontSize="16" Foreground="White"/>
         </bh:TaskDialogControl.Instruction>
         <StackPanel Margin="17,10,17,10">
             <Grid bh:TaskDialogControl.Expand="True">

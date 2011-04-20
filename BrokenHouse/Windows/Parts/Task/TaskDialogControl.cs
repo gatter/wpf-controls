@@ -74,6 +74,14 @@ namespace BrokenHouse.Windows.Parts.Task
         /// </summary>
         public static readonly DependencyProperty    AllowExpandProperty;
         /// <summary>
+        /// Identifies the <see cref="HeaderBackground"/> depedency property.
+        /// </summary>
+        public static readonly DependencyProperty    FooterBackgroundProperty;
+        /// <summary>
+        /// Identifies the <see cref="FooterBackground"/> depedency property.
+        /// </summary>
+        public static readonly DependencyProperty    HeaderBackgroundProperty;
+        /// <summary>
         /// Identifies the <see cref="IsExpanded"/> depedency property.
         /// </summary>
         public static readonly DependencyProperty    IsExpandedProperty;
@@ -185,6 +193,8 @@ namespace BrokenHouse.Windows.Parts.Task
             HasCheckBoxContentKey       = DependencyProperty.RegisterReadOnly("HasCheckBoxContent", typeof(bool), typeof(TaskDialogControl), new FrameworkPropertyMetadata(false));
             
             // Define the properties and the read only properties
+            FooterBackgroundProperty    = DependencyProperty.Register("FooterBackground", typeof(Brush), typeof(TaskDialogControl), new FrameworkPropertyMetadata(null));
+            HeaderBackgroundProperty    = DependencyProperty.Register("HeaderBackground", typeof(Brush), typeof(TaskDialogControl), new FrameworkPropertyMetadata(null));
             InstructionProperty         = DependencyProperty.Register("Instruction", typeof(object), typeof(TaskDialogControl), new FrameworkPropertyMetadata("Instruction", null), null);
             MessageProperty             = DependencyProperty.Register("Message", typeof(object), typeof(TaskDialogControl), new FrameworkPropertyMetadata(null, new PropertyChangedCallback(OnMessageChangedThunk)));
             ButtonsProperty             = DependencyProperty.Register("Buttons", typeof(object), typeof(TaskDialogControl), new FrameworkPropertyMetadata(null, new PropertyChangedCallback(OnButtonsChangedThunk)));
@@ -309,7 +319,30 @@ namespace BrokenHouse.Windows.Parts.Task
             get { return (bool)GetValue(IsExpandedProperty); }
             set { SetValue(IsExpandedProperty, value);  }
         }
+                
+        /// <summary>
+        /// Gets or sets the background brush displayed under the footer.
+        /// </summary>
+        [Category("Appearance")]
+        [Bindable(true)]
+        public Brush FooterBackground
+        {
+            get { return (Brush)GetValue(FooterBackgroundProperty); }
+            set { SetValue(FooterBackgroundProperty, value);  }
+        }
+     
+        /// <summary>
+        /// Gets or sets the background brush displayed under the instruction and icon.
+        /// </summary>
+        [Category("Appearance")]
+        [Bindable(true)]
+        public Brush HeaderBackground
+        {
+            get { return (Brush)GetValue(HeaderBackgroundProperty); }
+            set { SetValue(HeaderBackgroundProperty, value);  }
+        }
 
+        
         /// <summary>
         /// Gets ot sets whether the control is allowed to expand its content.
         /// </summary>

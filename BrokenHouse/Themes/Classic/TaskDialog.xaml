@@ -171,12 +171,14 @@
     <Style x:Key="{x:Static local:TaskElements.DialogControlStyleKey}" TargetType="{x:Type local:TaskDialogControl}">
         <Setter Property="Background" Value="{DynamicResource {x:Static local:TaskElements.ClassicDialogContentBackgroundKey}}"/>
         <Setter Property="Padding" Value="3"/>
+        <Setter Property="HeaderBackground" Value="Transparent"/>
+        <Setter Property="FooterBackground" Value="{DynamicResource {x:Static local:TaskElements.ClassicDialogFooterBackgroundKey}}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:TaskDialogControl}">
                     <DockPanel Background="{TemplateBinding Background}">
                         <StackPanel x:Name="PART_BottomPanel" DockPanel.Dock="Bottom" 
-                                    Background="{DynamicResource {x:Static local:TaskElements.ClassicDialogFooterBackgroundKey}}">
+                                    Background="{TemplateBinding FooterBackground}">
 
 
                             <!-- Separator -->
@@ -271,6 +273,7 @@
 
                         <!-- Content Section -->
                         <Grid Margin="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Padding}">
+                            
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -280,7 +283,12 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            
+
+                            <!-- Background -->
+                            <Border Grid.Row="0" Grid.Column="0" 
+                                    Grid.ColumnSpan="2"
+                                    Background="{TemplateBinding HeaderBackground}"/>
+
                             <!-- The main icon with active icon helper -->
                             <ContentPresenter x:Name="PART_MainIconPresenter" Grid.Row="0" Grid.Column="0" Visibility="Collapsed"
                                               HorizontalAlignment="Left" VerticalAlignment="Center" ContentSource="MainIcon"
