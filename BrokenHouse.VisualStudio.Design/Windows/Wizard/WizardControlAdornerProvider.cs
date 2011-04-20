@@ -17,38 +17,35 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
     [UsesItemPolicy(typeof(SelectedWizardPagePolicy))]
     internal class WizardControlAdornerProvider : PrimarySelectionAdornerProvider
     {
-        private const float                    c_NudgeAmount       = 20;
-        private AdornerPanel                   m_PopupAdornerPanel = new AdornerPanel() { IsContentFocusable = true };
-        private static WizardControlOptions    s_WizardOptions     = new WizardControlOptions();
+        private const float                           c_NudgeAmount       = 20;
+        private AdornerPanel                          m_PopupAdornerPanel = new AdornerPanel() { IsContentFocusable = true };
+        private static WizardControlOptions           s_WizardOptions     = null;
+        private static AdornerPanel                   s_OptionsPanel      = null;
+
+        static WizardControlAdornerProvider()
+        {
+            // Create the static wizard control
+            s_WizardOptions = new WizardControlOptions();
+        
+            // Position the adorner
+            AdornerPlacementCollection popupPlacement = new AdornerPlacementCollection();
+            
+            // Define the placement
+            popupPlacement.SizeRelativeToAdornerDesiredHeight(1.0, 0);
+            popupPlacement.SizeRelativeToAdornerDesiredWidth(1.0, 0);
+            popupPlacement.PositionRelativeToContentWidth(1.0, c_NudgeAmount);
+
+            // Associate the placement with the options
+            AdornerPanel.SetPlacements(s_WizardOptions, popupPlacement);
+        }
 
         /// <summary>
         /// Construct the adorner provider
         /// </summary>
         public WizardControlAdornerProvider()
         {
-            // Position the adoner
-            AdornerPlacementCollection popupPlacement = new AdornerPlacementCollection();
-
-            // these ones are Relative to Adorner since the size and position is based on the
-            // size of the adorner itself (i.e. I want it to be the desired size and position it
-            // so that it is on the outside corner of the adorned element plus some nudge amount
-            // NOTE: Coordinate space starts at 0,0 for the adorned element
-            popupPlacement.SizeRelativeToAdornerDesiredHeight(1.0, 0);
-            popupPlacement.SizeRelativeToAdornerDesiredWidth(1.0, 0);
-            popupPlacement.PositionRelativeToContentWidth(1.0, c_NudgeAmount);
-            AdornerPanel.SetPlacements(s_WizardOptions, popupPlacement);
             AdornerProperties.SetOrder(m_PopupAdornerPanel, AdornerOrder.Foreground);
-
-            // Detath from the old parent
-            if (s_WizardOptions.Parent != null)
-            {
-                (s_WizardOptions.Parent as AdornerPanel).Children.Remove(s_WizardOptions);
-            }
-
-            // And add it to the list of AdornerPanels provided by this AdornerProvider
-            m_PopupAdornerPanel.Children.Add(s_WizardOptions);
-
-            // Finally, add our panel to the Adorners collection
+ 
             Adorners.Add(m_PopupAdornerPanel);
         }
 
@@ -59,19 +56,24 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// <param name="view"></param>
         protected override void Activate( ModelItem item )
         {
+           
             // What type is it
             if (item.ItemType.IsSubclassOf(typeof(WizardControl)))
             {
+                WizardControl    wizardControl    = item.View.PlatformObject as WizardControl;
+
                 // Its the wizard control
-                s_WizardOptions.Activate(Context, item, new Point(0, 0));
+                ActivateOptions(item, new Point(0, 0));
             }
             else if ((item.Parent != null) && item.ItemType.IsSubclassOf(typeof(WizardPage)) && item.Parent.ItemType.IsSubclassOf(typeof(WizardControl)))
             {
-                WizardPage    wizardPage    = item.View.PlatformObject as WizardPage;
-                WizardControl wizardControl = wizardPage.ParentWizard;
-                WizardPage    originalPage  = wizardControl.ActivePage;
-                DesignerView  designerView  = DesignerView.GetDesignerView(wizardControl);
-
+                ModelItem     wizardControlItem = item.Parent;
+                WizardPage    wizardPage        = item.View.PlatformObject as WizardPage;
+                WizardControl wizardControl     = wizardControlItem.View.PlatformObject as WizardControl;
+                WizardPage    originalPage      = wizardControl.ActivePage;
+                DesignerView  designerView      = DesignerView.GetDesignerView(wizardControl);
+                int           newIndex          = wizardControl.Pages.IndexOf(wizardPage);
+                
                 // Do we have a designer view
                 if ((designerView != null) && (designerView.Context != null))
                 {
@@ -80,9 +82,15 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
                     // Is it to do with focusing
                     if ((tool == null) || (tool.FocusedTask == null))
                     {
-                        wizardControl.ActivePage = wizardPage;
+                        if (wizardControl.ActiveIndex != newIndex)
+                        {
+                            wizardControl.ActiveIndex = newIndex;
+
+                            wizardControlItem.Properties["ActiveIndex"].SetValue(newIndex);
+                        }
                     }
                 }
+               
 
                 // Ensure everything is ready
                 wizardControl.InvalidateArrange();
@@ -90,15 +98,17 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
                 wizardControl.InvalidateVisual();
                 wizardControl.UpdateLayout();
 
-                // Only active if we can
-                if (wizardPage.IsDescendantOf(wizardControl))
+
+                if (newIndex != -1)
                 {
+                    WizardPage targetPage = wizardControl.Pages[newIndex] as WizardPage;
+
                     // Determine the change in offset
                     Rect controlBounds = new Rect(0.0, 0.0, wizardControl.ActualWidth, wizardControl.ActualHeight);
                     Rect transformBounds = wizardControl.TransformToDescendant(wizardPage).TransformBounds(controlBounds);
 
                     // Activate the parent
-                    s_WizardOptions.Activate(Context, item.Parent, new Point(transformBounds.Right - wizardPage.ActualWidth, transformBounds.Top));
+                    ActivateOptions(item.Parent, new Point(transformBounds.Right - wizardPage.ActualWidth, transformBounds.Top));
                 }
             }
 
@@ -106,15 +116,40 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             base.Activate(item);
         }
 
+        private void ActivateOptions( ModelItem item, Point position )
+        {  
+            // If we are activated on another item - remove the options from that panel
+            if (s_OptionsPanel != null)
+            {
+                s_OptionsPanel.Children.Remove(s_WizardOptions);
+                s_OptionsPanel = null;
+                s_WizardOptions.Deactivate();
+            }
+
+            // And add it to the list of AdornerPanels provided by this AdornerProvider
+            m_PopupAdornerPanel.Children.Add(s_WizardOptions);
+            s_OptionsPanel = m_PopupAdornerPanel;
+            
+            // Activate the options with this context
+            s_WizardOptions.Activate(Context, item, position);
+        }
+
         /// <summary>
         /// Our Control has been deactivated
         /// </summary>
         protected override void Deactivate()
         {
+            // Call the base
             base.Deactivate();
 
-            // Call the base
-            s_WizardOptions.Deactivate();
+            // Only remove the options if it is associated with our panel
+            if (s_OptionsPanel == m_PopupAdornerPanel)
+            {
+                s_OptionsPanel.Children.Remove(s_WizardOptions);
+                s_OptionsPanel = null;
+                s_WizardOptions.Deactivate();
+            }
+
         }
     }
 }

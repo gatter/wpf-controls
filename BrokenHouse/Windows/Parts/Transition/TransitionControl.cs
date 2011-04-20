@@ -51,7 +51,10 @@ namespace BrokenHouse.Windows.Parts.Transition
             TransitionEffectProperty = TransitionPresenter.TransitionEffectProperty.AddOwner(typeof(TransitionControl), new FrameworkPropertyMetadata(null));
           
             // Override the style
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(TransitionControl), new FrameworkPropertyMetadata(TransitionElements.TransitionControlStyleKey));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(TransitionControl), new FrameworkPropertyMetadata(TransitionElements.TransitionControlStyleKey));    
+        
+            // Navigation
+            KeyboardNavigation.IsTabStopProperty.OverrideMetadata(typeof(TransitionControl), new FrameworkPropertyMetadata(false)); 
         }
        
 

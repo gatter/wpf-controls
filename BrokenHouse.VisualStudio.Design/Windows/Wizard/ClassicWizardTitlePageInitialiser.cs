@@ -32,13 +32,17 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             content.Properties["Height"].ClearValue();
             content.Properties["Width"].ClearValue();
             content.Properties["Name"].ClearValue();
+            content.Properties["HorizontalAlignment"].ClearValue();
+            content.Properties["VerticalAlignment"].ClearValue();
 
             // Update the page
             page.Properties[Metadata.FrameworkElementHeightPropertyId].ClearValue();
             page.Properties[Metadata.FrameworkElementWidthPropertyId].ClearValue();
             page.Properties[Metadata.ClassicWizardTitlePageTitlePropertyId].SetValue(page.Name);
+            page.Properties[Metadata.FrameworkElementHorizontalAlignmentPropertyId].ClearValue();
+            page.Properties[Metadata.FrameworkElementVerticalAlignmentPropertyId].ClearValue();
 
-            // Setthe content
+            // Set the content
             page.Content.SetValue(content);
         }
     }

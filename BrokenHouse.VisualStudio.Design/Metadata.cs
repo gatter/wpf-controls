@@ -50,6 +50,8 @@ namespace BrokenHouse.VisualStudio.Design
         public static PropertyIdentifier FrameworkElementWidthPropertyId               = new PropertyIdentifier(typeof(FrameworkElement), "Width");
         public static PropertyIdentifier FrameworkElementHeightPropertyId              = new PropertyIdentifier(typeof(FrameworkElement), "Height");
         public static PropertyIdentifier FrameworkElementMarginPropertyId              = new PropertyIdentifier(typeof(FrameworkElement), "Margin");
+        public static PropertyIdentifier FrameworkElementHorizontalAlignmentPropertyId = new PropertyIdentifier(typeof(FrameworkElement), "HorizontalAlignment");
+        public static PropertyIdentifier FrameworkElementVerticalAlignmentPropertyId   = new PropertyIdentifier(typeof(FrameworkElement), "VerticalAlignment");
         public static PropertyIdentifier ClassicWizardContentPageTitlePropertyId       = new PropertyIdentifier(typeof(ClassicWizardContentPage), "Title");
         public static PropertyIdentifier ClassicWizardContentPageDescriptionPropertyId = new PropertyIdentifier(typeof(ClassicWizardContentPage), "Description");
 

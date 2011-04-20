@@ -38,8 +38,11 @@ namespace BrokenHouse.Windows.Parts.Transition
         {
             TransitionEffectPropertyKey = DependencyProperty.RegisterReadOnly("TransitionEffect", typeof(TransitionEffect), typeof(TransitionFrame), new FrameworkPropertyMetadata(null, null));
             TransitionEffectProperty = TransitionEffectPropertyKey.DependencyProperty;
+
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TransitionFrame), new FrameworkPropertyMetadata(TransitionElements.TransitionFrameEmptyStyleKey));
-            KeyboardNavigation.IsTabStopProperty.OverrideMetadata(typeof(TransitionFrame), new FrameworkPropertyMetadata(false));        }
+
+            KeyboardNavigation.IsTabStopProperty.OverrideMetadata(typeof(TransitionFrame), new FrameworkPropertyMetadata(false));        
+        }
 
         /// <summary>
         /// Gets or sets the transition effect that controls this <see cref="TransitionFrame"/>. This is a dependency property.

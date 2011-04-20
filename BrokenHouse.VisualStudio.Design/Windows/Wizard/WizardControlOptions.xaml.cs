@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BrokenHouse.Windows.Data;
 using BrokenHouse.Windows.Controls;
 using BrokenHouse.Windows.Extensions;
 using BrokenHouse.Windows.Parts.Wizard;
@@ -271,8 +272,29 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         { 
             get 
             {
+                var properties = EditingItem.Properties["ActiveIndex"];
+
                 return (EditingItem == null)? -1 : (int)EditingItem.Properties["ActiveIndex"].ComputedValue;
             } 
+            set
+            {
+                if (value != -1)
+                {
+                    CompoundCollectionView view = EditingItem.Properties["Pages"].ComputedValue as CompoundCollectionView;
+                    WizardPage             page = view[value] as WizardPage;
+
+                    // Set the selection
+                    EditingItem.Properties["ActiveIndex"].SetValue(value);
+                    EditingContext.Items.SetValue(new Selection(new ModelItem[] { EditingItem.Content.Collection.FirstOrDefault(m => m.View.PlatformObject == page)}));
+
+                    // Ensure that the commands are updated
+                    CommandManager.InvalidateRequerySuggested();
+                }
+
+                OnPropertyChanged("ActivePageIndex");
+                OnPropertyChanged("ActivePageItem");
+                OnPropertyChanged("Summary");
+            }
         }
 
         /// <summary>
@@ -294,6 +316,10 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
                     // Ensure that the commands are updated
                     CommandManager.InvalidateRequerySuggested();
                 }
+
+                OnPropertyChanged("ActivePageIndex");
+                OnPropertyChanged("ActivePageItem");
+                OnPropertyChanged("Summary");
             }
         }
 

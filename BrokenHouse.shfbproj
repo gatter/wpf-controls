@@ -1,4 +1,5 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <!-- The configuration and platform will be used to determine which
          assemblies to include from solution and project documentation
@@ -7,20 +8,20 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{55c1a729-6080-4211-b138-0ed76f98c67f}</ProjectGuid>
-    <SHFBSchemaVersion>1.8.0.0</SHFBSchemaVersion>
+    <SHFBSchemaVersion>1.9.3.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual
          Studio adds them anyway -->
     <AssemblyName>Documentation</AssemblyName>
     <RootNamespace>Documentation</RootNamespace>
     <Name>Documentation</Name>
     <!-- SHFB properties -->
-    <OutputPath>.\Help\</OutputPath>
+    <OutputPath>D:\CodePlex\Net4\Help\</OutputPath>
     <HtmlHelpName>Documentation</HtmlHelpName>
     <SandcastlePath>C:\Program Files\Sandcastle\</SandcastlePath>
     <WorkingPath>
     </WorkingPath>
-    <FrameworkVersion>3.5</FrameworkVersion>
-    <HelpFileFormat>HtmlHelp1x</HelpFileFormat>
+    <FrameworkVersion>.NET 4.0.30319</FrameworkVersion>
+    <HelpFileFormat>HtmlHelp1</HelpFileFormat>
     <DocumentationSources>
       <DocumentationSource sourceFile="BrokenHouse\bin\Debug\BrokenHouse.dll" xmlns="" />
       <DocumentationSource sourceFile="BrokenHouse\bin\Debug\BrokenHouse.xml" xmlns="" />
@@ -28,14 +29,31 @@
     <HtmlHelp2xCompilerPath>C:\Program Files\Common Files\microsoft shared\Help 2.0 Compiler\</HtmlHelp2xCompilerPath>
     <HtmlHelp1xCompilerPath>C:\Program Files\HTML Help Workshop\</HtmlHelp1xCompilerPath>
     <ComponentConfigurations>
-      <ComponentConfig id="Cached MSDN URL References" enabled="True" xmlns="">
+      <ComponentConfig id="Cached MSDN URL References" enabled="True">
         <component id="Cached MSDN URL References" type="SandcastleBuilder.Components.CachedResolveReferenceLinksComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll" locale="{@Locale}" linkTarget="{@SdkLinkTarget}">
-          <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
-          <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@SDKLinks}" />
-          <targets files="reflection.xml" type="{@ProjectLinks}" />
+          <helpOutput format="HtmlHelp1">
+            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
+            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@HtmlSdkLinkType}" />
+            <targets files="reflection.xml" type="Local" />
+          </helpOutput>
+          <helpOutput format="MSHelp2">
+            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
+            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@MSHelp2SdkLinkType}" />
+            <targets files="reflection.xml" type="Index" />
+          </helpOutput>
+          <helpOutput format="MSHelpViewer">
+            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
+            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@MSHelpViewerSdkLinkType}" />
+            <targets files="reflection.xml" type="Id" />
+          </helpOutput>
+          <helpOutput format="Website">
+            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
+            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@WebsiteSdkLinkType}" />
+            <targets files="reflection.xml" type="Local" />
+          </helpOutput>
         </component>
       </ComponentConfig>
-      <ComponentConfig id="Code Block Component" enabled="True" xmlns="">
+      <ComponentConfig id="Code Block Component" enabled="True">
         <component id="Code Block Component" type="SandcastleBuilder.Components.CodeBlockComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
           <basePath value="{@HtmlEncProjectFolder}" />
           <languageFilter value="true" />
@@ -44,7 +62,7 @@
           <colorizer syntaxFile="{@SHFBFolder}Colorizer\highlight.xml" styleFile="{@SHFBFolder}Colorizer\highlight.xsl" copyImageUrl="../icons/CopyCode.gif" language="cs" tabSize="0" numberLines="false" outlining="false" keepSeeTags="false" defaultTitle="true" />
         </component>
       </ComponentConfig>
-      <ComponentConfig id="Post-transform Component" enabled="True" xmlns="">
+      <ComponentConfig id="Post-transform Component" enabled="True">
         <component id="Post-transform Component" type="SandcastleBuilder.Components.PostTransformComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
           <!-- Code colorizer files (required).
                  Attributes:
@@ -52,10 +70,12 @@
                     Script file (required)
                     "Copy" image file (required) -->
           <colorizer stylesheet="{@SHFBFolder}Colorizer\highlight.css" scriptFile="{@SHFBFolder}Colorizer\highlight.js" copyImage="{@SHFBFolder}Colorizer\CopyCode.gif" />
-          <!-- Base output path for the files (required).  This should match
+          <!-- Base output paths for the files (required).  These should match
                  the parent folder of the output path of the HTML files (see
-                 SaveComponent). -->
-          <outputPath value="Output\" />
+                 each of the SaveComponent instances below). -->
+          <outputPaths>
+{@HelpFormatOutputPaths}
+            </outputPaths>
           <!-- Logo image file (optional).  Filename is required. The height,
                  width, altText, placement, and alignment attributes are
                  optional. -->
