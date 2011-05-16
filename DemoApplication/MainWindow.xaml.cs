@@ -25,6 +25,7 @@ namespace DemoApplication
     public partial class MainWindow : Window
     {
         public List<DemoItem>   AllItems { get; private set; }
+        public DemoItem         SelectedItem { get; set; }
 
         public MainWindow()
         {
@@ -38,6 +39,8 @@ namespace DemoApplication
                                             new WizardOverview(), new WizardFeatures(), new WizardDemos(),
                                             new TransitionOverview(), new TransitionFeatures(), new TransitionControl(), new TransitionItemsControl()
             };
+
+            SelectedItem = AllItems[0];
             
             InitializeComponent();
 

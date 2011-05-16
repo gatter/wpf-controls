@@ -48,7 +48,9 @@
     </Window.Resources>
 
     <DockPanel Margin="10">
-        <ListView x:Name="ItemsList" ItemsSource="{Binding Source={StaticResource DemoItemsCollection}}"
+        <ListView x:Name="ItemsList" 
+                  ItemsSource="{Binding Source={StaticResource DemoItemsCollection}}"
+                  SelectedItem="{Binding Path=SelectedItem}"
                   BorderThickness="0" Margin="0,0,10,0" Background="Transparent" Width="160"
                   Style="{DynamicResource ListViewStyle1}">
             <ListView.GroupStyle>
@@ -79,13 +81,13 @@
             </ListView.View>
         </ListView>
         
-        <Border CornerRadius="4" BorderBrush="#ff000000" BorderThickness="1,1,1,1" SnapsToDevicePixels="True"
+        <Border CornerRadius="2" BorderBrush="#ff000000" BorderThickness="1,1,1,1" SnapsToDevicePixels="True"
                 Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="3" Color="#808080" Opacity="0.3"/>
             </Border.Effect>
             <Grid>
-                <Border CornerRadius="4" BorderBrush="#ffffffff" BorderThickness="1,1,1,1" SnapsToDevicePixels="True" ClipToBounds="True">
+                <Border CornerRadius="2" BorderBrush="#ffffffff" BorderThickness="1,1,1,1" SnapsToDevicePixels="True" ClipToBounds="True">
                     <Border.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.05">
                             <GradientStop Color="#3000FF16" Offset="1"/>

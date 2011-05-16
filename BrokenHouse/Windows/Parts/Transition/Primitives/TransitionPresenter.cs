@@ -525,10 +525,16 @@ namespace BrokenHouse.Windows.Parts.Transition.Primitives
         /// <param name="baseValue">Ensures that the transition effect is valid.</param>
         private static object OnTransitionEffectCoerceThunk( DependencyObject target, object baseValue )
         {
-            if (SystemParameters.IsRemoteSession || DesignerProperties.GetIsInDesignMode(target) || (baseValue == null))
+#if DEBUG
+            bool isRemote = false;
+#else
+            bool isRemote = SystemParameters.IsRemoteSession;
+#endif
+            if (isRemote || DesignerProperties.GetIsInDesignMode(target) || (baseValue == null))
             {
                 baseValue = new EmptyTransitionEffect();
             }
+
             return baseValue;
         }
      
