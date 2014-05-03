@@ -33,7 +33,7 @@ namespace DemoApplication
 
             AllItems = new List<DemoItem> { new Introduction(), new Releases(),
                                             new ControlsOverview(), new ControlsFeatures(), new IconElement(), new ActiveIconElement(),
-                                            new CommandLinkElement(), new IconColorTransforms(), new StockIcons(), new SnapDecoratorElement(),
+                                            new CommandLinkElement(), new IconColorTransforms(), new StockIcons(),
                                             new EdgeScrollViewer(),
                                             new TaskDialogOverview(), new TaskDialogFeatures(), new TaskDialogDemos(),
                                             new WizardOverview(), new WizardFeatures(), new WizardDemos(),

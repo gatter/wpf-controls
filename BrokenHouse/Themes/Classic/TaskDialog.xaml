@@ -187,31 +187,27 @@
                                   StrokeThickness="1" SnapsToDevicePixels="true"/>
 
                             <!-- Buttons -->
-                            <controls:SnapDecorator VerticalAlignment="Center" Margin="3" HorizontalAlignment="Stretch">
-                                <DockPanel HorizontalAlignment="Stretch">
-                                    <StackPanel DockPanel.Dock="Left" Orientation="Vertical">
-                                        <ToggleButton x:Name="PART_ExpanderControl" Margin="3,2,3,2"
-                                                      Style="{DynamicResource {x:Static local:TaskElements.ClassicDialogExpanderStyleKey}}"
-                                                      IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay}"
-                                                      VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                      Visibility="Visible">
-                                            <TextBlock x:Name="PART_ExpanderText"
-                                                       Text="{TemplateBinding CollapsedText}"
-                                                       TextWrapping="Wrap"/>
-                                        </ToggleButton>
+                            <DockPanel HorizontalAlignment="Stretch" Margin="3">
+                                <StackPanel DockPanel.Dock="Left" Orientation="Vertical">
+                                    <ToggleButton x:Name="PART_ExpanderControl" Margin="3,2,3,2"
+                                                    Style="{DynamicResource {x:Static local:TaskElements.ClassicDialogExpanderStyleKey}}"
+                                                    IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay}"
+                                                    VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                    Visibility="Visible">
+                                        <TextBlock x:Name="PART_ExpanderText"
+                                                    Text="{TemplateBinding CollapsedText}"
+                                                    TextWrapping="Wrap"/>
+                                    </ToggleButton>
 
-                                        <CheckBox x:Name="PART_CheckBoxControl"  
-                                                  Style="{DynamicResource {x:Static local:TaskElements.ClassicDialogCheckBoxStyleKey}}"
-                                                  VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                  Margin="3" 
-                                                  IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CheckBoxState}"
-                                                  Content="{TemplateBinding CheckBoxContent}"/>
-                                    </StackPanel>
-                                    <controls:SnapDecorator HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3">
-                                        <ContentPresenter x:Name="PART_Buttons" ContentSource="Buttons"/>
-                                    </controls:SnapDecorator>
-                                </DockPanel>
-                            </controls:SnapDecorator>
+                                    <CheckBox x:Name="PART_CheckBoxControl"  
+                                                Style="{DynamicResource {x:Static local:TaskElements.ClassicDialogCheckBoxStyleKey}}"
+                                                VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                Margin="3" 
+                                                IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CheckBoxState}"
+                                                Content="{TemplateBinding CheckBoxContent}"/>
+                                </StackPanel>
+                                <ContentPresenter x:Name="PART_Buttons" ContentSource="Buttons" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3"/>
+                            </DockPanel>
 
                             <!-- Icon Footer -->
                             <StackPanel>
@@ -253,22 +249,20 @@
                             </StackPanel>
 
                             <!-- Expandable Footer -->
-                            <controls:SnapDecorator x:Name="PART_FooterMessagePanel">
-                                <StackPanel>
-                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stretch="Fill" 
-                                          Stroke="{DynamicResource {x:Static local:TaskElements.ClassicDialogSeparatorKey}}"
-                                          StrokeThickness="1" SnapsToDevicePixels="true"/>
+                            <StackPanel x:Name="PART_FooterMessagePanel">
+                                <Line X1="0" Y1="0" X2="1" Y2="0" Stretch="Fill" 
+                                        Stroke="{DynamicResource {x:Static local:TaskElements.ClassicDialogSeparatorKey}}"
+                                        StrokeThickness="1" SnapsToDevicePixels="true"/>
                                     
-                                    <!-- We want the text to wrap - so if someone provides text directly we can wrap it -->
-                                    <ContentPresenter x:Name="PART_FooterMessagePresenter" Content="{x:Null}" Margin="6,9,6,9">
-                                        <ContentPresenter.Resources>
-                                            <DataTemplate DataType="{x:Type system:String}">
-                                                <TextBlock Text="{Binding .}" TextWrapping="Wrap"/>
-                                            </DataTemplate>
-                                        </ContentPresenter.Resources>
-                                    </ContentPresenter>
-                                </StackPanel>
-                            </controls:SnapDecorator>
+                                <!-- We want the text to wrap - so if someone provides text directly we can wrap it -->
+                                <ContentPresenter x:Name="PART_FooterMessagePresenter" Content="{x:Null}" Margin="6,9,6,9">
+                                    <ContentPresenter.Resources>
+                                        <DataTemplate DataType="{x:Type system:String}">
+                                            <TextBlock Text="{Binding .}" TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+                            </StackPanel>
                         </StackPanel>
 
                         <!-- Content Section -->
@@ -313,7 +307,7 @@
                             </ContentPresenter>
                             
                             <!-- This is where the message goes if it is not in the footer -->
-                            <controls:SnapDecorator x:Name="PART_ContentMessagePanel" Grid.Row="1" Grid.Column="1">
+                            <Border x:Name="PART_ContentMessagePanel" Grid.Row="1" Grid.Column="1">
                                 <ContentPresenter x:Name="PART_ContentMessagePresenter" Margin="0,3,0,3"
                                                   Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Message}">
                                     <ContentPresenter.Resources>
@@ -322,12 +316,12 @@
                                         </DataTemplate>
                                     </ContentPresenter.Resources>
                                 </ContentPresenter>
-                            </controls:SnapDecorator>
+                            </Border>
                             
                             <!-- This is the content of the control -->
-                            <controls:SnapDecorator x:Name="PART_ContentPanel" Grid.Row="2" Grid.Column="1">
+                            <Border x:Name="PART_ContentPanel" Grid.Row="2" Grid.Column="1">
                                 <ContentPresenter x:Name="PART_ContentPresenter" ContentSource="Content" Margin="0"/>
-                            </controls:SnapDecorator>
+                            </Border>
                         </Grid>
                     </DockPanel>
                     <ControlTemplate.Triggers>

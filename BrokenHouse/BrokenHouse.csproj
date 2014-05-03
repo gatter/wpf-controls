@@ -132,7 +132,6 @@
     <Compile Include="Windows\Controls\CommandLink.cs" />
     <Compile Include="Windows\Controls\ActiveIcon.cs" />
     <Compile Include="Windows\Controls\ErrorInfo.cs" />
-    <Compile Include="Windows\Controls\SnapDecorator.cs" />
     <Compile Include="Windows\Controls\Themes\Aero\CommandLinkChrome.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Windows\Converters\TrueFalseConverter.cs" />
@@ -258,6 +257,10 @@
     <Page Include="Themes\Classic\TaskButtonBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Aero2.normalcolor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

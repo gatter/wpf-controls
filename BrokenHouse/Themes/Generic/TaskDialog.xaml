@@ -185,7 +185,7 @@
                                   StrokeThickness="1" SnapsToDevicePixels="true"/>
 
                             <!-- Buttons -->
-                            <controls:SnapDecorator VerticalAlignment="Center" Margin="3" HorizontalAlignment="Stretch">
+                            <Border VerticalAlignment="Center" Margin="3" HorizontalAlignment="Stretch">
 
                                 <Grid HorizontalAlignment="Stretch">
                                     <Grid.RowDefinitions>
@@ -213,11 +213,11 @@
                                                   IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CheckBoxState}"
                                                   Content="{TemplateBinding CheckBoxContent}"/>
                                     </StackPanel>
-                                    <controls:SnapDecorator HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" Grid.Column="1" > 
+                                    <Border HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" Grid.Column="1" > 
                                         <ContentPresenter x:Name="PART_Buttons" ContentSource="Buttons"/>
-                                    </controls:SnapDecorator>
+                                    </Border>
                                 </Grid>
-                            </controls:SnapDecorator>
+                            </Border>
 
 
                             <!-- Icon Footer -->
@@ -263,7 +263,7 @@
                             </StackPanel>
 
                             <!-- Expandable Footer -->
-                            <controls:SnapDecorator x:Name="PART_FooterMessagePanel">
+                            <Border x:Name="PART_FooterMessagePanel">
                                 <StackPanel>
                                     <Line X1="0" Y1="0" X2="1" Y2="0" Stretch="Fill" 
                                           Stroke="{DynamicResource {x:Static local:TaskElements.AeroDialogSeparatorLowlightKey}}"
@@ -281,7 +281,7 @@
                                         </ContentPresenter.Resources>
                                     </ContentPresenter>
                                 </StackPanel>
-                            </controls:SnapDecorator>
+                            </Border>
                         </StackPanel>
 
                         <!-- Content Section -->
@@ -326,7 +326,7 @@
                             </ContentPresenter>
                                 
                             <!-- This is where the message goes if it is not in the footer -->
-                            <controls:SnapDecorator x:Name="PART_ContentMessagePanel" Grid.Row="1" Grid.Column="1">
+                            <Border x:Name="PART_ContentMessagePanel" Grid.Row="1" Grid.Column="1">
                                 <ContentPresenter x:Name="PART_ContentMessagePresenter" Margin="0,3,0,3"
                                         Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Message}">
                                     <ContentPresenter.Resources>
@@ -335,12 +335,12 @@
                                         </DataTemplate>
                                     </ContentPresenter.Resources>
                                 </ContentPresenter>
-                            </controls:SnapDecorator>
+                            </Border>
                                 
                             <!-- This is the content of the control -->
-                            <controls:SnapDecorator x:Name="PART_ContentPanel" Grid.Row="2" Grid.Column="1">
+                            <Border x:Name="PART_ContentPanel" Grid.Row="2" Grid.Column="1">
                                 <ContentPresenter x:Name="PART_ContentPresenter" ContentSource="Content" Margin="0"/>
-                            </controls:SnapDecorator>
+                            </Border>
                         </Grid>
                     </DockPanel>
                     <ControlTemplate.Triggers>

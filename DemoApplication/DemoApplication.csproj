@@ -241,12 +241,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Demos\Controls\SnapDecoratorElement.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Demos\Controls\IconElement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -383,9 +377,6 @@
     </Compile>
     <Compile Include="Demos\Task\TaskDialogCreator.xaml.cs">
       <DependentUpon>TaskDialogCreator.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Demos\Controls\SnapDecoratorElement.xaml.cs">
-      <DependentUpon>SnapDecoratorElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Demos\Controls\IconElement.xaml.cs">
       <DependentUpon>IconElement.xaml</DependentUpon>

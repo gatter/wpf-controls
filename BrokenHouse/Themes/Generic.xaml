@@ -12,6 +12,7 @@
         <ResourceDictionary Source="/BrokenHouse;component/Themes/Generic/TaskButtonBar.xaml"/>
         <ResourceDictionary Source="/BrokenHouse;component/Themes/Generic/ActiveIcon.xaml"/>
         <ResourceDictionary Source="/BrokenHouse;component/Themes/Generic/ErrorInfo.xaml"/>
+        <ResourceDictionary Source="/BrokenHouse;component/Themes/Generic/EdgeScrollViewer.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 

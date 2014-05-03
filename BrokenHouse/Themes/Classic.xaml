@@ -9,9 +9,9 @@
         <ResourceDictionary Source="/BrokenHouse;component/Themes/Generic/ClassicWizard.xaml"/>
         <ResourceDictionary Source="/BrokenHouse;component/Themes/Classic/TaskDialog.xaml"/>
         <ResourceDictionary Source="/BrokenHouse;component/Themes/Classic/TaskButtonBar.xaml"/>
-        <ResourceDictionary Source="/BrokenHouse;component/Themes/Generic/TaskIcon.xaml"/>
         <ResourceDictionary Source="/BrokenHouse;component/Themes/Generic/ActiveIcon.xaml"/>
         <ResourceDictionary Source="/BrokenHouse;component/Themes/Classic/ErrorInfo.xaml"/>
+        <ResourceDictionary Source="/BrokenHouse;component/Themes/Generic/EdgeScrollViewer.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
