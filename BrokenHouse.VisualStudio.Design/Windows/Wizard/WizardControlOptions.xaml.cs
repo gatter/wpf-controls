@@ -81,7 +81,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
                 {
                     page.Measure(pageBounds.Size);
                     page.Arrange(pageBounds);
-                }
+                } 
 
                 // Update the thumbnails
                 ThumbnailHeight = 100.0;
@@ -355,6 +355,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// <param name="e"></param>
         private void OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
+            MessageBox.Show("IsActive = " + IsActive); 
             if (!IsActive)
             {
                e.CanExecute = false;
