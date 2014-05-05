@@ -27,45 +27,49 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// <returns></returns>
         private ModelItem CheckRedirectParent( ModelItem parent, Type childType )
         {
-            WizardControl wizardControl = (WizardControl)parent.View.PlatformObject;
-            DesignerView  designerView  = DesignerView.GetDesignerView(wizardControl);
+            WizardControl wizardControl = parent.View.PlatformObject as WizardControl;
             ModelItem     checkedParent = null;
 
-            // Check what we can do
-            if (typeof(WizardPage).IsAssignableFrom(childType))
+            if (wizardControl != null)
             {
-                // Simple case
-                checkedParent = parent;
-            }
-            else if (((wizardControl == null) || (parent.Content == null)) || (parent.Content.Collection.Count <= 0))
-            {
-                // Its a simple add
-                checkedParent = parent;
-            }
-            else if ((designerView != null) && (designerView.Context != null))
-            {
-                Tool tool        = designerView.Context.Items.GetValue<Tool>();
-                int  activeIndex = wizardControl.ActiveIndex;
+                DesignerView  designerView  = DesignerView.GetDesignerView(wizardControl);
 
-                // Do we have a valid index
-                if (activeIndex >= 0)
+                // Check what we can do
+                if (typeof(WizardPage).IsAssignableFrom(childType))
                 {
-                    // Are we focused
-                    if ((tool == null) || (tool.FocusedTask != null))
+                    // Simple case
+                    checkedParent = parent;
+                }
+                else if (((wizardControl == null) || (parent.Content == null)) || (parent.Content.Collection.Count <= 0))
+                {
+                    // Its a simple add
+                    checkedParent = parent;
+                }
+                else if ((designerView != null) && (designerView.Context != null))
+                {
+                    Tool tool        = designerView.Context.Items.GetValue<Tool>();
+                    int  activeIndex = wizardControl.ActiveIndex;
+
+                    // Do we have a valid index
+                    if (activeIndex >= 0)
                     {
-                        checkedParent = parent.Content.Collection[activeIndex];
-                    }
-                    else
-                    {
-                        AdapterService adapterService = designerView.Context.Services.GetService<AdapterService>();
+                        // Are we focused
+                        if ((tool == null) || (tool.FocusedTask != null))
+                        {
+                            checkedParent = parent.Content.Collection[activeIndex];
+                        }
+                        else
+                        {
+                            AdapterService adapterService = designerView.Context.Services.GetService<AdapterService>();
                         
-                        checkedParent = FindSuitableParent(adapterService, parent, childType, activeIndex) ?? parent;
+                            checkedParent = FindSuitableParent(adapterService, parent, childType, activeIndex) ?? parent;
+                        }
                     }
                 }
-            }
-            else
-            {
-                // Did not find anything
+                else
+                {
+                    // Did not find anything
+                }
             }
         
             return checkedParent;

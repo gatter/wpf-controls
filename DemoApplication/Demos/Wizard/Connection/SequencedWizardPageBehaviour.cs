@@ -46,9 +46,9 @@ namespace DemoApplication.Demos.Wizard.Connection
         /// </summary>
         /// <param name="control">The WizardControl to which this behaviour might be attached.</param>
         /// <returns><b>true</b> if this behaviour is attached to the wizard.</returns>
-        public static bool GetIsSequenced( WizardControl control )
+        public static bool GetIsSequenced( DependencyObject target )
         {
-            return (bool)control.GetValue(IsSequencedProperty);
+            return (bool)target.GetValue(IsSequencedProperty);
         }
 
         /// <summary>
@@ -56,9 +56,9 @@ namespace DemoApplication.Demos.Wizard.Connection
         /// </summary>
         /// <param name="control">The WizardControl to which this behaviour will be attached (or detached).</param>
         /// <param name="value"><b>true</b> if this behaviour is to be attached to the page.</param>
-        public static void SetIsSequenced( WizardControl control, bool value )
+        public static void SetIsSequenced( DependencyObject target, bool value )
         {
-            control.SetValue(IsSequencedProperty, value);
+            target.SetValue(IsSequencedProperty, value);
         }
 
         /// <summary>
@@ -66,9 +66,9 @@ namespace DemoApplication.Demos.Wizard.Connection
         /// </summary>
         /// <param name="page">The WizardPage</param>
         /// <returns><b>true</b> if the page is pending (i.e. not been seen yet).</returns>
-        public static bool GetIsPending( WizardPage page )
+        public static bool GetIsPending( DependencyObject target )
         {
-            return (bool)page.GetValue(IsPendingProperty);
+            return (bool)target.GetValue(IsPendingProperty);
         }
 
         /// <summary>

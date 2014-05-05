@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BrokenHouse.Windows.Data;
 using BrokenHouse.Windows.Controls;
+using BrokenHouse.Windows.Input;
 using BrokenHouse.Windows.Extensions;
 using BrokenHouse.Windows.Parts.Wizard;
 using BrokenHouse.Windows.Parts.Task;
@@ -32,12 +33,18 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
     /// </summary>
     internal partial class WizardControlOptions : UserControl, INotifyPropertyChanged
     {
-        public bool                         IsAeroWizard       { get; private set; }
-        public double                       ThumbnailWidth     { get; private set; }
-        public double                       ThumbnailHeight    { get; private set; }
-        public EditingContext               EditingContext     { get; private set; }
-        public ModelItem                    EditingItem        { get; private set; }
-        public bool                         IsActive           { get; private set; }
+        public bool                         IsAeroWizard               { get; private set; }
+        public double                       ThumbnailWidth             { get; private set; }
+        public double                       ThumbnailHeight            { get; private set; }
+        public EditingContext               EditingContext             { get; private set; }
+        public ModelItem                    EditingItem                { get; private set; }
+        public bool                         IsActive                   { get; private set; }
+        public DelegateCommand              NewAeroPageCommand         { get; private set; }
+        public DelegateCommand              NewContentPageCommand      { get; private set; }
+        public DelegateCommand              NewTitlePageCommand        { get; private set; }
+        public DelegateCommand              DeletePageCommand          { get; private set; }
+        public DelegateCommand              MovePageBackwardsCommand   { get; private set; }
+        public DelegateCommand              MovePageForwardsCommand    { get; private set; }
 
         #region --- Constructor ---
 
@@ -45,7 +52,15 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// Default Constructorr
         /// </summary>
         public WizardControlOptions()
-        {
+        {    
+            // Create the commands
+            NewAeroPageCommand       = new DelegateCommand(OnNewAreoPage, () => IsActive && IsAeroWizard); 
+            NewContentPageCommand    = new DelegateCommand(OnNewContentPage, () => IsActive && !IsAeroWizard);     
+            NewTitlePageCommand      = new DelegateCommand(OnNewTitlePage, () => IsActive && !IsAeroWizard);         
+            DeletePageCommand        = new DelegateCommand(OnDeletePage, () => IsActive && (PageItemCollection.Count > 0));
+            MovePageBackwardsCommand = new DelegateCommand(OnMovePageBackwards, () => IsActive && (ActivePageIndex != 0));
+            MovePageForwardsCommand  = new DelegateCommand(OnMovePageForwards, () => IsActive && (ActivePageIndex != (PageCount - 1)));
+
             // Force the data context
             DataContext = this;
 
@@ -53,8 +68,9 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             InitializeComponent();
 
             // We are initially hidden
-            Visibility = Visibility.Collapsed;     
+            Visibility = Visibility.Collapsed; 
         }
+            
 
         #endregion
 
@@ -94,12 +110,11 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
                     ThumbnailWidth = 150.0;
                 }
 
-                //MessageBox.Show(string.Format("{0}x{1}", ThumbnailWidth, ThumbnailHeight));
-
                 // Trigger the property changes
                 OnPropertyChanged("ThumbnailHeight");
                 OnPropertyChanged("ThumbnailWidth");
 
+                // Trigger a measure to ensure that things are layout properly
                 InvalidateMeasure();
             }
         }
@@ -156,11 +171,15 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             Visibility = Visibility.Visible;
             IsActive   = true;
 
-            (Parent as AdornerPanel).MinHeight = MinHeight;
-            (Parent as AdornerPanel).MinWidth = ActualWidth;
+            // If the parent is set - update the panel
+            if (Parent != null)
+            {
+                (Parent as AdornerPanel).MinHeight = MinHeight;
+                (Parent as AdornerPanel).MinWidth = ActualWidth;
    
-            (Parent as AdornerPanel).InvalidateVisual();
-            (Parent as AdornerPanel).UpdateLayout();
+                (Parent as AdornerPanel).InvalidateVisual();
+                (Parent as AdornerPanel).UpdateLayout();
+            }
 
             // Enable the commands
             CommandManager.InvalidateRequerySuggested();
@@ -183,7 +202,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
                 PageItemCollection.CollectionChanged -= OnPageItemCollectionChanged;
      
                 // PageItemCollection from the size changing
-                wizardControl.SizeChanged += OnControlSizeChanged;
+                wizardControl.SizeChanged -= OnControlSizeChanged;
             }
 
             // We are no longer visible - we do this so that we are not
@@ -239,7 +258,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         { 
             get 
             {
-                return (EditingItem == null)? 0 : PageItemCollection.Count;
+                return ((EditingItem == null) || (EditingItem.View == null))?  0 : PageItemCollection.Count;
             } 
         }
        
@@ -250,7 +269,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         { 
             get 
             {
-                return (EditingItem == null)? null : EditingItem.Properties["Pages"].Value as ModelItemCollection;
+                return ((EditingItem == null) || (EditingItem.View == null))? null : EditingItem.Properties["Pages"].Value as ModelItemCollection;
             } 
         }
 
@@ -261,7 +280,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         { 
             get 
             { 
-                return (EditingItem == null)? "" : string.Format("{0}/{1}", ActivePageIndex + 1, PageItemCollection.Count); 
+                return ((EditingItem == null) || (EditingItem.View == null))?  "" : string.Format("{0}/{1}", ActivePageIndex + 1, PageItemCollection.Count); 
             } 
         }
 
@@ -274,7 +293,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             {
                 var properties = EditingItem.Properties["ActiveIndex"];
 
-                return (EditingItem == null)? -1 : (int)EditingItem.Properties["ActiveIndex"].ComputedValue;
+                return ((EditingItem == null) || (EditingItem.View == null))? -1 : (int)EditingItem.Properties["ActiveIndex"].ComputedValue;
             } 
             set
             {
@@ -348,49 +367,14 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
 
         #region --- Command Handlers ---
         
-        /// <summary>
-        /// Can the new content page be executed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            MessageBox.Show("IsActive = " + IsActive); 
-            if (!IsActive)
-            {
-               e.CanExecute = false;
-            }
-            else if (e.Command == WizardControlOptionsCommands.NewAeroPage)
-            {
-                e.CanExecute = IsAeroWizard;
-            }
-            else if ((e.Command == WizardControlOptionsCommands.NewContentPage) || (e.Command == WizardControlOptionsCommands.NewTitlePage))
-            {
-                e.CanExecute = !IsAeroWizard;
-            }
-            else if (e.Command == WizardControlOptionsCommands.DeletePage)
-            {
-                e.CanExecute = (PageItemCollection.Count > 0);
-            }
-            else if (e.Command == WizardControlOptionsCommands.MovePageBackwards)
-            {
-                e.CanExecute = (ActivePageIndex != 0);
-            }
-            else if (e.Command == WizardControlOptionsCommands.MovePageForwards)
-            {
-                e.CanExecute = (ActivePageIndex != (PageCount - 1));
-            }
-            else
-            {
-            }
-        }
+
            
         /// <summary>
         /// Add a new aero page
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnNewAreoPage( object sender, ExecutedRoutedEventArgs e )
+        private void OnNewAreoPage( )
         {
             ModelItem wizardPageItem = ModelFactory.CreateItem(EditingContext, typeof(AeroWizardPage), CreateOptions.InitializeDefaults, new object[0]);
 
@@ -398,10 +382,10 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             PageItemCollection.Insert(ActivePageIndex, wizardPageItem);
 
             // Update the active index
-            ActivePageItem = wizardPageItem;
+            ActivePageItem = wizardPageItem;     
 
-            // Event Complete
-            e.Handled = true;        
+            // Enable the commands
+            CommandManager.InvalidateRequerySuggested(); 
         }
  
         /// <summary>
@@ -409,7 +393,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnNewContentPage( object sender, ExecutedRoutedEventArgs e )
+        private void OnNewContentPage()
         {   
             ModelItem wizardPageItem = ModelFactory.CreateItem(EditingContext, typeof(ClassicWizardContentPage), CreateOptions.InitializeDefaults, new object[0]);
 
@@ -417,10 +401,10 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             PageItemCollection.Insert(ActivePageIndex, wizardPageItem);
 
             // Update the active index
-            ActivePageItem = wizardPageItem;
+            ActivePageItem = wizardPageItem;   
 
-            // Event Complete
-            e.Handled = true;        
+            // Enable the commands
+            CommandManager.InvalidateRequerySuggested();    
         }
 
         /// <summary>
@@ -428,7 +412,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnNewTitlePage( object sender, ExecutedRoutedEventArgs e )
+        private void OnNewTitlePage()
         {   
             ModelItem wizardPageItem = ModelFactory.CreateItem(EditingContext, typeof(ClassicWizardTitlePage), CreateOptions.InitializeDefaults, new object[0]);
 
@@ -442,10 +426,10 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
             PageItemCollection.Insert(ActivePageIndex, wizardPageItem);
 
             // Update the active index
-            ActivePageItem = wizardPageItem;
+            ActivePageItem = wizardPageItem;  
 
-            // Event Complete
-            e.Handled = true;     
+            // Enable the commands
+            CommandManager.InvalidateRequerySuggested(); 
         }
         
 
@@ -455,7 +439,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnMovePageForwards( object sender, ExecutedRoutedEventArgs e )
+        private void OnMovePageForwards()
         {
             int        oldIndex        = ActivePageIndex;
             int        newIndex        = oldIndex + 1;
@@ -471,6 +455,9 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
 
                 // Commit
                 scope.Complete();
+
+                // Enable the commands
+                CommandManager.InvalidateRequerySuggested(); 
             }
         }
 
@@ -480,7 +467,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnMovePageBackwards( object sender, ExecutedRoutedEventArgs e )
+        private void OnMovePageBackwards()
         {
             int        oldIndex        = ActivePageIndex;
             int        newIndex        = oldIndex - 1;
@@ -496,6 +483,9 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
 
                 // Commit
                 scope.Complete();
+
+                // Enable the commands
+                CommandManager.InvalidateRequerySuggested(); 
             }
         }
 
@@ -505,7 +495,7 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnDeletePage( object sender, ExecutedRoutedEventArgs e )
+        private void OnDeletePage()
         {
             TaskDialog   taskDialog = new TaskDialog(this);
 
@@ -518,9 +508,22 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
 
             if (taskDialog.ShowDialog() == "Remove")
             {
-                PageItemCollection.Remove(ActivePageItem);
+                // Select the next item
+                if (PageItemCollection.Count > 1)
+                {
+                    var nextItem = PageItemCollection[Math.Max(0, ActivePageIndex - 1)];
+
+                    SelectionOperations.Select(EditingContext, nextItem);
+                }
+                    
+                // Remove the old one
+                PageItemCollection.RemoveAt(ActivePageIndex);
             }
+
+            // Enable the commands
+            CommandManager.InvalidateRequerySuggested(); 
         }
+
         #endregion
 
     }

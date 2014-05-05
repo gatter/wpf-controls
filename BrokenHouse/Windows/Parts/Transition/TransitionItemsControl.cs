@@ -255,7 +255,7 @@ namespace BrokenHouse.Windows.Parts.Transition
         /// <param name="args"></param>
         protected virtual void OnTransitionTimer( object sender, EventArgs args )
         {
-            ProcessPendingTransitions();
+            ProcessPendingTransitions(false);
         }
 
         /// <summary>
@@ -268,7 +268,20 @@ namespace BrokenHouse.Windows.Parts.Transition
 
             m_TransitionPresenter = GetTemplateChild("PART_TransitionPresenter") as TransitionPresenter;
 
-            ProcessPendingTransitions();
+            // If we have an active name then then selected item must match
+            if (ActiveName != null)
+            {
+                object newActiveItem = Items.OfType<FrameworkElement>().FirstOrDefault(e => string.Equals(e.Name, ActiveName));
+                
+                // Do we update the active item?
+                if (ActiveItem != newActiveItem)
+                {
+                    ActiveItem = newActiveItem;
+                }
+            }
+
+            // Process any pending translations
+            ProcessPendingTransitions(true);
         }
         
         /// <summary>
@@ -349,14 +362,14 @@ namespace BrokenHouse.Windows.Parts.Transition
 
             if ((m_TransitionPresenter != null) && !m_TransitionTimer.IsEnabled)
             {
-                ProcessPendingTransitions();
+                ProcessPendingTransitions(false);
             }
         }
 
         /// <summary>
         /// Process the next item in the pending transition list.
         /// </summary>
-        private void ProcessPendingTransitions()
+        private void ProcessPendingTransitions( bool transitionImmediate )
         {
             if (m_PendingTransitions.Count > 0)
             {
@@ -371,7 +384,14 @@ namespace BrokenHouse.Windows.Parts.Transition
                 }
                 else if ((newIndex != -1) && (m_TransitionPresenter != null))
                 {
-                    m_TransitionPresenter.DoTransition(newContent, (oldIndex < newIndex) ? TransitionDirection.Forwards : TransitionDirection.Backwards);
+                    if (transitionImmediate)
+                    {
+                        m_TransitionPresenter.DoTransition(newContent, TransitionDirection.Immediate);
+                    }
+                    else
+                    {
+                        m_TransitionPresenter.DoTransition(newContent, (oldIndex < newIndex) ? TransitionDirection.Forwards : TransitionDirection.Backwards);
+                    }
                 }
                 else
                 {

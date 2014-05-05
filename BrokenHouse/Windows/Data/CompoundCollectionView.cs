@@ -36,7 +36,7 @@ namespace BrokenHouse.Windows.Data
         /// </summary>
         public CompoundCollectionView()
         {
-            CurrentView = m_BasicView = new SimpleListCollectionView(null);
+            CurrentView = m_ListView = new SimpleListCollectionView(null);
         }
 
         /// <summary>

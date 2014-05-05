@@ -124,6 +124,7 @@
     <Compile Include="Windows\Extensions\SizeExtensions.cs" />
     <Compile Include="Windows\Extensions\ThicknessExtensions.cs" />
     <Compile Include="Windows\Extensions\VisualExtensions.cs" />
+    <Compile Include="Windows\Input\DelegateCommand.cs" />
     <Compile Include="Windows\Int32Size.cs" />
     <Compile Include="Windows\Int32Thickness.cs" />
     <Compile Include="Windows\Int32ThicknessConverter.cs" />

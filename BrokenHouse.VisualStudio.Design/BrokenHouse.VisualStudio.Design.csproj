@@ -129,7 +129,6 @@
     <Compile Include="Windows\Wizard\WizardControlOptions.xaml.cs">
       <DependentUpon>WizardControlOptions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Wizard\WizardControlOptionsCommands.cs" />
     <Compile Include="Windows\Wizard\WizardControlParentAdapter.cs" />
     <Compile Include="Windows\Wizard\WizardPageParentAdapter.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

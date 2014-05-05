@@ -54,6 +54,9 @@ namespace BrokenHouse.Windows.Parts.Transition.Effects
             TransitionFrame.Measure(ParentEffect.TransitionPresenter.RenderSize);
             TransitionFrame.InvalidateVisual();
             TransitionFrame.UpdateLayout();
+
+            // Call the base class
+            base.InitialiseTransitionFrame(position);
         }
 
         /// <summary>

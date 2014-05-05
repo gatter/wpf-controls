@@ -328,6 +328,7 @@ namespace BrokenHouse.Windows.Parts.Transition
         /// <param name="position">The requured position for the target.</param>
         protected virtual void InitialiseTransitionFrame( TransitionPosition position )
         {
+            TransitionFrame.UseBitmapCaching = (position != TransitionPosition.Center);
         }
  
         /// <summary>

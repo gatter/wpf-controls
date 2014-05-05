@@ -58,6 +58,9 @@ namespace BrokenHouse.Windows.Parts.Transition.Effects
             TransitionFrame.Style = TransitionFrame.FindResource(key) as Style;
             TransitionFrame.InvalidateVisual();
             TransitionFrame.UpdateLayout();
+
+            // Call the base class
+            base.InitialiseTransitionFrame(position);
         }
 
         /// <summary>

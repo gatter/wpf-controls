@@ -176,7 +176,7 @@ namespace BrokenHouse.Windows.Parts.Transition.Effects
         /// The standard style is obtained from the underlying <see cref="ResourceDictionaryEffectAnimation"/>;
         /// it is then modified so that the target is positioned correctly based on the current <see cref="Direction"/>.
         /// </remarks>
-        /// <param name="position">The requured position for the target.</param>
+        /// <param name="position">The required position for the target.</param>
         protected override void InitialiseTransitionFrame( TransitionPosition position )
         {
             Style               style            = new Style(typeof(TransitionFrame), EffectStore.GetStyle(position));
@@ -197,7 +197,7 @@ namespace BrokenHouse.Windows.Parts.Transition.Effects
             }
             else if (position == TransitionPosition.End)
             {
-                transform = new TranslateTransform(-directionFactors.X * size.Width, -directionFactors.Y * size.Height);
+                transform = new TranslateTransform(-directionFactors.X * size.Width, -directionFactors.Y * size.Height); 
             }
             else
             {
@@ -210,6 +210,9 @@ namespace BrokenHouse.Windows.Parts.Transition.Effects
 
             // Apply it
             TransitionFrame.Style = style;
+
+            // Call the base class
+            TransitionFrame.UseBitmapCaching = (position != TransitionPosition.Center);
         }
 
         /// <summary>

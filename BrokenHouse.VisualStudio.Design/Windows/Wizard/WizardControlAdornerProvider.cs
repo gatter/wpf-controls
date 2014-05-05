@@ -56,14 +56,19 @@ namespace BrokenHouse.VisualStudio.Design.Windows.Wizard
         /// <param name="view"></param>
         protected override void Activate( ModelItem item )
         {
-           
-            // What type is it
-            if (item.ItemType.IsSubclassOf(typeof(WizardControl)))
+            if ( item.View == null)
+            {
+                // Nothing to activate
+            }
+            else if (item.ItemType.IsSubclassOf(typeof(WizardControl)))
             {
                 WizardControl    wizardControl    = item.View.PlatformObject as WizardControl;
 
                 // Its the wizard control
-                ActivateOptions(item, new Point(0, 0));
+                if (wizardControl != null)
+                {
+                    ActivateOptions(item, new Point(0, 0));
+                }
             }
             else if ((item.Parent != null) && item.ItemType.IsSubclassOf(typeof(WizardPage)) && item.Parent.ItemType.IsSubclassOf(typeof(WizardControl)))
             {

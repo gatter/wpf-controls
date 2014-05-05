@@ -5,6 +5,7 @@
         xmlns:bhp="http://www.brokenhouse.co.uk/wpf/primitives"
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         xmlns:local="clr-namespace:DemoApplication.Demos.Wizard.Connection"
+        xmlns:test="using:DemoApplication.Demos.Wizard.Connection"
         xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic"
         Width="600" Height="450" Icon="{x:Static bh:ShieldIcons.Windows}"
         Title="Sequence Wizard" >
@@ -156,13 +157,12 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
-    <bh:AeroWizardControl x:Name="PART_Wizard" Title="Connection Wizard" PageStyle="{DynamicResource newWizardPage}"
-                          local:SequencedWizardPageBehaviour.IsSequenced="true"> 
+
+    <bh:AeroWizardControl x:Name="PART_Wizard" Title="Connection Wizard" PageStyle="{DynamicResource newWizardPage}" local:SequencedWizardPageBehaviour.IsSequenced="True">
         <bh:AeroWizardControl.TransitionEffect>
             <bh:SlideTransitionEffect Direction="BottomToTop" TransitionType="Sequential"/>
         </bh:AeroWizardControl.TransitionEffect>
-        
+
         <!-- The first page -->
         <bh:AeroWizardPage Header="Getting Started">
             <DockPanel>
@@ -170,13 +170,13 @@
                 <TextBlock Text="To continue, Click Next." Margin="0,10,0,0"/>
             </DockPanel>
         </bh:AeroWizardPage>
-        
+
         <!-- Use the standard check hostname page -->
         <local:CheckHostnamePage Header="Specify Hostname"/>
-        
+
         <!-- Use the standard authentication page -->
         <local:CheckAuthenticationPage Header="Provide Credentials"/>
-        
+
         <!-- Or special confirmation page -->
         <bh:AeroWizardPage Header="Confirmation" NextLabel="Create">
             <DockPanel>
@@ -203,7 +203,7 @@
                 </themes:ClassicBorderDecorator>
             </DockPanel>
         </bh:AeroWizardPage>
-        
+
         <!-- The results page -->
         <bh:AeroWizardPage Header="Results" FinishLabel="Close" IsBackEnabled="false">
             <DockPanel>

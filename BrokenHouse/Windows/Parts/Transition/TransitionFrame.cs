@@ -25,17 +25,29 @@ namespace BrokenHouse.Windows.Parts.Transition
         /// Identifies the <see cref="TransitionEffect"/> dependency property key. 
         /// </summary>
         private static readonly DependencyPropertyKey TransitionEffectPropertyKey;
-
+        
         /// <summary>
         /// Identifies the <see cref="TransitionEffect"/> dependency property. 
         /// </summary>
         public static readonly DependencyProperty TransitionEffectProperty;
+        
+        /// <summary>
+        /// Identifies the <see cref="UseBitmapCaching"/> dependency property. 
+        /// </summary>
+        public static readonly DependencyProperty UseBitmapCachingProperty;
+
+        /// <summary>
+        /// Identifies the <see cref="UseBitmapCaching"/> dependency property key. 
+        /// </summary>
+        private static readonly DependencyPropertyKey UseBitmapCachingPropertyKey;
 
         /// <summary>
         /// Static constructor
         /// </summary>
         static TransitionFrame()
         {
+            UseBitmapCachingPropertyKey = DependencyProperty.RegisterReadOnly("UseBitmapCaching", typeof(bool), typeof(TransitionFrame), new FrameworkPropertyMetadata(false, null));
+            UseBitmapCachingProperty = UseBitmapCachingPropertyKey.DependencyProperty;
             TransitionEffectPropertyKey = DependencyProperty.RegisterReadOnly("TransitionEffect", typeof(TransitionEffect), typeof(TransitionFrame), new FrameworkPropertyMetadata(null, null));
             TransitionEffectProperty = TransitionEffectPropertyKey.DependencyProperty;
 
@@ -43,7 +55,7 @@ namespace BrokenHouse.Windows.Parts.Transition
 
             KeyboardNavigation.IsTabStopProperty.OverrideMetadata(typeof(TransitionFrame), new FrameworkPropertyMetadata(false));        
         }
-
+        
         /// <summary>
         /// Gets or sets the transition effect that controls this <see cref="TransitionFrame"/>. This is a dependency property.
         /// </summary>
@@ -51,6 +63,15 @@ namespace BrokenHouse.Windows.Parts.Transition
         {
             get { return (TransitionEffect)GetValue(TransitionEffectProperty); }
             internal set { SetValue(TransitionEffectPropertyKey, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets whether the content should be bitmap cached. This is a dependency property.
+        /// </summary>
+        public bool UseBitmapCaching
+        {
+            get { return (bool)GetValue(UseBitmapCachingProperty); }
+            internal set { SetValue(UseBitmapCachingPropertyKey, value); }
         }
 
         /// <summary>
